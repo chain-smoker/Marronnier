@@ -1,8 +1,8 @@
 ---
 name: new_feature
 about: "\U0001F3A8 새로운 기능 추가"
-title: ''
-labels: ''
+title: "[도메인 이름]"
+labels: "✨ Feature"
 assignees: ''
 
 ---
