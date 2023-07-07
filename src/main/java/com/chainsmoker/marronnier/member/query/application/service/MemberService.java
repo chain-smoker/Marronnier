@@ -5,12 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MemberQueryApplicationService {
+public class MemberService {
 
     MemberMapper memberMapper;
 
     @Autowired
-    public MemberQueryApplicationService (MemberMapper memberMapper) {
+    public MemberService(MemberMapper memberMapper) {
         this.memberMapper = memberMapper;
     }
 
