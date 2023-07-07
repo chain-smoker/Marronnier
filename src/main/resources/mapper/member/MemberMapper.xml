@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chainsmoker.marronnier.member.command.infra.repository.MemberMapper">
+<resultMap id="MemberMap" type="com.chainsmoker.marronnier.member.command.domain.aggregate.entity.Member">
+    <!-- ex
+    <result column="user_id" property="id" jdbcType="NVARCHAR" javaType="String"/>
+    <result column="user_name" property="username" jdbcType="NVARCHAR" javaType="String"/>
+    <result column="hashed_password" property="hashedPassword" jdbcType="NVARCHAR" javaType="String"/>
+    -->
+</resultMap>
+    <select id="getMemberList" resultMap="MemberMap">
+        SELECT
+            id
+             ,	login_id
+        FROM
+            user
+        ORDER by
+            id asc
+    </select>
+</mapper>
