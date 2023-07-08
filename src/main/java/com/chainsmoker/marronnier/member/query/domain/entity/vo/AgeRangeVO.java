@@ -1,4 +1,4 @@
-package com.chainsmoker.marronnier.member.command.domain.aggregate.vo;
+package com.chainsmoker.marronnier.member.query.domain.entity.vo;
 
 import java.text.ParseException;
 import java.time.LocalDate;

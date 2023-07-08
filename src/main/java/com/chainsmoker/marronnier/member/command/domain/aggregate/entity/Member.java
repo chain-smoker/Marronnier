@@ -28,7 +28,7 @@ public class Member {
     private String name;
 
     @Column(nullable = false, name = "uid")
-    private String UID;
+    private Long UID;
 
     private String address;
 
@@ -51,7 +51,7 @@ public class Member {
     private LocalDateTime createDate;
 
     @Builder
-    public Member(String name, String UID, String address, GenderEnum gender, LocalDate birthDate, String refreshToken, LocalDateTime createDate, PlatformEnum platform) {
+    public Member(String name, Long UID, String address, GenderEnum gender, LocalDate birthDate, String refreshToken, LocalDateTime createDate, PlatformEnum platform) {
         this.name = name;
         this.UID = UID;
         this.address = address;
