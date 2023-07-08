@@ -8,4 +8,4 @@ import java.util.Optional;
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
     Optional<Member> findByUID(Long UID);
-}가
+}
