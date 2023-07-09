@@ -1,14 +1,14 @@
-package com.chainsmoker.marronnier.member.command.domain.aggregate.vo;
+package com.chainsmoker.marronnier.member.query.domain.entity.vo;
 
 import java.text.ParseException;
 import java.time.LocalDate;
 
-public class AgeVO {
+public class AgeRangeVO {
 
     private int ageRange;
 
-    public AgeVO() {}
-    public AgeVO(String ageStr) throws ParseException {
+    public AgeRangeVO() {}
+    public AgeRangeVO(String ageStr) throws ParseException {
         LocalDate today = LocalDate.now();
         LocalDate birthDate = LocalDate.parse(ageStr);
         int yearDiff = today.getYear() - birthDate.getYear() - 1;
