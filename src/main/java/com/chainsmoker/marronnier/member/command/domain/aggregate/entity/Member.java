@@ -1,5 +1,6 @@
 package com.chainsmoker.marronnier.member.command.domain.aggregate.entity;
 
+import com.chainsmoker.marronnier.common.entity.BaseTimeEntity;
 import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.EnumType.GenderEnum;
 import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.EnumType.PlatformEnum;
 
@@ -10,6 +11,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -18,7 +20,7 @@ import javax.persistence.*;
 @Table(name="MEMBER_TB")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
+public class Member extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,27 +40,17 @@ public class Member {
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    @Column(nullable = false, name = "refresh_token")
-    private String refreshToken;
-
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private PlatformEnum platform;
 
-    @CreatedDate
-    @Column(name = "created_date")
-    private LocalDateTime createDate;
-
     @Builder
-    public Member(String name, Long UID, String address, GenderEnum gender, LocalDate birthDate, String refreshToken, LocalDateTime createDate, PlatformEnum platform) {
+    public Member(String name, Long UID, String address, GenderEnum gender, LocalDate birthDate, PlatformEnum platform) {
         this.name = name;
         this.UID = UID;
         this.address = address;
         this.gender = gender;
         this.birthDate = birthDate;
-        this.refreshToken = refreshToken;
-        this.createDate = createDate;
         this.platform = platform;
     }
 }
