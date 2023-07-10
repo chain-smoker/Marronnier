@@ -1,20 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.chainsmoker.marronnier.member.command.infra.repository.MemberMapper">
-<resultMap id="MemberMap" type="com.chainsmoker.marronnier.member.command.domain.aggregate.entity.Member">
-    <!-- ex
-    <result column="user_id" property="id" jdbcType="NVARCHAR" javaType="String"/>
-    <result column="user_name" property="username" jdbcType="NVARCHAR" javaType="String"/>
-    <result column="hashed_password" property="hashedPassword" jdbcType="NVARCHAR" javaType="String"/>
-    -->
+<mapper namespace="com.chainsmoker.marronnier.member.query.infra.repository.MemberMapper">
+<resultMap id="QueryMemberMap" type="com.chainsmoker.marronnier.member.query.domain.entity.QueryMember">
+    <id property="id" column="id" />
+    <result property="name" column="name"/>
+    <result property="UID" column="uid"/>
+    <result property="address" column="address" />
+    <result property="gender" column="gender"/>
+    <result property="bitrhDate" column="bitrh_date"/>
+    <result property="platform" column="platform"/>
+    <result property="createdDate" column="created_date"/>
+    <result property="modifiedDate" column="modified_date"/>
 </resultMap>
-    <select id="getMemberList" resultMap="MemberMap">
-        SELECT
-            id
-             ,	login_id
+    <select id="findAll" resultMap="QueryMemberMap">
+        SELECT *
         FROM
-            user
-        ORDER by
-            id asc
+            MEMBER_TB
+        order by
+            createdDate DESC
+    </select>
+
+    <select id="findById" resultMap="QueryMemberMap">
+        SELECT *
+        FROM
+            MEMBER_TB
+        WHERE
+            id = #{id}
+    </select>
+
+    <select id="findByUID" resultMap="QueryMemberMap">
+        SELECT *
+        FROM
+            MEMBER_TB
+        WHERE
+            uid = #{uid}
     </select>
 </mapper>
