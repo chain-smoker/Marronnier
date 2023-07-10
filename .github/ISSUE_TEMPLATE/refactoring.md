@@ -2,14 +2,14 @@
 name: Refactoring
 about: "\U0001F3D7️ 코드 수정 및 리펙토링"
 title: "[REFACTORING][도메인 이름]"
-labels: ''
+labels: "\U0001F3D7️ Refactoring"
 assignees: ''
 
 ---
 
 ---
-name: 'Issue: create-new-class'
-about: 새로운 기능 추가에 관한 이슈
+name: 'Issue: Refactoring'
+about: 코드 수정 및 리펙토링
 title: ''
 labels: ''
 assignees: ''
@@ -17,7 +17,7 @@ assignees: ''
 ---
 
 ## Description
-새로운 기능 추가에 관련 된 이슈 템플릿입니다.
+코드 수정 및 리펙토링에 관련된 이슈 템플릿입니다.
 
 
 ---
