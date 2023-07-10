@@ -1,4 +1,8 @@
 package com.chainsmoker.marronnier.feed.command.domain.repository;
 
-public class FeedRepo {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface FeedRepo {
+
+
 }
