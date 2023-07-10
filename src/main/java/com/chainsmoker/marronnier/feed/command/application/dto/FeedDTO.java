@@ -19,5 +19,7 @@ public class FeedDTO {
         feedDTO.setContent(feed.getContent());
         feedDTO.setCocktailId(feed.getCocktailId());
         feedDTO.setMemberId(feed.getMemberId());
+
+        return feedDTO;
     }
 }
