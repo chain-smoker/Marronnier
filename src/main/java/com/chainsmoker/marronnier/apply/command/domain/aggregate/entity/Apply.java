@@ -1,15 +1,14 @@
 package com.chainsmoker.marronnier.apply.command.domain.aggregate.entity;
 
 import com.chainsmoker.marronnier.apply.command.domain.aggregate.entity.EnumType.CategoryEnum;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Apply {
 
@@ -31,7 +30,17 @@ public class Apply {
     @CreatedDate
     private LocalDateTime createDate;   // 작성 일자
 
-//    @ManyToOne 회원번호? 작성자 이름? (실제 데이터베이스에서는 ForeignKey 관계가 생성)
-//    private Member member;
+    @Column(nullable = false)
+    private Long rquesterId;            // 회원 번호
 
+    @Builder
+    public Apply(int no, String title, String content, CategoryEnum category, boolean isApproval, LocalDateTime createDate, Long rquesterId) {
+        this.no = no;
+        this.title = title;
+        this.content = content;
+        this.category = category;
+        this.isApproval = isApproval;
+        this.createDate = createDate;
+        this.rquesterId = rquesterId;
+    }
 }
