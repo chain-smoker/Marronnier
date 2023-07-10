@@ -45,12 +45,4 @@ public class OAuthAttributes {
                 .attributes(attributes)
                 .build();
     }
-
-    public Member toEntity(){
-        return Member.builder()
-                .name(name)
-                .UID(uid)
-                .platform(PlatformEnum.KAKAO)
-                .build();
-    }
 }

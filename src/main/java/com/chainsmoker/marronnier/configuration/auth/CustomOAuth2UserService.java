@@ -5,8 +5,12 @@ import java.util.Collections;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
+import com.chainsmoker.marronnier.member.command.application.dto.CreateMemberDTO;
 import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.Member;
 import com.chainsmoker.marronnier.member.command.domain.repository.MemberRepository;
+import com.chainsmoker.marronnier.member.query.application.service.MemberQueryApplicationService;
+import com.chainsmoker.marronnier.member.command.application.service.MemberCommandApplicationService;
+import com.chainsmoker.marronnier.member.query.domain.entity.QueryMember;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -24,6 +28,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CustomOAuth2UserService  extends DefaultOAuth2UserService {
     private final MemberRepository memberRepository;
+    private final MemberQueryApplicationService memberQueryApplicationService;
+    private final MemberCommandApplicationService memberCommandApplicationService;
     private final HttpSession httpSession;
 
     @Override
@@ -38,19 +44,27 @@ public class CustomOAuth2UserService  extends DefaultOAuth2UserService {
 
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
 
-        Member member = saveOrUpdate(attributes);
-        httpSession.setAttribute("user", new SessionUser(member));
+        SessionUser sessionUser = saveOrUpdate(attributes);
+        httpSession.setAttribute("user", sessionUser);
 
         return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority("member")),
                 attributes.getAttributes(),
                 attributes.getNameAttributeKey());
     }
 
-    private Member saveOrUpdate(OAuthAttributes attributes){
-        Member member =  memberRepository.findByUID(attributes.getUid())
-                //.map(entity -> entity.update(attributes.getName()))
-                .orElse(attributes.toEntity());
-
-        return memberRepository.save(member);
+    private SessionUser saveOrUpdate(OAuthAttributes attributes) {
+        QueryMember member = memberQueryApplicationService.findByUid(attributes.getUid());
+        SessionUser sessionUser = null;
+        if (member == null) {
+            Member newMember = memberCommandApplicationService.create(
+                    CreateMemberDTO.builder()
+                            .name(attributes.getName())
+                            .UID(attributes.getUid())
+                            .build());
+            sessionUser = SessionUser.builder().id(newMember.getId()).name(newMember.getName()).build();
+        } else {
+            sessionUser = SessionUser.builder().id(member.getId()).name(member.getName()).build();
+        }
+        return sessionUser;
     }
 }
