@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "ELEMENTBYRECIPE_TB")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ElementByRecipeQuery {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
