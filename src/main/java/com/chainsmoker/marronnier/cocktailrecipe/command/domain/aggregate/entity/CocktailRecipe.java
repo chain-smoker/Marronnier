@@ -1,15 +1,13 @@
 package com.chainsmoker.marronnier.cocktailrecipe.command.domain.aggregate.entity;
 
 import com.chainsmoker.marronnier.cocktailrecipe.command.domain.aggregate.EnumType.DifficultyEnum;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "COCKTAILRECIPE_TB")
+@Setter
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CocktailRecipe {

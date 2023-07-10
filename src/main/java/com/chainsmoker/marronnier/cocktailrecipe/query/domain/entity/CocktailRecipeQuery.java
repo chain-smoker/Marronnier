@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "COCKTAILRECIPE_TB")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CocktailRecipeQuery {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

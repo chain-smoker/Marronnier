@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
+@Table(name="ELEMENT_TB")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ElementQuery {
     @Id
