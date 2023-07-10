@@ -1,4 +1,7 @@
 package com.chainsmoker.marronnier.feed.query.domain.repository;
 
-public class FeedQRepo {
+import com.chainsmoker.marronnier.feed.query.domain.entity.FeedQEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface FeedQRepo  {
 }
