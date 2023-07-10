@@ -1,6 +1,4 @@
 package com.chainsmoker.marronnier.feed.command.domain.aggregate.entity;
-
-import com.chainsmoker.marronnier.feed.command.domain.aggregate.vo.FeedWriter;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
