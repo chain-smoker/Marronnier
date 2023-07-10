@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("regist")
 public class ElementController {
 
-    @GetMapping("element")
+    @GetMapping("/element")
     public String RegistCocktailRecipe(){
-        return "cocktail/element/element";
+        return "cocktail/regist/element";
     }
 }

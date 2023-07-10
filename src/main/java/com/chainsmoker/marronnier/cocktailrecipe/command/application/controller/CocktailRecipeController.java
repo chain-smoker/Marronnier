@@ -1,23 +1,41 @@
 package com.chainsmoker.marronnier.cocktailrecipe.command.application.controller;
 
-import lombok.Getter;
+import com.chainsmoker.marronnier.cocktailrecipe.command.application.dto.RegistCocktailRecipeDTO;
+import com.chainsmoker.marronnier.cocktailrecipe.command.application.service.CocktailRecipeService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 // a 등록 페이지 이동 컨트롤러
 
 @Controller
 @RequestMapping("regist")
+@RequiredArgsConstructor
 public class CocktailRecipeController {
+    private final CocktailRecipeService cocktailRecipeService;
+    
 
+
+    //a Regist
     //a HomeController에 들어갈 요청
-    @GetMapping(" ")
+    @GetMapping("/main")
     public String Regist(){
-        return "cocktail/regist";
+        return "cocktail/registmain";
     }
-    @GetMapping("cocktailrecipe")
+    @GetMapping("/cocktailrecipe")
     public String RegistCocktailRecipe(){
-        return "cocktail/cocktailrecipe/cocktailrecipe";
+        return "cocktail/regist/cocktailrecipe";
     }
+
+    //a Regist
+
+    @PostMapping("/cocktailrecipe")
+    public String Regist(RegistCocktailRecipeDTO recipeDTO){
+        cocktailRecipeService.regist(recipeDTO);
+        return "cocktail/registmain";
+    }
+
 }

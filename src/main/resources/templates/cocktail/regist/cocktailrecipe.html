@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>칵테일 조주법 등록 페이지</h1>
+<form action="cocktailrecipe" method="post">
+
+    <input type="text" name="name">칵테일 이름<br>
+    <input type="text" name="description">칵테일 설명<br>
+    <input type="text" name="classification" list="class-list">칵테일 분류<br>
+    <datalist id="class-list">
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+    </datalist>
+    <input type="text" name="abv">칵테일 도수<br>
+    <input type="text" name="difficulty" list="difficulty-list">칵테일 난이도<br>
+    <datalist id="difficulty-list">
+        <option value="HARD">HARD</option>
+        <option value="NORMAL">NORMAL</option>
+        <option value="EASY">EASY</option>
+    </datalist>
+    <button type="submit">완료</button>
+</form>
+
+
+</body>
+</html>
