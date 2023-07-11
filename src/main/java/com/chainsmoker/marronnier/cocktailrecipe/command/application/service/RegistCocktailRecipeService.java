@@ -2,7 +2,7 @@ package com.chainsmoker.marronnier.cocktailrecipe.command.application.service;
 
 import com.chainsmoker.marronnier.cocktailrecipe.command.application.dto.RegistCocktailRecipeDTO;
 import com.chainsmoker.marronnier.cocktailrecipe.command.domain.aggregate.EnumType.DifficultyEnum;
-import com.chainsmoker.marronnier.cocktailrecipe.command.domain.aggregate.entity.CocktailRecipeEntity;
+import com.chainsmoker.marronnier.cocktailrecipe.command.domain.aggregate.entity.CocktailRecipe;
 import com.chainsmoker.marronnier.cocktailrecipe.command.domain.repository.CocktailRecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +16,12 @@ public class RegistCocktailRecipeService {
     }
 
     public void regist(RegistCocktailRecipeDTO recipeDTO){
-        CocktailRecipeEntity cocktailRecipe= CocktailRecipeEntity.builder().name(recipeDTO.getName())
-                .description(recipeDTO.getDescription()).classification(recipeDTO.getClassification())
-                .abv(recipeDTO.getAbv()).difficulty(DifficultyEnum.valueOf(recipeDTO.getDifficulty())).build();
+        CocktailRecipe cocktailRecipe= CocktailRecipe.builder()
+                .name(recipeDTO.getName())
+                .description(recipeDTO.getDescription())
+                .classification(recipeDTO.getClassification())
+                .abv(recipeDTO.getAbv())
+                .difficulty(recipeDTO.getDifficulty()).build();
         cocktailRecipeRepository.save(cocktailRecipe);
     }
 }

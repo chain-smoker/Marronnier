@@ -11,7 +11,8 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Element {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "element_id")
     private Long id;
     private String name;
@@ -22,8 +23,7 @@ public class Element {
     //a 구현 재료사진, 요청번호 포링키
 
     @Builder
-    public Element(Long id, String name, String category) {
-        this.id = id;
+    public Element(String name, String category) {
         this.name = name;
         this.category = category;
     }

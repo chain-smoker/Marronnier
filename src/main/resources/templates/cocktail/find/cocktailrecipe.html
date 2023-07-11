@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>칵테일 조주법 조회하기</h1>
+<div>
+    <th:block th:each="recipe : ${recipes}">
+        <span th:text="${recipe.getId()}"></span>
+        <span th:text="${recipe.getName()}"></span>
+        <span th:text="${recipe.getDescription()}"></span>
+        <span th:text="${recipe.getClassification()}"></span>
+        <span th:text="${recipe.getDifficulty()}"></span>
+        <br>
+    </th:block>
+</div>
+
+</body>
+</html>

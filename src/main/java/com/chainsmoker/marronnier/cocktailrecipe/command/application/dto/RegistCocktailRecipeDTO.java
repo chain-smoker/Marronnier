@@ -1,6 +1,7 @@
 package com.chainsmoker.marronnier.cocktailrecipe.command.application.dto;
 
-import com.chainsmoker.marronnier.cocktailrecipe.command.domain.aggregate.entity.CocktailRecipeEntity;
+import com.chainsmoker.marronnier.cocktailrecipe.command.domain.aggregate.EnumType.DifficultyEnum;
+import com.chainsmoker.marronnier.cocktailrecipe.command.domain.aggregate.entity.CocktailRecipe;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,16 +15,16 @@ public class RegistCocktailRecipeDTO {
     private String description;
     private String classification;
     private String abv;
-    private String difficulty;
+    private DifficultyEnum difficulty;
 
-    public static RegistCocktailRecipeDTO toRegistCocktailRecipeDTO(CocktailRecipeEntity cocktailRecipe){
+    public static RegistCocktailRecipeDTO toRegistCocktailRecipeDTO(CocktailRecipe cocktailRecipe){
         RegistCocktailRecipeDTO recipeDTO=new RegistCocktailRecipeDTO();
         recipeDTO.setId(cocktailRecipe.getId());
         recipeDTO.setName(cocktailRecipe.getName());
         recipeDTO.setDescription(cocktailRecipe.getDescription());
         recipeDTO.setClassification(cocktailRecipe.getClassification());
         recipeDTO.setAbv(cocktailRecipe.getAbv());
-        recipeDTO.setDifficulty(String.valueOf(cocktailRecipe.getDifficulty()));
+        recipeDTO.setDifficulty(cocktailRecipe.getDifficulty());
         return recipeDTO;
     }
 }
