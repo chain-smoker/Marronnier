@@ -5,15 +5,13 @@ import com.chainsmoker.marronnier.member.query.infra.repository.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
-public class MemberQueryApplicationService {
+public class FindMemberService {
 
     private final MemberMapper memberMapper;
 
     @Autowired
-    public MemberQueryApplicationService(MemberMapper memberMapper) {
+    public FindMemberService(MemberMapper memberMapper) {
         this.memberMapper = memberMapper;
     }
 

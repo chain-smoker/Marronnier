@@ -1,5 +1,6 @@
 package com.chainsmoker.marronnier.configuration;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -15,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan(value = "com.chainsmoker.marronnier", sqlSessionFactoryRef = "SqlSessionFactory")
+@MapperScan(value = "com.chainsmoker.marronnier", sqlSessionFactoryRef = "SqlSessionFactory", annotationClass = Mapper.class)
 public class DataBaseConfiguration {
 
     @Value("${spring.datasource.mapper-locations}")
