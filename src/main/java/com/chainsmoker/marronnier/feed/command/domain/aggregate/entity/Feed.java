@@ -24,7 +24,6 @@ public class Feed {
 
     @Builder
     public Feed(Long feedID, Long memberId, Long cocktailId, String content) {
-        this.feedID = feedID;
         this.memberId = memberId;
         this.cocktailId = cocktailId;
         this.content = content;

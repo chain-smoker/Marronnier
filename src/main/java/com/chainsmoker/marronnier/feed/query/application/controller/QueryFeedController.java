@@ -4,13 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/feed")
-public class FeedQController {
+public class QueryFeedController {
     @GetMapping("")
     public String viewAllFeed() {
         //모든 피드를 보여주는 코드 추가
@@ -19,6 +18,7 @@ public class FeedQController {
 
     @GetMapping("/write")
     public String moveToFeedWrite() {
+        System.out.println("여기까지옴");
         //피드 작성하는 페이지로 이동
         //근데 피드는 여기서 작성하는게 맞았나?
         return "feed/write";

@@ -22,4 +22,10 @@ public class FeedDTO {
 
         return feedDTO;
     }
+    public FeedDTO(Feed feed){
+        this.feedId = feed.getFeedID();
+        this.memberId = feed.getMemberId();
+        this.cocktailId = feed.getCocktailId();
+        this.content=feed.getContent();
+    }
 }
