@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>member's Basket</title>
+</head>
+<body>
+<table>
+  <tr>
+      <th>칵테일 ID</th>
+      <th>칵테일 이름</th>
+      <th>추가 날짜</th>
+  </tr>
+  <tr th:each="basket : ${memberCockTailBaskets}">
+      <td th:text="${basket.getCockTailRecipeId()}">
+    <td th:text="${basket.getCockTailRecipeName()}"></td>
+    <td th:text="${basket.getCreatedDate()}"></td>
+  </tr>
+</table>
+<button id="add-basket" onclick="location.href='/basket/add'">술 추가하기</button>
+</body>
+</html>

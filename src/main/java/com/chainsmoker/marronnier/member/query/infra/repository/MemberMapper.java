@@ -4,7 +4,6 @@ import com.chainsmoker.marronnier.member.query.domain.entity.QueryMember;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-import java.util.Optional;
 
 @Mapper
 public interface MemberMapper {
