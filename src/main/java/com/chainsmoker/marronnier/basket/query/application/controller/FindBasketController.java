@@ -15,7 +15,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/basket")
-@SessionAttributes({"id", "name"})
+@SessionAttributes("user")
 public class FindBasketController {
 
     private final FindBasketService findBasketService;
