@@ -1,8 +1,7 @@
 package com.chainsmoker.marronnier.cocktailrecipe.command.application.controller;
 
 import com.chainsmoker.marronnier.cocktailrecipe.command.application.dto.RegistCocktailRecipeDTO;
-import com.chainsmoker.marronnier.cocktailrecipe.command.application.service.CocktailRecipeService;
-import lombok.RequiredArgsConstructor;
+import com.chainsmoker.marronnier.cocktailrecipe.command.application.service.RegistCocktailRecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("regist")
-@RequiredArgsConstructor
-public class CocktailRecipeController {
-    private final CocktailRecipeService cocktailRecipeService;
-    
+public class RegistCocktailRecipeController {
+    private final RegistCocktailRecipeService cocktailRecipeService;
+    @Autowired
+    public RegistCocktailRecipeController(RegistCocktailRecipeService cocktailRecipeService){
+        this.cocktailRecipeService=cocktailRecipeService;
+    }
 
 
     //a Regist

@@ -1,6 +1,6 @@
 package com.chainsmoker.marronnier.member.command.application.controller;
 
-import com.chainsmoker.marronnier.member.command.application.service.MemberService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

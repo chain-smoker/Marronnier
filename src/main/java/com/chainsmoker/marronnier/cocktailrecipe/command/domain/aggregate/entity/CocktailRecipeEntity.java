@@ -1,9 +1,7 @@
 package com.chainsmoker.marronnier.cocktailrecipe.command.domain.aggregate.entity;
 
-import com.chainsmoker.marronnier.cocktailrecipe.command.application.dto.RegistCocktailRecipeDTO;
 import com.chainsmoker.marronnier.cocktailrecipe.command.domain.aggregate.EnumType.DifficultyEnum;
 import lombok.*;
-import org.checkerframework.checker.units.qual.C;
 
 import javax.persistence.*;
 
@@ -11,7 +9,7 @@ import javax.persistence.*;
 @Table(name = "COCKTAILRECIPE_TB")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CocktailRecipe {
+public class CocktailRecipeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "cocktailrecipe_id")
@@ -35,7 +33,7 @@ public class CocktailRecipe {
 
     //a 구현 사진 , 요청번호 포링키
     @Builder
-    public CocktailRecipe(String name, String description, String classification, String abv, DifficultyEnum difficulty) {
+    public CocktailRecipeEntity(String name, String description, String classification, String abv, DifficultyEnum difficulty) {
         this.name = name;
         this.description = description;
         this.classification = classification;
