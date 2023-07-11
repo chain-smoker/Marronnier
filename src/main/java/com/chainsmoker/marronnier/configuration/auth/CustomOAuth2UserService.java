@@ -6,10 +6,9 @@ import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import com.chainsmoker.marronnier.member.command.application.dto.CreateMemberDTO;
+import com.chainsmoker.marronnier.member.command.application.service.RegistMemberService;
 import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.Member;
-import com.chainsmoker.marronnier.member.command.domain.repository.MemberRepository;
-import com.chainsmoker.marronnier.member.query.application.service.MemberQueryApplicationService;
-import com.chainsmoker.marronnier.member.command.application.service.MemberCommandApplicationService;
+import com.chainsmoker.marronnier.member.query.application.service.FindMemberService;
 import com.chainsmoker.marronnier.member.query.domain.entity.QueryMember;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -27,9 +26,8 @@ import lombok.RequiredArgsConstructor;
 @Transactional
 @RequiredArgsConstructor
 public class CustomOAuth2UserService  extends DefaultOAuth2UserService {
-    private final MemberRepository memberRepository;
-    private final MemberQueryApplicationService memberQueryApplicationService;
-    private final MemberCommandApplicationService memberCommandApplicationService;
+    private final RegistMemberService registMemberService;
+    private final FindMemberService findMemberService;
     private final HttpSession httpSession;
 
     @Override
@@ -53,10 +51,10 @@ public class CustomOAuth2UserService  extends DefaultOAuth2UserService {
     }
 
     private SessionUser saveOrUpdate(OAuthAttributes attributes) {
-        QueryMember member = memberQueryApplicationService.findByUid(attributes.getUid());
+        QueryMember member = findMemberService.findByUid(attributes.getUid());
         SessionUser sessionUser = null;
         if (member == null) {
-            Member newMember = memberCommandApplicationService.create(
+            Member newMember = registMemberService.create(
                     CreateMemberDTO.builder()
                             .name(attributes.getName())
                             .UID(attributes.getUid())
