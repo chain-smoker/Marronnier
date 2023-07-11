@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "COCKTAILRECIPE_TB")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CocktailRecipeQuery {
+public class CocktailRecipeQueryEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

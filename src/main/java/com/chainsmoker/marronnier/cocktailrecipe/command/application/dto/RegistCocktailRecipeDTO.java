@@ -1,10 +1,9 @@
 package com.chainsmoker.marronnier.cocktailrecipe.command.application.dto;
 
-import com.chainsmoker.marronnier.cocktailrecipe.command.domain.aggregate.entity.CocktailRecipe;
+import com.chainsmoker.marronnier.cocktailrecipe.command.domain.aggregate.entity.CocktailRecipeEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
@@ -17,7 +16,7 @@ public class RegistCocktailRecipeDTO {
     private String abv;
     private String difficulty;
 
-    public static RegistCocktailRecipeDTO toRegistCocktailRecipeDTO(CocktailRecipe cocktailRecipe){
+    public static RegistCocktailRecipeDTO toRegistCocktailRecipeDTO(CocktailRecipeEntity cocktailRecipe){
         RegistCocktailRecipeDTO recipeDTO=new RegistCocktailRecipeDTO();
         recipeDTO.setId(cocktailRecipe.getId());
         recipeDTO.setName(cocktailRecipe.getName());
