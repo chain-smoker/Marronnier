@@ -9,10 +9,9 @@ import javax.persistence.*;
 @Table(name = "COCKTAILRECIPE_TB")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CocktailRecipeEntity {
+public class CocktailRecipe {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "cocktailrecipe_id")
     private Long id;
 
     @Column
@@ -24,7 +23,7 @@ public class CocktailRecipeEntity {
     @Column
     private String classification;
 
-    @Column//a 술 도수
+    @Column
     private String abv;
 
     @Column
@@ -33,7 +32,7 @@ public class CocktailRecipeEntity {
 
     //a 구현 사진 , 요청번호 포링키
     @Builder
-    public CocktailRecipeEntity(String name, String description, String classification, String abv, DifficultyEnum difficulty) {
+    public CocktailRecipe(String name, String description, String classification, String abv, DifficultyEnum difficulty) {
         this.name = name;
         this.description = description;
         this.classification = classification;

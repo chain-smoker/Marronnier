@@ -13,29 +13,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("regist")
 public class RegistCocktailRecipeController {
-    private final RegistCocktailRecipeService cocktailRecipeService;
+    private final RegistCocktailRecipeService registCocktailRecipeService;
     @Autowired
     public RegistCocktailRecipeController(RegistCocktailRecipeService cocktailRecipeService){
-        this.cocktailRecipeService=cocktailRecipeService;
+        this.registCocktailRecipeService=cocktailRecipeService;
     }
 
 
     //a Regist
     //a HomeController에 들어갈 요청
     @GetMapping("/main")
-    public String Regist(){
+    public String registMain(){
         return "cocktail/registmain";
     }
     @GetMapping("/cocktailrecipe")
-    public String RegistCocktailRecipe(){
+    public String registCocktailRecipe(){
         return "cocktail/regist/cocktailrecipe";
     }
 
     //a Regist
 
     @PostMapping("/cocktailrecipe")
-    public String Regist(RegistCocktailRecipeDTO recipeDTO){
-        cocktailRecipeService.regist(recipeDTO);
+    public String regist(RegistCocktailRecipeDTO recipeDTO){
+        registCocktailRecipeService.regist(recipeDTO);
         return "cocktail/registmain";
     }
 
