@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/basket")
-@SessionAttributes({"id", "name"})
+@SessionAttributes("user")
 public class CreateBasketController {
 
     private final RegistBasketService registBasketService;
