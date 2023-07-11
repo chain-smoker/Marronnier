@@ -1,4 +1,7 @@
 package com.chainsmoker.marronnier.feed.command.domain.aggregate.entity;
+import com.chainsmoker.marronnier.feed.command.domain.aggregate.VO.CocktailRecipeVO;
+import com.chainsmoker.marronnier.feed.command.domain.aggregate.VO.MemberVO;
+import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.Member;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,17 +16,16 @@ import javax.persistence.*;
 public class Feed {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long feedID;
-    @Column(nullable = false)
-    private Long memberId;
-    @Column(nullable = false)
-    private Long cocktailId;
-
+    private Long feedId;
+    @Embedded
+    private MemberVO memberId;
+    @Embedded
+    private CocktailRecipeVO cocktailId;
     @Column(nullable = false, columnDefinition = "TEXT")
     private  String content;
 
     @Builder
-    public Feed(Long feedID, Long memberId, Long cocktailId, String content) {
+    public Feed(MemberVO memberId, CocktailRecipeVO cocktailId, String content) {
         this.memberId = memberId;
         this.cocktailId = cocktailId;
         this.content = content;

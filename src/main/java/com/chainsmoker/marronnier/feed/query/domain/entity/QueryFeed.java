@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class QueryFeed {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long feedID;
+    private Long feedId;
     @Column(nullable = false)
     private Long memberId;
     @Column(nullable = false)

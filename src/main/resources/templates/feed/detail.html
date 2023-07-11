@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+  <thead>
+  <tr>
+    <th>피드번호</th>
+    <th>피드쓴사람</th>
+    <th>술</th>
+    <th>내용</th>
+  </tr>
+  </thead>
+  <tr th:each="feed:${feeds}">
+    <td><span th:text="${feed.getFeedId()}"></span>
+    </td>
+    <td>
+     <span th:text="${feed.getMemberId()}"></span>
+    </td>
+    <td>
+     <span th:text="${feed.getCocktailId()}"></span>
+    </td>
+    <td>
+    <span th:text="${feed.getContent()}"></span>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

@@ -7,7 +7,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class FeedWriteDTO {
+public class CreateFeedDTO {
     private Long memberId;
     private Long cocktailId;
     private String content;

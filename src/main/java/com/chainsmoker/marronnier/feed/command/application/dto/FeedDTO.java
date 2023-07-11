@@ -15,17 +15,17 @@ public class FeedDTO {
 
     private static FeedDTO toFeedDTO(Feed feed){
         FeedDTO feedDTO = new FeedDTO();
-        feedDTO.setFeedId(feed.getFeedID());
+        feedDTO.setFeedId(feed.getFeedId());
         feedDTO.setContent(feed.getContent());
-        feedDTO.setCocktailId(feed.getCocktailId());
-        feedDTO.setMemberId(feed.getMemberId());
+        feedDTO.setCocktailId(feed.getCocktailId().getId());
+        feedDTO.setMemberId(feed.getMemberId().getId());
 
         return feedDTO;
     }
     public FeedDTO(Feed feed){
-        this.feedId = feed.getFeedID();
-        this.memberId = feed.getMemberId();
-        this.cocktailId = feed.getCocktailId();
+        this.feedId = feed.getFeedId();
+        this.memberId = feed.getMemberId().getId();
+        this.cocktailId = feed.getCocktailId().getId();
         this.content=feed.getContent();
     }
 }
