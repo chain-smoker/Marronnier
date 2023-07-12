@@ -1,7 +1,7 @@
 ---
 name: Request_feature
 about: "☎️ 다른 도메인에 기능 요청"
-title: "[Request]"
+title: "[REQUEST]"
 labels: "☎️ Request"
 assignees: ''
 
