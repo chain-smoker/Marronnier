@@ -19,7 +19,7 @@ public class FindCocktailRecipeController {
     public FindCocktailRecipeController(FindCocktailRecipeService findCocktailRecipeService){
         this.findCocktailRecipeService=findCocktailRecipeService;
     }
-
+    // 삭제 HomeController에 들어갈 요청
     @GetMapping("/main")
     public String findMain(){
         return "cocktail/findMain";

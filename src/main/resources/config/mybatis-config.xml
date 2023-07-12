@@ -8,4 +8,7 @@
         <!-- DB 조회결과 snake_case -> camelCase 변환 -->
         <setting name="mapUnderscoreToCamelCase" value="true" />
     </settings>
+    <typeAliases>
+        <typeAlias type="com.chainsmoker.marronnier.element.query.domain.entity.QueryElement" alias="QueryElement"/>
+    </typeAliases>
 </configuration>
