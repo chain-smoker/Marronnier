@@ -1,13 +1,47 @@
 package com.chainsmoker.marronnier.configuration.auth;
 
-import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.Member;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
-@Builder
 public class SessionUser {
-    private Long id;
-    private String name;
+    private final long id;
+    private final String name;
+
+    private SessionUser(Builder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+    }
+
+    public static Builder builder(long id, String name) {
+        return new Builder(id, name);
+    }
+
+    public static class Builder {
+        private final long id;
+        private final String name;
+
+        private Builder(long id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        /**
+         * 위 생성자에서 만약 입력 값 중 옵셔널 값일 경우 Setter를 통해 값을 초기화
+         * 위 경우 Builder 클래스의 옵셔널 필드는 final 키워드 사용 불가
+         * 이러한 경우 Builder 패턴을 사용하는 의미가 크게 낮아짐.
+         */
+
+        public SessionUser build() {
+            return new SessionUser(this);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "SessionUser{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
+
