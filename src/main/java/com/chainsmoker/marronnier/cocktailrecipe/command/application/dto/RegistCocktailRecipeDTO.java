@@ -17,6 +17,7 @@ public class RegistCocktailRecipeDTO {
     private String abv;
     private DifficultyEnum difficulty;
 
+    // 삭제 static이 필요한가???
     public static RegistCocktailRecipeDTO toRegistCocktailRecipeDTO(CocktailRecipe cocktailRecipe){
         RegistCocktailRecipeDTO recipeDTO=new RegistCocktailRecipeDTO();
         recipeDTO.setId(cocktailRecipe.getId());
