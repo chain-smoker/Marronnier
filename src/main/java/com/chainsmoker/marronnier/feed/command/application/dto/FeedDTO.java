@@ -14,7 +14,7 @@ public class FeedDTO {
     private String content;
 
     public FeedDTO(Feed feed){
-        this.feedId = feed.getFeedId();
+        this.feedId = feed.getId();
         this.memberId = feed.getMemberId().getId();
         this.cocktailId = feed.getCocktailId().getId();
         this.content=feed.getContent();

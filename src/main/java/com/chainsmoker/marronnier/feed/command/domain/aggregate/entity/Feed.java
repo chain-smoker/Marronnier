@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class Feed {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long feedId;
+    private Long Id;
     @Embedded
     private MemberVO memberId;
     @Embedded
