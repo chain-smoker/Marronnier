@@ -15,7 +15,6 @@ public class CockTailRecipeVO {
     @Column(nullable = false, name = "cocktail_recipe_id")
     private long id;
 
-    @Builder
     public CockTailRecipeVO(long id) {
         this.id = id;
     }

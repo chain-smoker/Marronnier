@@ -3,7 +3,7 @@ package com.chainsmoker.marronnier.basket.query.application.service;
 import com.chainsmoker.marronnier.basket.query.domain.entity.QueryBasket;
 import com.chainsmoker.marronnier.basket.query.domain.service.MemberRequestService;
 import com.chainsmoker.marronnier.basket.query.infra.repository.BasketMapper;
-import com.chainsmoker.marronnier.member.query.application.dto.MemberCockTailBasketDTO;
+import com.chainsmoker.marronnier.basket.query.application.dto.MemberCockTailBasketDTO;
 import com.chainsmoker.marronnier.member.query.domain.entity.QueryMember;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,13 +28,19 @@ public class FindBasketService {
         List<MemberCockTailBasketDTO> memberCockTailBasketDTOList = new ArrayList<>();
         for (QueryBasket basket : baskets) {
             QueryMember member = memberRequestService.getMemberById(basket.getMemberId());
-            MemberCockTailBasketDTO memberCockTailBasketDTO = MemberCockTailBasketDTO
-                    .builder()
-                    .cockTailRecipeId(basket.getCockTailRecipeId())
-                    .cockTailRecipeName(member.getName())
-                    .memberId(member.getId())
-                    .createdDate(basket.getCreatedDate())
-                    .build();
+//            MemberCockTailBasketDTO memberCockTailBasketDTO = MemberCockTailBasketDTO
+//                    .builder()
+//                    .cockTailRecipeId(basket.getCockTailRecipeId())
+//                    .cockTailRecipeName(member.getName())
+//                    .memberId(member.getId())
+//                    .createdDate(basket.getCreatedDate())
+//                    .build();
+            MemberCockTailBasketDTO memberCockTailBasketDTO = new MemberCockTailBasketDTO(
+                    basket.getMemberId(),
+                    basket.getCockTailRecipeId(),
+                    member.getName(),
+                    basket.getCreatedDate()
+            );
             memberCockTailBasketDTOList.add(memberCockTailBasketDTO);
         }
         return memberCockTailBasketDTOList;

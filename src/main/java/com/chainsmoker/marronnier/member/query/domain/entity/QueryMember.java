@@ -3,10 +3,7 @@ package com.chainsmoker.marronnier.member.query.domain.entity;
 import com.chainsmoker.marronnier.common.entity.BaseTimeEntity;
 import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.EnumType.GenderEnum;
 import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.EnumType.PlatformEnum;
-import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.Member;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;

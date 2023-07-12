@@ -2,7 +2,7 @@ package com.chainsmoker.marronnier.basket.query.application.controller;
 
 import com.chainsmoker.marronnier.basket.query.application.service.FindBasketService;
 import com.chainsmoker.marronnier.configuration.auth.SessionUser;
-import com.chainsmoker.marronnier.member.query.application.dto.MemberCockTailBasketDTO;
+import com.chainsmoker.marronnier.basket.query.application.dto.MemberCockTailBasketDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
