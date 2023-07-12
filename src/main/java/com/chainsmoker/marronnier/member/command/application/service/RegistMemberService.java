@@ -18,11 +18,16 @@ public class RegistMemberService {
     }
 
     public Member create(CreateMemberDTO memberDTO) {
-        Member memberEntity = Member.builder()
-                .UID(memberDTO.getUID())
-                .name(memberDTO.getName())
-                .platform(PlatformEnum.KAKAO)
-                .build();
+//        Member memberEntity = Member.builder()
+//                .UID(memberDTO.getUID())
+//                .name(memberDTO.getName())
+//                .platform(PlatformEnum.KAKAO)
+//                .build();
+        Member memberEntity = new Member(
+                memberDTO.getName(),
+                memberDTO.getUID(),
+                PlatformEnum.KAKAO
+        );
         return memberRepository.save(memberEntity);
     }
 }

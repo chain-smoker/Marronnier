@@ -5,14 +5,10 @@ import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.EnumTyp
 import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.EnumType.PlatformEnum;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 
@@ -44,13 +40,34 @@ public class Member extends BaseTimeEntity {
     @Column(nullable = false)
     private PlatformEnum platform;
 
-    @Builder
-    public Member(String name, Long UID, String address, GenderEnum gender, LocalDate birthDate, PlatformEnum platform) {
+    public Member(String name, Long uid, String address, GenderEnum gender, LocalDate birthDate, PlatformEnum platform) {
         this.name = name;
-        this.UID = UID;
+        this.UID = uid;
         this.address = address;
         this.gender = gender;
         this.birthDate = birthDate;
         this.platform = platform;
+    }
+
+    public Member(String name, long uid, PlatformEnum platform) {
+        this.name = name;
+        this.UID = uid;
+        this.platform = platform;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setGender(GenderEnum gender) {
+        this.gender = gender;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 }

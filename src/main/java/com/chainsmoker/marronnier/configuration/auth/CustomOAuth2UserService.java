@@ -59,9 +59,11 @@ public class CustomOAuth2UserService  extends DefaultOAuth2UserService {
                             .name(attributes.getName())
                             .UID(attributes.getUid())
                             .build());
-            sessionUser = SessionUser.builder().id(newMember.getId()).name(newMember.getName()).build();
+            //sessionUser = SessionUser.builder().addId(newMember.getId()).name(newMember.getName()).build();
+            sessionUser = SessionUser.builder(newMember.getId(), newMember.getName()).build();
         } else {
-            sessionUser = SessionUser.builder().id(member.getId()).name(member.getName()).build();
+            //sessionUser = SessionUser.builder().id(member.getId()).name(member.getName()).build();
+            sessionUser = SessionUser.builder(member.getId(), member.getName()).build();
         }
         return sessionUser;
     }
