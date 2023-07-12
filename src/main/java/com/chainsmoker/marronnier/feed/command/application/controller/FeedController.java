@@ -3,18 +3,23 @@ package com.chainsmoker.marronnier.feed.command.application.controller;
 import com.chainsmoker.marronnier.feed.command.application.dto.CreateFeedDTO;
 import com.chainsmoker.marronnier.feed.command.application.service.FeedInsertService;
 import com.chainsmoker.marronnier.feed.command.domain.service.FeedService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @Controller
-@RequiredArgsConstructor
 @RequestMapping("/feed")
 public class FeedController {
     private final FeedService feedService;
     private final FeedInsertService feedInsertService;
+    @Autowired
+    public FeedController(FeedService feedService, FeedInsertService feedInsertService) {
+        this.feedService = feedService;
+        this.feedInsertService = feedInsertService;
+    }
+
     @PostMapping("")
     public String writeFeed(@RequestParam Map<String, String> feedInfos) {
         CreateFeedDTO feedWriteDTO = feedService.saveData(feedInfos);//웹에서 받은 데이터 dto에 저장

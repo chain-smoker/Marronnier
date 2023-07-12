@@ -17,7 +17,7 @@ public class CheckFeedDTO {
     private String content;
 
     public CheckFeedDTO(QueryFeed feed){
-        this.feedId= feed.getFeedId();
+        this.feedId= feed.getId();
         this.memberId = feed.getMemberId();
         this.cocktailId = feed.getCocktailId() ;
         this.content = feed.getContent();
