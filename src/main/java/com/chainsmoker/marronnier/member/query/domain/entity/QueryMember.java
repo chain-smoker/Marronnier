@@ -3,6 +3,7 @@ package com.chainsmoker.marronnier.member.query.domain.entity;
 import com.chainsmoker.marronnier.common.entity.BaseTimeEntity;
 import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.EnumType.GenderEnum;
 import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.EnumType.PlatformEnum;
+import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.EnumType.Role;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -34,4 +35,7 @@ public class QueryMember extends BaseTimeEntity {
     @Column(nullable = false)
     private PlatformEnum platform;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
 }
