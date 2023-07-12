@@ -2,7 +2,6 @@ package com.chainsmoker.marronnier.cocktailrecipe.query.application.controller;
 
 import com.chainsmoker.marronnier.cocktailrecipe.query.application.dto.FindCocktailRecipeDTO;
 import com.chainsmoker.marronnier.cocktailrecipe.query.application.service.FindCocktailRecipeService;
-import com.chainsmoker.marronnier.cocktailrecipe.query.domain.entity.QueryCocktailRecipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,13 +22,13 @@ public class FindCocktailRecipeController {
 
     @GetMapping("/main")
     public String findMain(){
-        return "cocktail/findmain";
+        return "cocktail/findMain";
     }
     @GetMapping("/cocktailrecipe")
     public String findAllCocktailRecipe(Model model){
         List<FindCocktailRecipeDTO> recipes=findCocktailRecipeService.findAllCocktailRecipe();
         model.addAttribute("recipes",recipes);
-        return "cocktail/find/cocktailrecipe";
+        return "cocktail/find/cocktailRecipe";
     }
 
 }

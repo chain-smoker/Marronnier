@@ -24,11 +24,11 @@ public class RegistCocktailRecipeController {
     //a HomeController에 들어갈 요청
     @GetMapping("/main")
     public String registMain(){
-        return "cocktail/registmain";
+        return "cocktail/registMain";
     }
     @GetMapping("/cocktailrecipe")
     public String registCocktailRecipe(){
-        return "cocktail/regist/cocktailrecipe";
+        return "cocktail/regist/cocktailRecipe";
     }
 
     //a Regist
@@ -36,7 +36,7 @@ public class RegistCocktailRecipeController {
     @PostMapping("/cocktailrecipe")
     public String regist(RegistCocktailRecipeDTO recipeDTO){
         registCocktailRecipeService.regist(recipeDTO);
-        return "cocktail/registmain";
+        return "cocktail/registMain";
     }
 
 }

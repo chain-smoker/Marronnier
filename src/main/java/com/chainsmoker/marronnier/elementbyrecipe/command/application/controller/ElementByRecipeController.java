@@ -12,7 +12,7 @@ public class ElementByRecipeController {
 
     @GetMapping("/elementbyrecipe")
     public String RegistCocktailRecipe(){
-        return "cocktail/regist/elementbyrecipe";
+        return "cocktail/regist/elementByrecipe";
     }
 
 }
