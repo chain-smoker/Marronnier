@@ -45,7 +45,7 @@ public class CustomOAuth2UserService  extends DefaultOAuth2UserService {
         SessionUser sessionUser = saveOrUpdate(attributes);
         httpSession.setAttribute("user", sessionUser);
 
-        return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority("member")),
+        return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority(sessionUser.getRole().getKey())),
                 attributes.getAttributes(),
                 attributes.getNameAttributeKey());
     }
@@ -53,17 +53,14 @@ public class CustomOAuth2UserService  extends DefaultOAuth2UserService {
     private SessionUser saveOrUpdate(OAuthAttributes attributes) {
         QueryMember member = findMemberService.findByUid(attributes.getUid());
         SessionUser sessionUser = null;
+        CreateMemberDTO createMemberDTO = new CreateMemberDTO(attributes.getUid(), attributes.getName());
         if (member == null) {
-            Member newMember = registMemberService.create(
-                    CreateMemberDTO.builder()
-                            .name(attributes.getName())
-                            .UID(attributes.getUid())
-                            .build());
+            Member newMember = registMemberService.create(createMemberDTO);
             //sessionUser = SessionUser.builder().addId(newMember.getId()).name(newMember.getName()).build();
-            sessionUser = SessionUser.builder(newMember.getId(), newMember.getName()).build();
+            sessionUser = SessionUser.builder(newMember.getId(), newMember.getName(), newMember.getRole()).build();
         } else {
             //sessionUser = SessionUser.builder().id(member.getId()).name(member.getName()).build();
-            sessionUser = SessionUser.builder(member.getId(), member.getName()).build();
+            sessionUser = SessionUser.builder(member.getId(), member.getName(), member.getRole()).build();
         }
         return sessionUser;
     }

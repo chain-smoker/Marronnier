@@ -1,28 +1,33 @@
 package com.chainsmoker.marronnier.configuration.auth;
 
+import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.EnumType.Role;
 import lombok.Getter;
 
 @Getter
 public class SessionUser {
     private final long id;
     private final String name;
+    private final Role role;
 
     private SessionUser(Builder builder) {
         this.id = builder.id;
         this.name = builder.name;
+        this.role = builder.role;
     }
 
-    public static Builder builder(long id, String name) {
-        return new Builder(id, name);
+    public static Builder builder(long id, String name,Role role) {
+        return new Builder(id, name, role);
     }
 
     public static class Builder {
         private final long id;
         private final String name;
+        private final Role role;
 
-        private Builder(long id, String name) {
+        private Builder(long id, String name, Role role) {
             this.id = id;
             this.name = name;
+            this.role = role;
         }
 
         /**
