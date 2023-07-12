@@ -1,4 +1,5 @@
 package com.chainsmoker.marronnier.feed.command.domain.aggregate.entity;
+import com.chainsmoker.marronnier.feed.command.application.dto.UpdateFeedDTO;
 import com.chainsmoker.marronnier.feed.command.domain.aggregate.VO.CocktailRecipeVO;
 import com.chainsmoker.marronnier.feed.command.domain.aggregate.VO.MemberVO;
 import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.Member;
@@ -31,4 +32,10 @@ public class Feed {
         this.content = content;
     }
 
+    public Feed(UpdateFeedDTO updateFeedDTO) {
+        Id = updateFeedDTO.getId();
+        this.memberId = new MemberVO(updateFeedDTO.getMemberId());
+        this.cocktailId = new CocktailRecipeVO( updateFeedDTO.getCocktailId());
+        this.content = updateFeedDTO.getContent();
+    }
 }

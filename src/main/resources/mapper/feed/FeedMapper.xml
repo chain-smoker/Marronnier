@@ -12,6 +12,14 @@
         FROM
             FEED_TB
         ORDER BY
-            feedId DESC
+            Id DESC
+    </select>
+
+    <select id="findFeedById" resultMap="QueryFeedMap">
+        SELECT *
+        FROM
+            FEED_TB
+        WHERE
+            ID= #{Id}
     </select>
 </mapper>
