@@ -25,4 +25,9 @@ public class FindFeedService {
         List<CheckFeedDTO> checkFeedDTOS = queryFeedService.saveInfo(queryFeeds);
         return checkFeedDTOS;
     }
+
+    public QueryFeed findFeedById(Long feedId) {
+        QueryFeed queryFeed = feedMapper.findFeedById(feedId);
+        return queryFeed;
+    }
 }

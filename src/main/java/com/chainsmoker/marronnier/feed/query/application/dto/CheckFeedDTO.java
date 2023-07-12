@@ -11,13 +11,13 @@ import lombok.ToString;
 @ToString
 @Getter
 public class CheckFeedDTO {
-    private Long feedId;
+    private Long Id;
     private Long memberId;
     private Long cocktailId;
     private String content;
 
     public CheckFeedDTO(QueryFeed feed){
-        this.feedId= feed.getId();
+        this.Id= feed.getId();
         this.memberId = feed.getMemberId();
         this.cocktailId = feed.getCocktailId() ;
         this.content = feed.getContent();

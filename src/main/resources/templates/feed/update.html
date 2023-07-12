@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<body>
+피드 고치러온 페이지입니다.
+<form th:action="@{'/feed/'+${feed.getId()}}" method="post">
+  <input th:value="${feed.getId()}" name = "Id" readonly><br>
+  <input th:value="${feed.getMemberId()}" name = "memberId" readonly><br>
+  <input th:value ="${feed.getCocktailId()}" type="text" name="cocktailId">칵테일<br>
+  <input th:value ="${feed.getContent()}" type="text" name="content">내용<br>
+  <button type="submit">수정</button>
+</form>
+</body>
+</body>
+</html>
