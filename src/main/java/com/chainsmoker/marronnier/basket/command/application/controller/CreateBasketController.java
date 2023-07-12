@@ -31,11 +31,7 @@ public class CreateBasketController {
         SessionUser sessionUser = (SessionUser) session.getAttribute("user");
         long memberId = sessionUser.getId();
 
-        CreateBasketDTO createBasketDTO = CreateBasketDTO
-                .builder()
-                .memberId(memberId)
-                .cockTailRecipeId(cockTailRecipeId)
-                .build();
+        CreateBasketDTO createBasketDTO = new CreateBasketDTO(memberId, cockTailRecipeId);
         long addResult = registBasketService.create(createBasketDTO);
         return "redirect:/basket";
     }

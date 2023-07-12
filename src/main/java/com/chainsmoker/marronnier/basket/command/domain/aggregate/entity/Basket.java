@@ -26,8 +26,6 @@ public class Basket extends BaseTimeEntity {
     @Embedded
     private CockTailRecipeVO cockTailRecipeId;
 
-
-    @Builder
     public Basket(MemberVO memberId, CockTailRecipeVO cockTailRecipeId) {
         this.memberId = memberId;
         this.cockTailRecipeId = cockTailRecipeId;

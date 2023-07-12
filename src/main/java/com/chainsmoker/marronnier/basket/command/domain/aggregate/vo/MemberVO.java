@@ -17,7 +17,6 @@ public class MemberVO {
     @Column(nullable = false, name = "member_id")
     private long id;
 
-    @Builder
     public MemberVO(long id) {
         this.id = id;
     }

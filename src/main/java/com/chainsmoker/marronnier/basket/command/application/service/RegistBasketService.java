@@ -23,19 +23,10 @@ public class RegistBasketService {
         long memberId = createBasketDTO.getMemberId();
         long cockTailRecipeId = createBasketDTO.getCockTailRecipeId();
 
-        MemberVO memberVO = MemberVO
-                .builder()
-                .id(memberId)
-                .build();
-        CockTailRecipeVO cockTailRecipeVO = CockTailRecipeVO
-                .builder()
-                .id(cockTailRecipeId)
-                .build();
+        MemberVO memberVO = new MemberVO(memberId);
+        CockTailRecipeVO cockTailRecipeVO = new CockTailRecipeVO(cockTailRecipeId);
 
-        Basket basket = Basket.builder()
-                .memberId(memberVO)
-                .cockTailRecipeId(cockTailRecipeVO)
-                .build();
+        Basket basket = new Basket(memberVO, cockTailRecipeVO);
         Basket result = basketRepository.save(basket);
         return result.getId();
     }
