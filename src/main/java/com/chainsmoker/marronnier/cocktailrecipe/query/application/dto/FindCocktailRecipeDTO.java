@@ -15,7 +15,6 @@ import javax.persistence.Enumerated;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 public class FindCocktailRecipeDTO {
     private Long id;
     private String name;

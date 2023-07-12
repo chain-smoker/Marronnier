@@ -16,12 +16,13 @@ public class RegistCocktailRecipeService {
     }
 
     public void regist(RegistCocktailRecipeDTO recipeDTO){
-        CocktailRecipe cocktailRecipe= CocktailRecipe.builder()
-                .name(recipeDTO.getName())
-                .description(recipeDTO.getDescription())
-                .classification(recipeDTO.getClassification())
-                .abv(recipeDTO.getAbv())
-                .difficulty(recipeDTO.getDifficulty()).build();
+        CocktailRecipe cocktailRecipe =
+                new CocktailRecipe(recipeDTO.getName(),
+                        recipeDTO.getDescription(),
+                        recipeDTO.getClassification(),
+                        recipeDTO.getAbv(),
+                        recipeDTO.getDifficulty()
+                );
         cocktailRecipeRepository.save(cocktailRecipe);
     }
 }

@@ -31,7 +31,6 @@ public class CocktailRecipe {
     private DifficultyEnum difficulty;
 
     //a 구현 사진 , 요청번호 포링키
-    @Builder
     public CocktailRecipe(String name, String description, String classification, String abv, DifficultyEnum difficulty) {
         this.name = name;
         this.description = description;
