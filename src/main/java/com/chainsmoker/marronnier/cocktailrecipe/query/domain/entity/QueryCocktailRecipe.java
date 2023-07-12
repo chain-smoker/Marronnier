@@ -31,6 +31,7 @@ public class QueryCocktailRecipe {
     @Enumerated(EnumType.STRING)
     private DifficultyEnum difficulty;
 
+    //a 삭제 필요
     @Override
     public String toString() {
         return "QueryCocktailRecipe{" +
