@@ -1,18 +1,32 @@
 package com.chainsmoker.marronnier.feed.query.application.controller;
 
-import lombok.RequiredArgsConstructor;
+import com.chainsmoker.marronnier.feed.query.application.dto.CheckFeedDTO;
+import com.chainsmoker.marronnier.feed.query.application.service.FindFeedService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
-@RequiredArgsConstructor
 @RequestMapping("/feed")
 public class QueryFeedController {
+    private final FindFeedService findFeedService;
+    @Autowired
+    public QueryFeedController(FindFeedService findFeedService) {
+        this.findFeedService = findFeedService;
+    }
+
     @GetMapping("")
-    public String viewAllFeed() {
-        //모든 피드를 보여주는 코드 추가
+    public String viewAllFeed(Model model) {
+        List<CheckFeedDTO> checkFeedDTO = findFeedService.findAllFeeds();
+
+        checkFeedDTO.forEach(System.out::println);
+        model.addAttribute("feeds",checkFeedDTO);
+
         return "feed/feed";
     }
 

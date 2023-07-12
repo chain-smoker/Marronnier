@@ -13,19 +13,10 @@ public class FeedDTO {
     private Long cocktailId;
     private String content;
 
-    private static FeedDTO toFeedDTO(Feed feed){
-        FeedDTO feedDTO = new FeedDTO();
-        feedDTO.setFeedId(feed.getFeedID());
-        feedDTO.setContent(feed.getContent());
-        feedDTO.setCocktailId(feed.getCocktailId());
-        feedDTO.setMemberId(feed.getMemberId());
-
-        return feedDTO;
-    }
     public FeedDTO(Feed feed){
-        this.feedId = feed.getFeedID();
-        this.memberId = feed.getMemberId();
-        this.cocktailId = feed.getCocktailId();
+        this.feedId = feed.getId();
+        this.memberId = feed.getMemberId().getId();
+        this.cocktailId = feed.getCocktailId().getId();
         this.content=feed.getContent();
     }
 }

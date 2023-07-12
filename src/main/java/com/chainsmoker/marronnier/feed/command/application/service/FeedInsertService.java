@@ -1,21 +1,32 @@
 package com.chainsmoker.marronnier.feed.command.application.service;
 
-import com.chainsmoker.marronnier.feed.command.application.dto.FeedWriteDTO;
+import com.chainsmoker.marronnier.feed.command.application.dto.CreateFeedDTO;
+import com.chainsmoker.marronnier.feed.command.domain.aggregate.VO.CocktailRecipeVO;
+import com.chainsmoker.marronnier.feed.command.domain.aggregate.VO.MemberVO;
 import com.chainsmoker.marronnier.feed.command.domain.aggregate.entity.Feed;
 import com.chainsmoker.marronnier.feed.command.domain.repository.FeedReposiroty;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class FeedInsertService {
     private final FeedReposiroty feedReposiroty;
 
-    public void saveFeed(FeedWriteDTO feedWriteDTO){
+    @Autowired
+    public FeedInsertService(FeedReposiroty feedReposiroty) {
+        this.feedReposiroty = feedReposiroty;
+    }
+
+    public void saveFeed(CreateFeedDTO feedWriteDTO) {
+        MemberVO memberId = MemberVO.builder()
+                .memberId(feedWriteDTO.getMemberId()).build();
+        CocktailRecipeVO cocktailRecipeVO = CocktailRecipeVO.builder()
+                .cocktailId(feedWriteDTO.getCocktailId()).build();
+
         feedReposiroty.save(Feed.builder()
-                .content( feedWriteDTO.getContent())
-                .memberId(feedWriteDTO.getMemberId())
-                .cocktailId(feedWriteDTO.getCocktailId())
+                .content(feedWriteDTO.getContent())
+                .memberId(memberId)
+                .cocktailId(cocktailRecipeVO)
                 .build()
         );
     }
