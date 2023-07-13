@@ -14,4 +14,9 @@
         FROM
             COCKTAILRECIPE_TB
     </select>
+    <select id="findById" resultMap="QueryCocktailRecipeMap" parameterType="long">
+        SELECT *
+        FROM COCKTAILRECIPE_TB WHERE id=#{cocktailrecipeId}
+
+    </select>
 </mapper>

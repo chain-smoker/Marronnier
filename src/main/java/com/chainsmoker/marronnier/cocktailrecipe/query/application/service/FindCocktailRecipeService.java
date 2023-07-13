@@ -26,4 +26,9 @@ public class FindCocktailRecipeService {
         }
         return recipeDTOS;
     }
+    public FindCocktailRecipeDTO findByCocktailRecipeId(Long cocktailrecipeId){
+        QueryCocktailRecipe recipe=findCocktailMapper.findById(cocktailrecipeId);
+        FindCocktailRecipeDTO recipeDTO=FindCocktailRecipeDTO.entityToDTO(recipe);
+        return recipeDTO;
+    }
 }

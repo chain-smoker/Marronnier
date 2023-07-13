@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface FindCocktailRecipeMapper {
     List<QueryCocktailRecipe> findAll();
+
+    QueryCocktailRecipe findById(Long cocktailrecipeId);
 }
