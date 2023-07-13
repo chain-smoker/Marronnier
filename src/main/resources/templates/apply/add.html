@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>요청글 페이지</title>
+</head>
+<body>
+    <form action="add" method="post">
+
+        <label for="title">제목</label>
+        <input type="text" id="title" name="title" placeholder="제목" required>
+        <br>
+
+        <label for="category">카테고리</label>
+        <select name="category" id="category">
+            <option value="">--Please choose an option--</option>
+            <option value="COCKTAIL_RECIPE">칵테일 조주법</option>
+            <option value="ELEMENT">칵테일 재료</option>
+        </select>
+
+        <br>
+        <label for="content">본문</label>
+        <textarea id="content" rows="3" name="content" placeholder="본문" required></textarea>
+
+        <br>
+        <input type="hidden" name="isApproval" value="false">
+
+        <br>
+        <button type="submit">SAVE</button>
+    </form>
+</body>
+</html>
