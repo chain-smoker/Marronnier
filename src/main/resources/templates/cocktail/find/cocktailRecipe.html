@@ -8,12 +8,27 @@
 <h1>칵테일 조주법 조회하기</h1>
 <div>
     <th:block th:each="recipe : ${recipes}">
-        <span th:text="${recipe.getId()}"></span>
-        <span th:text="${recipe.getName()}"></span>
-        <span th:text="${recipe.getDescription()}"></span>
-        <span th:text="${recipe.getClassification()}"></span>
-        <span th:text="${recipe.getDifficulty()}"></span>
-        <br>
+        <form th:action="@{'elementbyrecipe/'+${recipe.getId()}}" method="post">
+            <span>Id : </span><span th:text="${recipe.getId()}"></span>
+            <input type="text" name="id" th:value="${recipe.getId()}"  hidden="hidden"/><br>
+
+            <span>이름 : </span><span th:text="${recipe.getName()}"></span>
+            <input type="text" name="name" th:value="${recipe.getName()}" hidden="hidden" /><br>
+
+            <span>설명 : </span><span th:text="${recipe.getDescription()}"></span>
+            <input type="text" name="description" th:value="${recipe.getDescription()}" hidden="hidden" /><br>
+
+            <span>분류 : </span><span th:text="${recipe.getClassification()}"></span>
+            <input type="text" name="classification" th:value="${recipe.getClassification()}" hidden="hidden" /><br>
+
+            <span>도수 : </span><span th:text="${recipe.getAbv()}"></span>
+            <input type="text" name="abv" th:value="${recipe.getAbv()}" hidden="hidden" /><br>
+
+            <span>난이도 : </span><span th:text="${recipe.getDifficulty()}"></span>
+            <input type="text" name="difficulty" th:value="${recipe.getDifficulty()}" hidden="hidden" /><br>
+            <button type="submit">상세 조회</button>
+            <br>
+        </form>
     </th:block>
 </div>
 

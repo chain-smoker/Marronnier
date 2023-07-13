@@ -11,4 +11,8 @@
         FROM
             ELEMENT_TB
     </select>
+    <select id="findById" resultMap="QueryElementResultMap" parameterType="long">
+        SELECT *
+        FROM ELEMENT_TB WHERE id=#{elementId}
+    </select>
 </mapper>

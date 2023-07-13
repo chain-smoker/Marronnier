@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface FindElementMapper {
     List<QueryElement> findAll();
+
+    QueryElement findById(Long elementId);
 }

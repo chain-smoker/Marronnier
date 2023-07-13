@@ -14,7 +14,6 @@ public class FindElementDTO {
     private Long id;
     private String name;
 
-    // 수정 ENUM 타입으로 수정
     private CategoryNameEnum category;
 
     public static FindElementDTO entityToDTO(QueryElement queryElement){
@@ -25,4 +24,12 @@ public class FindElementDTO {
         return elementDTO;
     }
 
+    @Override
+    public String toString() {
+        return "FindElementDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", category=" + category +
+                '}';
+    }
 }

@@ -8,14 +8,14 @@ import javax.persistence.*;
 @Entity
 @Table(name = "ELEMENTBYRECIPE_TB")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ElementByRecipeQuery {
+public class QueryElementByRecipe {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="cocktail_id", nullable = false)
+    @Column(nullable = false)
     private Long cocktailId;
 
-    @Column(name="element_id",nullable = false)
+    @Column(nullable = false)
     private Long elementId;
 
     @Column

@@ -15,10 +15,10 @@ public class ElementByRecipe {
     @Column
     private Long id;
 
-    @Column(name="cocktail_id", nullable = false)
+    @Column(nullable = false)
     private Long cocktailId;
 
-    @Column(name="element_id",nullable = false)
+    @Column(nullable = false)
     private Long elementId;
 
     @Column

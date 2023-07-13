@@ -24,6 +24,8 @@ public class FindElementController {
     public String findAllElement(Model model){
         List<FindElementDTO> elements=findElementService.findAllElement();
         model.addAttribute("elements", elements);
+        FindElementDTO element=findElementService.findByElementId(1L);
+        System.out.println("element = " + element);
         return "cocktail/find/element";
     }
 }
