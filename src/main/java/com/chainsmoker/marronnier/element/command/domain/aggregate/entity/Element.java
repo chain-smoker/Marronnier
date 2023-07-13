@@ -1,7 +1,9 @@
 package com.chainsmoker.marronnier.element.command.domain.aggregate.entity;
 
 
+import com.chainsmoker.marronnier.element.command.domain.aggregate.EnumType.CategoryNameEnum;
 import lombok.*;
+import org.checkerframework.checker.units.qual.C;
 
 import javax.persistence.*;
 
@@ -12,19 +14,18 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Element {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
+
+    @Column
     private String name;
 
     //a VO
-    private String category;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private CategoryNameEnum category;
 
     //a 구현 재료사진, 요청번호 포링키
 
-    @Builder
-    public Element(String name, String category) {
-        this.name = name;
-        this.category = category;
-    }
 }
