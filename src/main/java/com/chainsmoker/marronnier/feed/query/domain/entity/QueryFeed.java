@@ -11,10 +11,10 @@ import javax.persistence.*;
 public class QueryFeed {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
-    @Column(nullable = false)
+    private Long id;
+    @Column(nullable = false, name="member_id")
     private Long memberId;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "cocktail_recipe_id")
     private Long cocktailId;
 
     @Column(nullable = false, columnDefinition = "TEXT")

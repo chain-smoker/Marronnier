@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+피드 테스트용 페이지입니다...
+<br>
+<table>
+  <thead>
+  <tr>
+    <th>피드번호</th>
+    <th>피드쓴사람</th>
+    <th>술</th>
+    <th>내용</th>
+  </tr>
+  </thead>
+  <tr th:each="feed:${feeds}">
+    <td>
+      <a th:href="@{'/feed/'+${feed.getId()}}"><span th:text="${feed.getId()}"></span></a>
+    </td>
+    <td>
+      <a><span th:text="${feed.getMemberId()}"></span></a>
+    </td>
+    <td>
+      <a><span th:text="${feed.getCocktailId()}"></span></a>
+    </td>
+    <td>
+      <a><span th:text="${feed.getContent()}"></span></a>
+    </td>
+  </tr>
+</table>
+<br>
+<button onclick="location.href='/feed/write'">피드 쓰러가기</button>
+</body>
+</html>
