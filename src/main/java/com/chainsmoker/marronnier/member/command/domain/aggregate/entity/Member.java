@@ -55,10 +55,11 @@ public class Member extends BaseTimeEntity {
         this.role = Role.MEMBER;
     }
 
-    public Member(String name, long uid, PlatformEnum platform) {
+    public Member(String name, long uid, PlatformEnum platform, Role role) {
         this.name = name;
         this.UID = uid;
         this.platform = platform;
+        this.role = role;
     }
 
     public void setName(String name) {
@@ -76,4 +77,6 @@ public class Member extends BaseTimeEntity {
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
+
+    public void setRole(Role role) {this.role = role;}
 }

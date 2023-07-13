@@ -26,7 +26,8 @@ public class RegistMemberService {
         Member memberEntity = new Member(
                 memberDTO.getName(),
                 memberDTO.getUID(),
-                PlatformEnum.KAKAO
+                PlatformEnum.KAKAO,
+                memberDTO.getRole()
         );
         return memberRepository.save(memberEntity);
     }

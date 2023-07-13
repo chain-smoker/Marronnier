@@ -7,9 +7,11 @@ import lombok.*;
 public class CreateMemberDTO {
     private Long UID;
     private String name;
+    private Role role;
 
-    public CreateMemberDTO(Long UID, String name) {
+    public CreateMemberDTO(Long UID, String name, Role role) {
         this.UID = UID;
         this.name = name;
+        this.role = role;
     }
 }
