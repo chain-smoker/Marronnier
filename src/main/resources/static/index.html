@@ -3,13 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        input.kakao-login-btn {
+            background: url("images/kakao_login_medium_narrow.png") no-repeat;
+            border: none;
+            cursor: pointer;
+            height: 45px;
+            width: 183px;
+            object-fit: contain;
+        }
+        div.menu {
+            height: 500px;
+        }
+    </style>
 </head>
 <body>
-    <button id="kakao-login" onclick="location.href='/oauth2/authorization/kakao'">카카오 로그인</button>
-    <button  onclick="location.href='/apply/add'">요청글 쓰기</button>
+    <div class="menu">
+        <input type="button" class="kakao-login-btn" onclick="location.href='/oauth2/authorization/kakao'">
+        <button onclick="location.href='/apply/add'">요청글 쓰기</button>
+    </div>
 </body>
-
-<script>
-
-</script>
 </html>

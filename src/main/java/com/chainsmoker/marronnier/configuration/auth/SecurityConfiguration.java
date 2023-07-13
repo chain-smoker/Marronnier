@@ -21,7 +21,7 @@ public class SecurityConfiguration {
         http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/","/auth/**", "/css/**", "/images/**",
-                "/js/**", "/h2-console/**").permitAll()
+                "/js/**", "/h2-console/**","/login/**").permitAll()
                 .antMatchers("/basket/**", "/profile/**", "/find/**", "/feed/**").hasRole(Role.MEMBER.name())
                 .anyRequest().authenticated()
 //			    .antMatchers("/**").authenticated() // 인가된 사용자만 접근 가능하도록 설정
