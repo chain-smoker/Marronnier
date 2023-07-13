@@ -28,8 +28,6 @@ public class RegistApplyService {
 
         Apply apply = new Apply(title, content, category, isApproval, requesterId);
 
-        System.out.println("apply = " + apply);
-
         applyRepository.save(apply);
     }
 }

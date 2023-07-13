@@ -35,8 +35,6 @@ public class CreateApplyController {
         SessionUser sessionUser = (SessionUser) session.getAttribute("user");
         long requesterId = sessionUser.getId();
 
-        System.out.println("requesterId = " + requesterId);
-
         // 사용자 입력값 DTO에 담기
         String title = applyInfos.get("title");
         String content = applyInfos.get("content");
@@ -46,13 +44,9 @@ public class CreateApplyController {
         CreateApplyDTO createApplyDTO =
                 new CreateApplyDTO(title, content, category, isApproval, requesterId);
 
-        System.out.println("createApplyDTO = " + createApplyDTO);
-
         registApplyService.create(createApplyDTO);
 
         return "redirect:/";
     }
-
-
 
 }

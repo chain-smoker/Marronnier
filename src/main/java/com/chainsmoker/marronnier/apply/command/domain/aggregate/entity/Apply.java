@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
+@Table(name = "APPLY_TB")
 public class Apply extends BaseTimeEntity {
 
     @Id
