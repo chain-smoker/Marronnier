@@ -3,7 +3,6 @@ package com.chainsmoker.marronnier.element.command.domain.aggregate.entity;
 
 import com.chainsmoker.marronnier.element.command.domain.aggregate.EnumType.CategoryNameEnum;
 import lombok.*;
-import org.checkerframework.checker.units.qual.C;
 
 import javax.persistence.*;
 
@@ -15,6 +14,7 @@ import javax.persistence.*;
 public class Element {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Column
     private Long id;
 

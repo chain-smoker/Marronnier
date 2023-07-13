@@ -1,9 +1,11 @@
 package com.chainsmoker.marronnier.element.command.application.controller;
 
+import com.chainsmoker.marronnier.element.command.application.dto.RegistElementDTO;
 import com.chainsmoker.marronnier.element.command.application.service.RegistElementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 // a 등록 페이지 이동 컨트롤러
@@ -20,8 +22,7 @@ public class RegistElementController {
     }
 
 
-    // 아직안됨
-    @GetMapping("/element")
+    @GetMapping("/main")
     public String registMain() {
         return "cocktail/registMain";
     }
@@ -29,6 +30,12 @@ public class RegistElementController {
 
     @GetMapping("/element")
     public String registElement() {
-        return "cocktail/regist/element"
+        return "cocktail/regist/element";
+    }
+
+    @PostMapping("/element")
+    public String regist(RegistElementDTO elementDTO) {
+        registElementService.regist(elementDTO);
+        return "cocktail/registMain";
     }
 }
