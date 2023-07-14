@@ -1,6 +1,5 @@
 package com.chainsmoker.marronnier.basket.query.application.dto;
 
-import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -11,13 +10,17 @@ public class MemberCockTailBasketDTO {
     private final long memberId;
     private final long cockTailRecipeId;
     private final String cockTailRecipeName;
+    private final String cockTailRecipeDescription;
+    private final String cockTailRecipeDifficulty;
     private final String getCockTailRecipeImage;
     private final LocalDateTime createdDate;
 
-    public MemberCockTailBasketDTO(long memberId, long cockTailRecipeId, String cockTailRecipeName, LocalDateTime createdDate) {
+    public MemberCockTailBasketDTO(long memberId, long cockTailRecipeId, String cockTailRecipeName, String cockTailRecipeDescription, String cockTailRecipeDifficulty, LocalDateTime createdDate) {
         this.memberId = memberId;
         this.cockTailRecipeId = cockTailRecipeId;
         this.cockTailRecipeName = cockTailRecipeName;
+        this.cockTailRecipeDescription = cockTailRecipeDescription;
+        this.cockTailRecipeDifficulty = cockTailRecipeDifficulty;
         this.getCockTailRecipeImage = null;
         this.createdDate = createdDate;
     }

@@ -1,9 +1,11 @@
 package com.chainsmoker.marronnier.basket.query.application.service;
 
 import com.chainsmoker.marronnier.basket.query.domain.entity.QueryBasket;
+import com.chainsmoker.marronnier.basket.query.domain.service.CocktailRecipeRequestService;
 import com.chainsmoker.marronnier.basket.query.domain.service.MemberRequestService;
 import com.chainsmoker.marronnier.basket.query.infra.repository.BasketMapper;
 import com.chainsmoker.marronnier.basket.query.application.dto.MemberCockTailBasketDTO;
+import com.chainsmoker.marronnier.cocktailrecipe.query.application.dto.FindCocktailRecipeDTO;
 import com.chainsmoker.marronnier.member.query.domain.entity.QueryMember;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +18,13 @@ public class FindBasketService {
 
     private final BasketMapper basketMapper;
     private final MemberRequestService memberRequestService;
+    private final CocktailRecipeRequestService cocktailRecipeRequestService;
 
     @Autowired
-    public FindBasketService(BasketMapper basketMapper, MemberRequestService memberRequestService) {
+    public FindBasketService(BasketMapper basketMapper, MemberRequestService memberRequestService, CocktailRecipeRequestService cocktailRecipeRequestService) {
         this.basketMapper = basketMapper;
         this.memberRequestService = memberRequestService;
+        this.cocktailRecipeRequestService = cocktailRecipeRequestService;
     }
 
     public List<MemberCockTailBasketDTO> findByMemberId(long memberId) {
@@ -28,19 +32,17 @@ public class FindBasketService {
         List<MemberCockTailBasketDTO> memberCockTailBasketDTOList = new ArrayList<>();
         for (QueryBasket basket : baskets) {
             QueryMember member = memberRequestService.getMemberById(basket.getMemberId());
-//            MemberCockTailBasketDTO memberCockTailBasketDTO = MemberCockTailBasketDTO
-//                    .builder()
-//                    .cockTailRecipeId(basket.getCockTailRecipeId())
-//                    .cockTailRecipeName(member.getName())
-//                    .memberId(member.getId())
-//                    .createdDate(basket.getCreatedDate())
-//                    .build();
+            FindCocktailRecipeDTO cocktailRecipe = cocktailRecipeRequestService.getCocktailRecipeById(basket.getCockTailRecipeId());
+
             MemberCockTailBasketDTO memberCockTailBasketDTO = new MemberCockTailBasketDTO(
-                    basket.getMemberId(),
-                    basket.getCockTailRecipeId(),
-                    member.getName(),
+                    member.getId(),
+                    cocktailRecipe.getId(),
+                    cocktailRecipe.getName(),
+                    cocktailRecipe.getDescription(),
+                    cocktailRecipe.getDifficulty(),
                     basket.getCreatedDate()
             );
+
             memberCockTailBasketDTOList.add(memberCockTailBasketDTO);
         }
         return memberCockTailBasketDTOList;
