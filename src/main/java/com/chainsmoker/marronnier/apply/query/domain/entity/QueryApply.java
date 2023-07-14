@@ -1,19 +1,20 @@
-package com.chainsmoker.marronnier.apply.command.domain.aggregate.entity;
+package com.chainsmoker.marronnier.apply.query.domain.entity;
 
 import com.chainsmoker.marronnier.apply.command.domain.aggregate.entity.EnumType.CategoryEnum;
-import com.chainsmoker.marronnier.common.entity.BaseTimeEntity;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "APPLY_TB")
-public class Apply extends BaseTimeEntity {
+public class QueryApply {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private long id;                     // 요청 번호
 
@@ -30,14 +31,13 @@ public class Apply extends BaseTimeEntity {
     @Column(name = "is_approval")
     private boolean isApproval;         // 승인 여부
 
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;  // 작성 날짜
+
+    @Column(name = "modified_date")
+    private LocalDateTime modifiedDate; // 수정 날짜
+
     @Column(name ="requester_id", nullable = false)
     private long requesterId;            // 회원 번호
 
-    public Apply(String title, String content, CategoryEnum category, boolean isApproval, long requesterId) {
-        this.title = title;
-        this.content = content;
-        this.category = category;
-        this.isApproval = isApproval;
-        this.requesterId = requesterId;
-    }
 }
