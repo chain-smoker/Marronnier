@@ -4,6 +4,7 @@ import com.chainsmoker.marronnier.element.command.application.dto.RegistElementD
 import com.chainsmoker.marronnier.element.command.application.service.RegistElementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,10 @@ public class RegistElementController {
 
 
     @GetMapping("/main")
-    public String registMain() {
+    public String registMain(Model model) {
+
+        model.addAttribute("message", "값 전송 완료됨");
+
         return "cocktail/registMain";
     }
 
