@@ -3,8 +3,8 @@
 <mapper namespace="com.chainsmoker.marronnier.elementbyrecipe.query.infra.repository.FindElementByRecipeMapper">
     <select id="findElement" resultType="long" parameterType="long">
         SELECT
-            elementId
+            element_id
           FROM ELEMENTBYRECIPE_TB
-         WHERE cocktailId = #{recipeId}
+         WHERE cocktail_id = #{recipeId}
     </select>
 </mapper>
