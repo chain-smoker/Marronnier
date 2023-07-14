@@ -1,6 +1,5 @@
 package com.chainsmoker.marronnier.admin.command.application.dto;
 
-import com.chainsmoker.marronnier.admin.command.domain.aggragate.entity.vo.PasswordVO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,12 +7,12 @@ import lombok.Setter;
 @Setter
 public class CreateAdminDTO {
     private String loginId;
-    private PasswordVO password;
+    private String password;
     private String name;
 
     public CreateAdminDTO(String loginId, String password, String name) {
         this.loginId = loginId;
-        this.password = new PasswordVO(password);
+        this.password = password;
         this.name = name;
     }
 
