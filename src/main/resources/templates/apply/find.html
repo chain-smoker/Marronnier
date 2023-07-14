@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Apply List</title>
+</head>
+<body>
+<h1>Apply List</h1>
+
+<table>
+    <thead>
+    <tr align="center">
+        <th>요청글 ID</th>
+        <th>제목</th>
+        <th>본문</th>
+        <th>카테고리</th>
+        <th>승인 여부</th>
+        <th>작성 날짜</th>
+        <th>수정 날짜</th>
+        <th>회원 번호</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- 반복문 사용, Apply를 표시-->
+    <tr th:each="apply : ${applys}" align="center">
+        <td th:text="${apply.id}"></td>
+        <td th:text="${apply.title}"></td>
+        <td th:text="${apply.content}"></td>
+        <td th:text="${apply.category}"></td>
+        <td th:text="${apply.approval}"></td>
+        <td th:text="${apply.createdDate}"></td>
+        <td th:text="${apply.modifiedDate}"></td>
+        <td th:text="${apply.requesterId}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div>
+    <!-- 이전 페이지 표시 -->
+    <a th:href="@{/apply/find(page=${currentPage - 1})}"
+       th:if="${currentPage > 1}">이전</a>
+
+    <!-- 현재 페이지 및 전체 페이지 수 표시 -->
+    <span th:text="${currentPage}"></span> / <span th:text="${totalPages}"></span>
+
+    <!-- 다음 페이지 표시 -->
+    <a th:href="@{/apply/find(page=${currentPage + 1})}"
+       th:if="${currentPage < totalPages}">다음</a>
+</div>
+</body>
+</html>
