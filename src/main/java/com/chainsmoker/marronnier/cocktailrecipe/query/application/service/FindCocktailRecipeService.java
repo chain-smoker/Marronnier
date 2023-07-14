@@ -2,7 +2,7 @@ package com.chainsmoker.marronnier.cocktailrecipe.query.application.service;
 
 import com.chainsmoker.marronnier.cocktailrecipe.query.application.dto.FindCocktailRecipeDTO;
 import com.chainsmoker.marronnier.cocktailrecipe.query.domain.entity.QueryCocktailRecipe;
-import com.chainsmoker.marronnier.cocktailrecipe.query.infra.repository.FindCocktailMapper;
+import com.chainsmoker.marronnier.cocktailrecipe.query.infra.repository.FindCocktailRecipeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +11,10 @@ import java.util.List;
 
 @Service
 public class FindCocktailRecipeService {
-    private final FindCocktailMapper findCocktailMapper;
+    private final FindCocktailRecipeMapper findCocktailMapper;
 
     @Autowired
-    public FindCocktailRecipeService(FindCocktailMapper findCocktailMapper){
+    public FindCocktailRecipeService(FindCocktailRecipeMapper findCocktailMapper){
         this.findCocktailMapper=findCocktailMapper;
     }
 
@@ -25,5 +25,10 @@ public class FindCocktailRecipeService {
             recipeDTOS.add(FindCocktailRecipeDTO.entityToDTO(recipe));
         }
         return recipeDTOS;
+    }
+    public FindCocktailRecipeDTO findByCocktailRecipeId(Long cocktailrecipeId){
+        QueryCocktailRecipe recipe=findCocktailMapper.findById(cocktailrecipeId);
+        FindCocktailRecipeDTO recipeDTO=FindCocktailRecipeDTO.entityToDTO(recipe);
+        return recipeDTO;
     }
 }

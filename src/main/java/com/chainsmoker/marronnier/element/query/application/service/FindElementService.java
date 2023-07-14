@@ -19,11 +19,15 @@ public class FindElementService {
     }
     public List<FindElementDTO> findAllElement() {
         List<QueryElement> elements=findElementMapper.findAll();
-        System.out.println("elements = " + elements);
         List<FindElementDTO> elementDTOS=new ArrayList<>();
         for (QueryElement element:elements){
             elementDTOS.add(FindElementDTO.entityToDTO(element));
         }
         return elementDTOS;
+    }
+    public FindElementDTO findByElementId(Long elementId){
+        QueryElement element=findElementMapper.findById(elementId);
+        FindElementDTO elementDTO=FindElementDTO.entityToDTO(element);
+        return elementDTO;
     }
 }

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>주조법별 재료 페이지입니다.</h1>
+<span>칵테일 번호 : </span><span th:text="${recipe.getId()}"></span><br>
+<span>칵테일 이름 : </span><span th:text="${recipe.getName()}"></span><br>
+<span>칵테일 설명 : </span><span th:text="${recipe.getDescription()}"></span><br>
+<span>칵테일 분류 :</span><span th:text="${recipe.getClassification()}"></span><br>
+<span>칵테일 도수 :</span><span th:text="${recipe.getAbv()}"></span><br>
+<span>칵테일 난이도 : </span><span th:text="${recipe.getDifficulty()}"></span><br>
+<br><span>사용된 재료</span><br>
+<th:block th:each="element : ${elements}">
+    <span>재료 번호 : </span><span th:text="${element.getId()}"></span><br>
+    <span>재료 이름 : </span><span th:text="${element.getName()}"></span><br>
+    <span>재료 카테고리 : </span><span th:text="${element.getCategory()}"></span><br>
+    <br>
+</th:block>
+</body>
+</html>

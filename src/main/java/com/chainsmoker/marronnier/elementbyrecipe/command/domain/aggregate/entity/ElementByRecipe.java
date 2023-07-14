@@ -15,7 +15,7 @@ public class ElementByRecipe {
     @Column
     private Long id;
 
-    @Column(name="cocktail_id", nullable = false)
+    @Column(name = "cocktail_id",nullable = false)
     private Long cocktailId;
 
     @Column(name="element_id",nullable = false)

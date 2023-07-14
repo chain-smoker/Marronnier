@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.chainsmoker.marronnier.cocktailrecipe.query.infra.repository.FindCocktailMapper">
+<mapper namespace="com.chainsmoker.marronnier.cocktailrecipe.query.infra.repository.FindCocktailRecipeMapper">
     <resultMap id="QueryCocktailRecipeMap" type="com.chainsmoker.marronnier.cocktailrecipe.query.domain.entity.QueryCocktailRecipe">
         <id property="id" column="id"/>
         <result property="name" column="name"/>
@@ -10,8 +10,25 @@
         <result property="difficulty" column="difficulty"/>
     </resultMap>
     <select id="findAll" resultMap="QueryCocktailRecipeMap">
-        SELECT *
+        SELECT
+                ID
+              , NAME
+              , DESCRIPTION
+              , CLASSIFICATION
+              , ABV
+              , DIFFICULTY
         FROM
             COCKTAILRECIPE_TB
+    </select>
+    <select id="findById" resultMap="QueryCocktailRecipeMap" parameterType="long">
+        SELECT
+               ID
+             , NAME
+             , DESCRIPTION
+             , CLASSIFICATION
+             , ABV
+             , DIFFICULTY
+        FROM COCKTAILRECIPE_TB WHERE id=#{cocktailrecipeId}
+
     </select>
 </mapper>
