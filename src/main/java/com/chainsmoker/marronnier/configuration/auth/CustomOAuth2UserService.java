@@ -23,9 +23,9 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
-@Service
 @Transactional
 @RequiredArgsConstructor
+@Service
 public class CustomOAuth2UserService  extends DefaultOAuth2UserService {
     private final RegistMemberService registMemberService;
     private final FindMemberService findMemberService;
