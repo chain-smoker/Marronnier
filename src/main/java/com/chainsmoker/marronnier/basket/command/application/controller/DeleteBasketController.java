@@ -4,6 +4,7 @@ import com.chainsmoker.marronnier.basket.command.application.dto.DeleteBasketDTO
 import com.chainsmoker.marronnier.basket.command.application.service.DeleteBasketService;
 import com.chainsmoker.marronnier.configuration.auth.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +22,8 @@ public class DeleteBasketController {
     }
 
     @PostMapping("/delete")
-    public String addBasket(HttpSession session, @ModelAttribute("delete-basket") DeleteBasketDTO deleteBasketDTO) {
-        SessionUser sessionUser = (SessionUser) session.getAttribute("user");
+    public String addBasket(Authentication authentication, @ModelAttribute("delete-basket") DeleteBasketDTO deleteBasketDTO) {
+        SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         long memberId = sessionUser.getId();
 
         deleteBasketService.delete(deleteBasketDTO);
