@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 @NoArgsConstructor
 @Setter
 public class FeedDTO {
-    private Long Id;
-    private Long memberId;
-    private Long cocktailId;
+    private long Id;
+    private long memberId;
+    private long cocktailId;
     private String content;
 
     public FeedDTO(Feed feed){

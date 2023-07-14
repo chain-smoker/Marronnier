@@ -29,6 +29,24 @@
     <button>수정</button>
   </a>
   </tr>
+  <th:block th:if="${whetherLike ==0}">
+  <form action="/like" method="post">
+    <input type="text" th:value="${feed.getId()}" name="feedId" hidden>
+    <button type="submit">좋아요</button>
+  </form>
+  </th:block>
+
+  <th:block th:if="${whetherLike ==1}">
+    <form action="/like/cancel" method="post">
+      <input type="text" th:value="${feed.getId()}" name="feedId" hidden>
+      <button type="submit">좋아요취소</button>
+    </form>
+  </th:block>
 </table>
+<div>
+  좋아요 수
+</div>
+<input type="text" th:value="${NumberoFlIKE}" readonly>
+
 </body>
 </html>
