@@ -17,4 +17,7 @@ public class Like implements Serializable {
     public Like(LikeVO like) {
         this.like=like;
     }
+    public Like(long memberId, long feedid){
+        this.like = new LikeVO(feedid,memberId);
+    }
 }

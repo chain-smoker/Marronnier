@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chainsmoker.marronnier.like.query.domain.repository.LikeMapper">
+    
+    
+    <resultMap id="QueryLikeMap" type="com.chainsmoker.marronnier.like.query.domain.entity.QueryLike">
+        <id property="memberId" column="member_id"/>
+        <result property="feedId" column="feed_id"/>
+    </resultMap>
+    
+    <select id="findNumberOfLike" parameterType="hashmap" resultType="_int">
+        SELECT
+            COUNT(*)
+          FROM LIKE_TB
+         WHERE feed_id = #{ feedId }
+    </select>
+
+    <select id="findLikeByMemberIdAndFeedId" parameterType="hashmap" resultType="_int">
+        SELECT
+            COUNT(*)
+         FROM LIKE_TB
+        WHERE feed_id = #{ feedId } AND member_id = #{ memberId }
+    </select>
+    
+</mapper>
