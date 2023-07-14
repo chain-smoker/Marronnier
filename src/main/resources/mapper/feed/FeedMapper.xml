@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.chainsmoker.marronnier.feed.query.infra.repository.FeedMapper">
     <resultMap id="QueryFeedMap" type="com.chainsmoker.marronnier.feed.query.domain.entity.QueryFeed">
-        <id property="Id" column="Id"/>
-        <result property="memberId" column="memberId"/>
-        <result property="cocktailId" column="cocktailId"/>
+        <id property="id" column="id"/>
+        <result property="memberId" column="member_id"/>
+        <result property="cocktailId" column="cocktail_recipe_Id"/>
         <result property="content" column="content"/>
     </resultMap>
     <select id="findAllFeeds" resultMap="QueryFeedMap">
@@ -12,7 +12,7 @@
         FROM
             FEED_TB
         ORDER BY
-            Id DESC
+            id DESC
     </select>
 
     <select id="findFeedById" resultMap="QueryFeedMap">
@@ -20,6 +20,6 @@
         FROM
             FEED_TB
         WHERE
-            ID= #{Id}
+            id = #{id}
     </select>
 </mapper>

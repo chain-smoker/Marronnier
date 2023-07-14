@@ -12,7 +12,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CocktailRecipeVO {
-    @Column(nullable = false, name ="cocktailId")
+    @Column(nullable = false, name ="cocktail_recipe_id")
     private long id;
 
     @Builder

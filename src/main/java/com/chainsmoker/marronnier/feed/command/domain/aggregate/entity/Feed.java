@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class Feed {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
     @Embedded
     private MemberVO memberId;
     @Embedded
@@ -33,7 +33,7 @@ public class Feed {
     }
 
     public Feed(UpdateFeedDTO updateFeedDTO) {
-        Id = updateFeedDTO.getId();
+        this.id = updateFeedDTO.getId();
         this.memberId = new MemberVO(updateFeedDTO.getMemberId());
         this.cocktailId = new CocktailRecipeVO( updateFeedDTO.getCocktailId());
         this.content = updateFeedDTO.getContent();
