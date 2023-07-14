@@ -5,15 +5,19 @@
     <title>member's Basket</title>
 </head>
 <body>
-<table>
-  <tr>
+<table border="1">
+  <tr align ="center">
       <th>칵테일 ID</th>
       <th>칵테일 이름</th>
+      <th>칵테일 설명</th>
+      <th>칵테일 제작 난이도</th>
       <th>추가 날짜</th>
   </tr>
-  <tr th:each="basket : ${memberCockTailBaskets}">
+  <tr th:each="basket : ${memberCockTailBaskets}" align ="center">
       <td th:text="${basket.getCockTailRecipeId()}">
     <td th:text="${basket.getCockTailRecipeName()}"></td>
+    <td th:text="${basket.getCockTailRecipeDescription()}"></td>
+      <td th:text="${basket.getCockTailRecipeDifficulty()}"></td>
     <td th:text="${basket.getCreatedDate()}"></td>
   </tr>
 </table>
