@@ -10,12 +10,24 @@
         <result property="difficulty" column="difficulty"/>
     </resultMap>
     <select id="findAll" resultMap="QueryCocktailRecipeMap">
-        SELECT *
+        SELECT
+                ID
+              , NAME
+              , DESCRIPTION
+              , CLASSIFICATION
+              , ABV
+              , DIFFICULTY
         FROM
             COCKTAILRECIPE_TB
     </select>
     <select id="findById" resultMap="QueryCocktailRecipeMap" parameterType="long">
-        SELECT *
+        SELECT
+               ID
+             , NAME
+             , DESCRIPTION
+             , CLASSIFICATION
+             , ABV
+             , DIFFICULTY
         FROM COCKTAILRECIPE_TB WHERE id=#{cocktailrecipeId}
 
     </select>

@@ -7,12 +7,18 @@
         <result property="category" column="category"/>
     </resultMap>
     <select id="findAll" resultMap="QueryElementResultMap">
-        SELECT *
+        SELECT
+                ID
+              , NAME
+              , CATEGORY
         FROM
             ELEMENT_TB
     </select>
     <select id="findById" resultMap="QueryElementResultMap" parameterType="long">
-        SELECT *
+        SELECT
+               ID
+             , NAME
+             , CATEGORY
         FROM ELEMENT_TB WHERE id=#{elementId}
     </select>
 </mapper>

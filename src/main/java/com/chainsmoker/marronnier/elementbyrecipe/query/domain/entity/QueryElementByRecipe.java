@@ -12,10 +12,10 @@ public class QueryElementByRecipe {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "cocktail_id", nullable = false)
     private Long cocktailId;
 
-    @Column(nullable = false)
+    @Column(name="element_id", nullable = false)
     private Long elementId;
 
     @Column
