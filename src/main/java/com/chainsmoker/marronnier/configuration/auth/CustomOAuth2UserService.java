@@ -11,12 +11,10 @@ import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.EnumTyp
 import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.Member;
 import com.chainsmoker.marronnier.member.query.application.service.FindMemberService;
 import com.chainsmoker.marronnier.member.query.domain.entity.QueryMember;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
-import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
@@ -44,11 +42,8 @@ public class CustomOAuth2UserService  extends DefaultOAuth2UserService {
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
 
         SessionUser sessionUser = saveOrUpdate(attributes);
-        httpSession.setAttribute("user", sessionUser);
 
-        return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority(sessionUser.getRole().getKey())),
-                attributes.getAttributes(),
-                attributes.getNameAttributeKey());
+        return sessionUser;
     }
 
     private SessionUser saveOrUpdate(OAuthAttributes attributes) {

@@ -4,7 +4,6 @@ import com.chainsmoker.marronnier.admin.command.domain.aggragate.entity.EnumType
 import com.chainsmoker.marronnier.common.handler.OAuth2SuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,7 +14,6 @@ import java.io.IOException;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
-@EnableMethodSecurity
 public class SecurityConfiguration {
 
     private final CustomOAuth2UserService customOAuth2UserService;
@@ -30,15 +28,14 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.sessionManagement().invalidSessionUrl("/login");
         http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/","/auth/**", "/css/**", "/images/**",
                 "/js/**", "/h2-console/**","/login/**", "/admin/regist", "/admin/login", "/feed/feed","/admin/error").permitAll()
-                .antMatchers("/home","basket/**", "/profile/**", "/find/**", "/feed/**", "/apply/self").hasRole(Role.MEMBER.name())
+                .antMatchers("/home","/basket/**", "/profile/**", "/find/**", "/feed/**", "/apply/self").hasRole(Role.MEMBER.name())
                 .antMatchers("/apply/**", "/report/**", "/admin/**").hasRole(AdminRole.ADMIN.name())
                 .anyRequest().authenticated()
-//			    .antMatchers("/**").authenticated() // 인가된 사용자만 접근 가능하도록 설정
-//			    .antMatchers("게시물등").hasRole(Role.USER.name()) // 특정 ROLE을 가진 사용자만 접근 가능하도록 설정
                 .and()
                 .oauth2Login()
                     .authorizationEndpoint()
@@ -47,6 +44,9 @@ public class SecurityConfiguration {
                             .userService(customOAuth2UserService)
                 .and()
                 .successHandler(oAuth2SuccessHandler)
+                .failureHandler((request, response, exception) -> {
+                    response.sendRedirect("/login");
+                })
                 ;
 
         http.formLogin()
@@ -76,13 +76,13 @@ public class SecurityConfiguration {
 
         http
                 .exceptionHandling()
-                .authenticationEntryPoint((httpServletRequest, httpServletResponse, e) -> {  // 인증 실패 시 처리
+                .authenticationEntryPoint((request, response, e) -> {  // 인증 실패 시 처리
                     System.out.println("인증 실패");
-                    httpServletResponse.sendRedirect("/");
+                    response.sendRedirect("/");
                 })
-                .accessDeniedHandler((httpServletRequest, httpServletResponse, e) -> {// 인가 실패 시 처리
-                        System.out.println("인가 실패");
-                        httpServletResponse.sendRedirect("/");
+                .accessDeniedHandler((request, response, e) -> {// 인가 실패 시 처리
+                    System.out.println("인가 실패");
+                    response.sendRedirect("/");
                 })
         ;
         return http.build();

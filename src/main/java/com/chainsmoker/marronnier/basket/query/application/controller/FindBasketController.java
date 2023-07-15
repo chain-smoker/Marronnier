@@ -4,13 +4,13 @@ import com.chainsmoker.marronnier.basket.query.application.service.FindBasketSer
 import com.chainsmoker.marronnier.configuration.auth.SessionUser;
 import com.chainsmoker.marronnier.basket.query.application.dto.MemberCockTailBasketDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -26,8 +26,8 @@ public class FindBasketController {
     }
 
     @GetMapping("")
-    public String findCockTailBaskets(HttpSession session, Model model) {
-        SessionUser sessionUser = (SessionUser) session.getAttribute("user");
+    public String findCockTailBaskets(Authentication authentication, Model model) {
+        SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         long memberId = sessionUser.getId();
         List<MemberCockTailBasketDTO> memberCockTailBasketDTOs = findBasketService.findByMemberId(memberId);
         model.addAttribute("memberCockTailBaskets", memberCockTailBasketDTOs);

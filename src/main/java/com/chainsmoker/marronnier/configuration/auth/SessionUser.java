@@ -2,9 +2,17 @@ package com.chainsmoker.marronnier.configuration.auth;
 
 import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.EnumType.Role;
 import lombok.Getter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 @Getter
-public class SessionUser {
+public class SessionUser implements OAuth2User {
     private final long id;
     private final String name;
     private final Role role;
@@ -17,6 +25,24 @@ public class SessionUser {
 
     public static Builder builder(long id, String name,Role role) {
         return new Builder(id, name, role);
+    }
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        Map<String, Object> attr = new HashMap<>();
+        attr.put("id", this.id);
+        attr.put("name", this.name);
+        attr.put("role", this.role);
+        return attr;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singleton(new SimpleGrantedAuthority(this.role.getKey()));
+    }
+
+    public String getNameAttributeKey() {
+        return "id";
     }
 
     public static class Builder {

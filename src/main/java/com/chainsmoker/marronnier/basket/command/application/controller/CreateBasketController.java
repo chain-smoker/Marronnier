@@ -4,6 +4,7 @@ import com.chainsmoker.marronnier.basket.command.application.dto.CreateBasketDTO
 import com.chainsmoker.marronnier.basket.command.application.service.RegistBasketService;
 import com.chainsmoker.marronnier.configuration.auth.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +28,8 @@ public class CreateBasketController {
     }
 
     @PostMapping("add")
-    public String addBasket(HttpSession session, @ModelAttribute("cockTailRecipeId") long cockTailRecipeId) {
-        SessionUser sessionUser = (SessionUser) session.getAttribute("user");
+    public String addBasket(Authentication authentication, @ModelAttribute("cockTailRecipeId") long cockTailRecipeId) {
+        SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         long memberId = sessionUser.getId();
 
         CreateBasketDTO createBasketDTO = new CreateBasketDTO(memberId, cockTailRecipeId);

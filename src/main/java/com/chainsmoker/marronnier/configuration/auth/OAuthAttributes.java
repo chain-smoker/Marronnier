@@ -4,8 +4,6 @@ package com.chainsmoker.marronnier.configuration.auth;
 
 import java.util.Map;
 
-import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.EnumType.PlatformEnum;
-import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.Member;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -15,13 +13,15 @@ public class OAuthAttributes {
     private final String nameAttributeKey;
     private final String name;
     private final Long uid;
+    private final Long id;
 
     @Builder
-    public OAuthAttributes(Map<String, Object> attributes, String nameAttributeKey, String name, Long uid, String picture) {
+    public OAuthAttributes(Map<String, Object> attributes, String nameAttributeKey, String name, Long uid, String picture, Long id) {
         this.attributes = attributes;
         this.nameAttributeKey = nameAttributeKey;
         this.name = name;
         this.uid = uid;
+        this.id = id;
     }
 
     public static OAuthAttributes of(String socialName, String userNameAttributeName, Map<String, Object> attributes){
