@@ -9,6 +9,7 @@ import com.chainsmoker.marronnier.member.command.application.dto.CreateMemberDTO
 import com.chainsmoker.marronnier.member.command.application.service.RegistMemberService;
 import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.EnumType.Role;
 import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.Member;
+import com.chainsmoker.marronnier.member.query.application.dto.FindMemberDTO;
 import com.chainsmoker.marronnier.member.query.application.service.FindMemberService;
 import com.chainsmoker.marronnier.member.query.domain.entity.QueryMember;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -47,7 +48,7 @@ public class CustomOAuth2UserService  extends DefaultOAuth2UserService {
     }
 
     private SessionUser saveOrUpdate(OAuthAttributes attributes) {
-        QueryMember member = findMemberService.findByUid(attributes.getUid());
+        FindMemberDTO member = findMemberService.findByUid(attributes.getUid());
         SessionUser sessionUser = null;
         CreateMemberDTO createMemberDTO = new CreateMemberDTO(attributes.getUid(), attributes.getName(), Role.MEMBER);
         if (member == null) {

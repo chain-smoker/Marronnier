@@ -1,7 +1,8 @@
 package com.chainsmoker.marronnier.member.query.application.service;
 
+import com.chainsmoker.marronnier.member.query.application.dto.FindMemberDTO;
 import com.chainsmoker.marronnier.member.query.domain.entity.QueryMember;
-import com.chainsmoker.marronnier.member.query.infra.repository.MemberMapper;
+import com.chainsmoker.marronnier.member.query.domain.repository.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +16,28 @@ public class FindMemberService {
         this.memberMapper = memberMapper;
     }
 
-    public QueryMember findById(long id) {
+    public FindMemberDTO findById(long id) {
         QueryMember member = memberMapper.findById(id);
-        return member;
+        return FindMemberDTO.builder(
+                member.getId(),
+                member.getName(),
+                member.getAddress(),
+                member.getGender(),
+                member.getBirthDate(),
+                member.getRole()
+        ).build();
     }
 
-    public QueryMember findByUid(long uid) {
+    public FindMemberDTO findByUid(long uid) {
         QueryMember member = memberMapper.findByUID(uid);
-        return member;
+        return FindMemberDTO.builder(
+                member.getId(),
+                member.getName(),
+                member.getAddress(),
+                member.getGender(),
+                member.getBirthDate(),
+                member.getRole()
+        ).build();
     }
 
 
