@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        function onNum() {
+            var form = document.search;
+            var searchWord = form.searchWord.value;
+            var action = form.action;
+            axios
+                .post(action, {
+                    searchWord: searchWord
+                })
+                .then((res) => {
+                    // console.log(res.data.searchWord);
+                    console.log(res.data);
+                    viewData(res.data);
+                })
+                .catch((err) => {
+                    console.log("An error occurred:", err.response);
+                })
+        }
+        function viewData(data) {
+            var i=0;
+            $(".searchResult").empty();
+            while (i < data.length){
+                $(".searchResult").append("<span>"+"========="+"</span><br>");
+                $(".searchResult").append("<span>"+"Name : "+data[i].name+"</span><br>");
+                $(".searchResult").append("<span>"+"Category : "+data[i].category+"</span><br>");
+                i++;
+            }
+        }
+    </script>
+</head>
+<body>
+<h1>비동기 검색 페이지</h1>
+<form name="search" action="./searchword" method="post">
+    <input type="text" placeholder="검색어를 입력해주세요" name="searchWord"/>
+    <input type="button" onclick='onNum()' value="전송"/>
+</form>
+
+<h2>검색 결과 출력화면</h2>
+<div class="searchResult">
+</div>
+</body>
+</html>
