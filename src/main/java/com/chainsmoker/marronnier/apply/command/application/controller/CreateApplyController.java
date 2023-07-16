@@ -4,6 +4,7 @@ import com.chainsmoker.marronnier.apply.command.application.dto.CreateApplyDTO;
 import com.chainsmoker.marronnier.apply.command.application.service.RegistApplyService;
 import com.chainsmoker.marronnier.configuration.auth.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +13,6 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/apply/*")
-@SessionAttributes({"user"})
 public class CreateApplyController {
 
     private final RegistApplyService registApplyService;
@@ -29,10 +29,10 @@ public class CreateApplyController {
 
     @PostMapping("add")
     public String addApply(@RequestParam Map<String, String> applyInfos,
-                           HttpSession session) {
+                           Authentication authentication) {
 
         // 로그인된 사용자 id 가져오기
-        SessionUser sessionUser = (SessionUser) session.getAttribute("user");
+        SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         long requesterId = sessionUser.getId();
 
         // 사용자 입력값 DTO에 담기
