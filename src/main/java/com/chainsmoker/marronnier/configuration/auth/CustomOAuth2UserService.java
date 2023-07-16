@@ -11,7 +11,6 @@ import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.EnumTyp
 import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.Member;
 import com.chainsmoker.marronnier.member.query.application.dto.FindMemberDTO;
 import com.chainsmoker.marronnier.member.query.application.service.FindMemberService;
-import com.chainsmoker.marronnier.member.query.domain.entity.QueryMember;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
@@ -28,7 +27,6 @@ import lombok.RequiredArgsConstructor;
 public class CustomOAuth2UserService  extends DefaultOAuth2UserService {
     private final RegistMemberService registMemberService;
     private final FindMemberService findMemberService;
-    private final HttpSession httpSession;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -50,8 +48,8 @@ public class CustomOAuth2UserService  extends DefaultOAuth2UserService {
     private SessionUser saveOrUpdate(OAuthAttributes attributes) {
         FindMemberDTO member = findMemberService.findByUid(attributes.getUid());
         SessionUser sessionUser = null;
-        CreateMemberDTO createMemberDTO = new CreateMemberDTO(attributes.getUid(), attributes.getName(), Role.MEMBER);
         if (member == null) {
+            CreateMemberDTO createMemberDTO = new CreateMemberDTO(attributes.getUid(), attributes.getName(), Role.MEMBER);
             Member newMember = registMemberService.create(createMemberDTO);
             //sessionUser = SessionUser.builder().addId(newMember.getId()).name(newMember.getName()).build();
             sessionUser = SessionUser.builder(newMember.getId(), newMember.getName(), newMember.getRole()).build();

@@ -23,7 +23,8 @@ public class SessionUser implements OAuth2User {
         this.role = builder.role;
     }
 
-    public static Builder builder(long id, String name,Role role) {
+
+    public static Builder builder(long id, String name, Role role) {
         return new Builder(id, name, role);
     }
 

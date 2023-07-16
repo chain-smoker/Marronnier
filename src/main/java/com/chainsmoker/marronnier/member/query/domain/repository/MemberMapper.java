@@ -12,4 +12,6 @@ public interface MemberMapper {
    QueryMember findById(long id);
 
     QueryMember findByUID(long uid);
+
+    boolean isAddedInformation(long id);
 }

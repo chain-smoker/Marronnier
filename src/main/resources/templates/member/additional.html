@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>사용자 추가 정보 입력</title>
+</head>
+<body>
+    <div align="center">
+        <h1>추가 정보 입력</h1>
+        <p th:text="|${member.getName()}님 반갑습니다!|"></p><br>
+        <p>보다 정확한 추천을 위해 회원님의 추가 정보를 알려주세요!</p>
+        <form action="/member/update" method="post">
+            <label>거주지</label> <input type="text" name="address"> <br>
+            <label>직업</label> <input type="text" name="job"><br>
+            <label>거주지</label> <input type="date" name="birthDate"><br>
+            <select name="gender" id="gender">
+                <option value="">성별 선택</option>
+                <option value="MALE">남성</option>
+                <option value="FEMALE">여성</option>
+                <option value="HIDDEN">숨김</option>
+            </select>
+            <br>
+            <button type="submit">완료</button>
+        </form>
+        <button onclick="location.href='/home'">홈으로 가기</button>
+    </div>
+
+</body>
+</html>
