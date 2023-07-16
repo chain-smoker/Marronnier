@@ -1,13 +1,12 @@
 package com.chainsmoker.marronnier.basket.query.application.service;
 
 import com.chainsmoker.marronnier.basket.query.domain.entity.QueryBasket;
-import com.chainsmoker.marronnier.basket.query.domain.service.CocktailRecipeRequestService;
-import com.chainsmoker.marronnier.basket.query.domain.service.MemberRequestService;
+import com.chainsmoker.marronnier.basket.query.domain.service.CocktailRecipeRequest;
+import com.chainsmoker.marronnier.basket.query.domain.service.MemberRequest;
 import com.chainsmoker.marronnier.basket.query.domain.repository.BasketMapper;
 import com.chainsmoker.marronnier.basket.query.application.dto.MemberCockTailBasketDTO;
 import com.chainsmoker.marronnier.cocktailrecipe.query.application.dto.FindCocktailRecipeDTO;
 import com.chainsmoker.marronnier.member.query.application.dto.FindMemberDTO;
-import com.chainsmoker.marronnier.member.query.domain.entity.QueryMember;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +17,11 @@ import java.util.List;
 public class FindBasketService {
 
     private final BasketMapper basketMapper;
-    private final MemberRequestService memberRequestService;
-    private final CocktailRecipeRequestService cocktailRecipeRequestService;
+    private final MemberRequest memberRequestService;
+    private final CocktailRecipeRequest cocktailRecipeRequestService;
 
     @Autowired
-    public FindBasketService(BasketMapper basketMapper, MemberRequestService memberRequestService, CocktailRecipeRequestService cocktailRecipeRequestService) {
+    public FindBasketService(BasketMapper basketMapper, MemberRequest memberRequestService, CocktailRecipeRequest cocktailRecipeRequestService) {
         this.basketMapper = basketMapper;
         this.memberRequestService = memberRequestService;
         this.cocktailRecipeRequestService = cocktailRecipeRequestService;

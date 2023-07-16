@@ -32,7 +32,7 @@ public class SecurityConfiguration {
         http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/","/auth/**", "/css/**", "/images/**",
-                "/js/**", "/h2-console/**","/login/**", "/admin/regist", "/admin/login", "/feed/feed","/admin/error").permitAll()
+                "/js/**", "/h2-console/**","/login/**", "/admin/regist", "/admin/login", "/feed/feed","/admin/error","/main/error").permitAll()
                 .antMatchers("/home","/basket/**", "/profile/**", "/find/**", "/feed/**", "/apply/self").hasRole(Role.MEMBER.name())
                 .antMatchers("/apply/**", "/report/**", "/admin/**").hasRole(AdminRole.ADMIN.name())
                 .anyRequest().authenticated()
@@ -78,11 +78,17 @@ public class SecurityConfiguration {
                 .exceptionHandling()
                 .authenticationEntryPoint((request, response, e) -> {  // 인증 실패 시 처리
                     System.out.println("인증 실패");
-                    response.sendRedirect("/");
+                    //response.sendRedirect("/");
+                    request.setAttribute("errorTitle", "인증 실패");
+                    request.setAttribute("errorMessage", "사용자의 신원을 검증할 수 없습니다!");
+                    request.getRequestDispatcher("/main/error").forward(request, response);
                 })
                 .accessDeniedHandler((request, response, e) -> {// 인가 실패 시 처리
                     System.out.println("인가 실패");
-                    response.sendRedirect("/");
+                    //response.sendRedirect("/");
+                    request.setAttribute("errorTitle", "인가 실패");
+                    request.setAttribute("errorMessage", "해당 페이지를 접근할 권한이 없습니다!");
+                    request.getRequestDispatcher("/main/error").forward(request, response);
                 })
         ;
         return http.build();
