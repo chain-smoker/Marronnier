@@ -17,13 +17,13 @@ public class SearchElementController {
         this.searchElementService=searchElementService;
     }
     @GetMapping("/search")
-    public String test(){
+    public String searchMain(){
         return "cocktail/searchMain";
     }
 
     @ResponseBody
     @PostMapping("/searchword")
-    public List<FindElementDTO> test1(@RequestBody Map<String, String> map){
+    public List<FindElementDTO> searchElement(@RequestBody Map<String, String> map){
         String searchWord=map.get("searchWord");
         List<FindElementDTO> elements=searchElementService.searchElement(searchWord);
         return elements;
