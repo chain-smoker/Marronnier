@@ -31,6 +31,8 @@ public class Member extends BaseTimeEntity {
 
     private String address;
 
+    private String job;
+
     @Enumerated(EnumType.STRING)
     private GenderEnum gender;
 
@@ -45,7 +47,8 @@ public class Member extends BaseTimeEntity {
     @Column(nullable = false)
     private Role role;
 
-    public Member(String name, Long uid, String address, GenderEnum gender, LocalDate birthDate, PlatformEnum platform) {
+
+    public Member(String name, Long uid, String address, GenderEnum gender, LocalDate birthDate, PlatformEnum platform, String job) {
         this.name = name;
         this.UID = uid;
         this.address = address;
@@ -53,6 +56,7 @@ public class Member extends BaseTimeEntity {
         this.birthDate = birthDate;
         this.platform = platform;
         this.role = Role.MEMBER;
+        this.job = job;
     }
 
     public Member(String name, long uid, PlatformEnum platform, Role role) {
@@ -79,4 +83,9 @@ public class Member extends BaseTimeEntity {
     }
 
     public void setRole(Role role) {this.role = role;}
+
+    public void setJob(String job) {
+        this.job = job;
+    }
+
 }

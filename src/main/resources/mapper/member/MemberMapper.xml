@@ -35,4 +35,15 @@
         WHERE
             uid = #{uid}
     </select>
+
+    <select id="isAddedInformation" resultType="_boolean">
+        SELECT
+            address IS NULL
+            AND birth_date IS NULL
+            AND gender IS NULL
+        FROM
+            MEMBER_TB
+        WHERE
+            id = #{id}
+    </select>
 </mapper>

@@ -18,27 +18,37 @@ public class FindMemberService {
 
     public FindMemberDTO findById(long id) {
         QueryMember member = memberMapper.findById(id);
-        return FindMemberDTO.builder(
-                member.getId(),
-                member.getName(),
-                member.getAddress(),
-                member.getGender(),
-                member.getBirthDate(),
-                member.getRole()
-        ).build();
+        if(member != null) {
+            return FindMemberDTO.builder(
+                    member.getId(),
+                    member.getName(),
+                    member.getAddress(),
+                    member.getGender(),
+                    member.getBirthDate(),
+                    member.getRole()
+            ).build();
+        } else {
+            return null;
+        }
     }
 
     public FindMemberDTO findByUid(long uid) {
         QueryMember member = memberMapper.findByUID(uid);
-        return FindMemberDTO.builder(
-                member.getId(),
-                member.getName(),
-                member.getAddress(),
-                member.getGender(),
-                member.getBirthDate(),
-                member.getRole()
-        ).build();
+        if(member != null) {
+            return FindMemberDTO.builder(
+                    member.getId(),
+                    member.getName(),
+                    member.getAddress(),
+                    member.getGender(),
+                    member.getBirthDate(),
+                    member.getRole()
+            ).build();
+        } else {
+            return null;
+        }
     }
 
-
+    public boolean isAddedInformation(long id) {
+        return !memberMapper.isAddedInformation(id);
+    }
 }

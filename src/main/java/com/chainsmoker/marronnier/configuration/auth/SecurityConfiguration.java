@@ -45,7 +45,7 @@ public class SecurityConfiguration {
                 .and()
                 .successHandler(oAuth2SuccessHandler)
                 .failureHandler((request, response, exception) -> {
-                    response.sendRedirect("/login");
+                    response.sendRedirect("/");
                 })
                 ;
 
