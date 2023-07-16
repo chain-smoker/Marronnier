@@ -1,23 +1,17 @@
 ---
-name: Fix_bug
-about: "\U0001F6A8 버그 수정"
-title: "[BUG][도메인 이름]"
-labels: "\U0001F41E BugFix, ✨ Feature"
+name: Deploy
+about: "\U0001F680 배포 관련 설정 및 기능 추가"
+title: "[DEPLOY]"
+labels: "\U0001F680 Deploy"
 assignees: ''
 
 ---
-
----
-name: 'Issue: create-new-class'
-about: 버그 수정에 관한 이슈
-title: ''
-labels: ''
-assignees: ''
 
 ---
 
 ## Description
-버그 수정에 관한 이슈 템플릿입니다.
+배포 관련 설정 및 기능 추가에 관련 된 이슈 템플릿입니다.
+
 
 ---
 
