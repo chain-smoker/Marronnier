@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chainsmoker.marronnier.element.query.infra.repository.SearchElementMapper">
+    <resultMap id="QueryElementResultMap" type="QueryElement">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="category" column="category"/>
+    </resultMap>
+    <select id="searchElement" resultMap="QueryElementResultMap" parameterType="string">
+        SELECT
+                ID
+              , NAME
+              , CATEGORY
+        FROM ELEMENT_TB
+         WHERE NAME LIKE concat ('%', #{searchWord}, '%')
+    </select>
+</mapper>
