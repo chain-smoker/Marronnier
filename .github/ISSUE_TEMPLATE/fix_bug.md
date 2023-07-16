@@ -2,7 +2,7 @@
 name: Fix_bug
 about: "\U0001F6A8 버그 수정"
 title: "[BUG][도메인 이름]"
-labels: "\U0001F41E BugFix, ✨ Feature"
+labels: "\U0001F41E BugFix"
 assignees: ''
 
 ---
