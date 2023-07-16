@@ -1,4 +1,4 @@
-package com.chainsmoker.marronnier.member.query.infra.repository;
+package com.chainsmoker.marronnier.member.query.domain.repository;
 
 import com.chainsmoker.marronnier.member.query.domain.entity.QueryMember;
 import org.apache.ibatis.annotations.Mapper;

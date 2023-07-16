@@ -1,4 +1,4 @@
-package com.chainsmoker.marronnier.basket.query.infra.repository;
+package com.chainsmoker.marronnier.basket.query.domain.repository;
 
 
 import com.chainsmoker.marronnier.basket.query.domain.entity.QueryBasket;

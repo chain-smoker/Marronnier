@@ -1,6 +1,7 @@
 package com.chainsmoker.marronnier.basket.query.infra.service;
 
 import com.chainsmoker.marronnier.common.annotation.InfraService;
+import com.chainsmoker.marronnier.member.query.application.dto.FindMemberDTO;
 import com.chainsmoker.marronnier.member.query.application.service.FindMemberService;
 import com.chainsmoker.marronnier.member.query.domain.entity.QueryMember;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class MemberRequestService implements com.chainsmoker.marronnier.basket.q
     }
 
     @Override
-    public QueryMember getMemberById(long memberId) {
+    public FindMemberDTO getMemberById(long memberId) {
 
         return findMemberService.findById(memberId);
     }

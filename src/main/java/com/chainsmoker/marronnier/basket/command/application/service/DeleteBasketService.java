@@ -1,7 +1,7 @@
 package com.chainsmoker.marronnier.basket.command.application.service;
 
 import com.chainsmoker.marronnier.basket.command.application.dto.DeleteBasketDTO;
-import com.chainsmoker.marronnier.basket.command.infra.repository.BasketRepository;
+import com.chainsmoker.marronnier.basket.command.domain.repository.BasketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

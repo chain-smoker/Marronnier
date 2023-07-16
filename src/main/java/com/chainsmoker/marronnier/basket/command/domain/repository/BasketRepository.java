@@ -1,4 +1,4 @@
-package com.chainsmoker.marronnier.basket.command.infra.repository;
+package com.chainsmoker.marronnier.basket.command.domain.repository;
 
 import com.chainsmoker.marronnier.basket.command.domain.aggregate.entity.Basket;
 import org.springframework.data.jpa.repository.JpaRepository;
