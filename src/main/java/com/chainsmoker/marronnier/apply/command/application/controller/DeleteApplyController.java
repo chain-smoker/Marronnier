@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 // @RequestMapping annotation을 사용할 경우, view와 controller의 전송 방식이 맞지 않을 때 에러 발생
 @RequestMapping(value="/apply/*", method = {RequestMethod.POST})
-@SessionAttributes({"user"})
 public class DeleteApplyController {
 
     private final DeleteApplyService deleteApplyService;
