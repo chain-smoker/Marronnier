@@ -17,6 +17,7 @@
         <th>작성 날짜</th>
         <th>수정 날짜</th>
         <th>회원 번호</th>
+        <th>-</th>
     </tr>
     </thead>
     <tbody>
@@ -30,6 +31,13 @@
         <td th:text="${apply.createdDate}"></td>
         <td th:text="${apply.modifiedDate}"></td>
         <td th:text="${apply.requesterId}"></td>
+        <td>
+            <!-- 삭제 요청 -->
+            <form th:action="@{/apply/delete/__${apply.id}__}" method="post">
+                <input type="hidden" name="_method" value="delete" />
+                <button type="submit">삭제</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>
