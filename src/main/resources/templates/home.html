@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<!--
+	Story by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="en">
+<head>
+    <title>Marronnier</title>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport"/>
+
+    <!-- google font -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Open+Sans:ital,wght@1,800&display=swap"
+          rel="stylesheet">
+
+    <link href="/css/main.css" rel="stylesheet"/>
+    <noscript>
+        <link href="/css/noscript.css" rel="stylesheet"/>
+    </noscript>
+    <!-- google font 적용 -->
+    <style>
+        h1, h2, h3, h4, h5, h6, p {
+            font-family: 'Nanum Pen Script' !important;
+        }
+    </style>
+</head>
+<body class="is-preload">
+
+<!-- Wrapper -->
+<div class="divided" id="wrapper">
+
+    <!-- main -->
+    <section
+            class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
+        <div class="content">
+            <img alt="" src="/images/logo.png">
+            <br>
+            <br>
+            <th:block th:if="${session.user == null }">
+                <h2 class="major">어서 오세요<br>분위기에 맞는<br>칵테일을 추천해 드릴게요</h2>
+            </th:block>
+            <th:block th:if="${session.user != null }">
+                <h2 th:Text="'[ ' + ${session.user.getName() +' ] 님 환영합니다.'}"></h2>
+            </th:block>
+            <br>
+            <ul class="actions stacked">
+                <th:block th:if="${session.user != null }">
+                    <li><a class="button big wide smooth-scroll-middle" href="apply/add">요청하기</a></li>
+                    <li><a class="button big wide smooth-scroll-middle" href="apply/find">요청글 목록</a></li>
+                </th:block>
+                <th:block th:if="${session.user == null }">
+                    <li><img onclick="location.href='/oauth2/authorization/kakao'"
+                             src="/images/kakao_login_large_narrow.png"></li>
+                </th:block>
+            </ul>
+        </div>
+        <!-- 카카오 로그인 버튼 -->
+        <div class="image">
+            <img alt="main-image" src="/images/alcohol.jpg"/>
+        </div>
+    </section>
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.scrollex.min.js"></script>
+<script src="/js/jquery.scrolly.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>
