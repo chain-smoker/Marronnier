@@ -48,5 +48,16 @@
 </div>
 <input type="text" th:value="${NumberoFlIKE}" readonly>
 
+<br>
+<br>
+<br>
+<br>
+
+<th:block th:if="${whetherWriter==1}">
+<form th:action="@{'/feed/delete/'+${feed.getId()}}" method="post">
+  <button type="submit">삭제</button>
+</form>
+</th:block>
+
 </body>
 </html>

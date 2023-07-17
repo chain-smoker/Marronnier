@@ -5,8 +5,9 @@ import com.chainsmoker.marronnier.feed.query.application.dto.CheckFeedDTO;
 import com.chainsmoker.marronnier.feed.query.application.service.FindFeedService;
 import com.chainsmoker.marronnier.feed.query.domain.entity.QueryFeed;
 import com.chainsmoker.marronnier.feed.query.domain.service.LikeService;
-import com.chainsmoker.marronnier.feed.query.infra.service.CheckLikeService;
+import com.chainsmoker.marronnier.feed.query.domain.service.QueryFeedService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,24 +24,27 @@ import java.util.Map;
 public class QueryFeedController {
     private final FindFeedService findFeedService;
     private final LikeService likeService;
+    private final QueryFeedService queryFeedService;
+
 
     @Autowired
-    public QueryFeedController(FindFeedService findFeedService, LikeService likeService) {
+    public QueryFeedController(FindFeedService findFeedService, LikeService likeService, QueryFeedService queryFeedService) {
         this.findFeedService = findFeedService;
         this.likeService = likeService;
+        this.queryFeedService = queryFeedService;
     }
 
     @GetMapping("")
-    public String viewAllFeed(HttpSession httpSession, Model model) {
+    public String viewAllFeed(Authentication authentication, Model model) {
         List<CheckFeedDTO> checkFeedDTO = findFeedService.findAllFeeds();
-        SessionUser sessionUser = (SessionUser) httpSession.getAttribute("user");
+        SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         model.addAttribute("feeds", checkFeedDTO);
         return "feed/feed";
     }
 
     @GetMapping("/write")
-    public String moveToFeedWrite(HttpSession httpSession, Model model) {
-        SessionUser sessionUser = (SessionUser) httpSession.getAttribute("user");
+    public String moveToFeedWrite(Authentication authentication, Model model) {
+        SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         String memberName = sessionUser.getName();
         long memberId = sessionUser.getId();
         model.addAttribute("memberName", memberName);
@@ -49,9 +53,9 @@ public class QueryFeedController {
     }
 
     @GetMapping("/{feedId}")
-    public String feedDetail(HttpSession httpSession, @PathVariable long feedId, Model model) {
+    public String feedDetail(Authentication authentication, @PathVariable long feedId, Model model) {
         //pathvariable에 해당하는 피드 보는 페이지
-        SessionUser sessionUser = (SessionUser) httpSession.getAttribute("user");
+        SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         long memberId = sessionUser.getId();
         //session에서 \memberId 조회
 
@@ -63,6 +67,10 @@ public class QueryFeedController {
         //memberId로 좋아요를 했는지 확인
         model.addAttribute("whetherLike",likeService.checkLike(parameter));
         model.addAttribute("NumberoFlIKE",likeService.numberOfLikes(feedId));
+
+        //작성자확인
+        long feedMemberId = findFeedService.findFeedMemberId(feedId);
+        model.addAttribute("whetherWriter", queryFeedService.isWriter(memberId,feedMemberId));
         return "feed/detail";
     }
 

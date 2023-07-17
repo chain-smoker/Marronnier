@@ -19,4 +19,8 @@ public class QueryFeedService {
 
         return feedDTOS;
     }
+
+    public int isWriter(long memberId, long feedMemberId){
+        return memberId==feedMemberId?1:0;
+    }
 }

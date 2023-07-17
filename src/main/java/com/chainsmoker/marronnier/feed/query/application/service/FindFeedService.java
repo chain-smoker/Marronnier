@@ -30,4 +30,10 @@ public class FindFeedService {
         QueryFeed queryFeed = feedMapper.findFeedById(feedId);
         return queryFeed;
     }
+
+    public long findFeedMemberId(long feedId) {
+        long feedMemberId = feedMapper.findFeedMemberIdByFeedId(feedId);
+
+        return feedMemberId;
+    }
 }
