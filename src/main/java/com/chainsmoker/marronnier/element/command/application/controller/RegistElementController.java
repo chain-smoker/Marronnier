@@ -30,13 +30,13 @@ public class RegistElementController {
         return "cocktail/registMain";
     }
 
-    @GetMapping("/regist")
+    @GetMapping("/element")
     public String registElement() {
 
         return "cocktail/regist/element";
     }
 
-    @PostMapping("/regist")
+    @PostMapping("/element")
     public String regist(RegistElementDTO elementDTO) {
         registElementService.regist(elementDTO);
         return "cocktail/registMain";
