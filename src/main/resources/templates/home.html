@@ -1,0 +1,88 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Home</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h1 align="center" th:text="|${member.getName()}님 환영합니다 !|"></h1>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE HTML>
+<!--
+	Story by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="ko">
+<head>
+    <title>Marronnier</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Open+Sans:ital,wght@1,800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/main.css"/>
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css"/>
+    </noscript>
+    <!-- google font 적용 -->
+    <style>
+        h1, h2, h3, h4, h5, h6, p {
+            font-family: 'Nanum Pen Script' !important;
+        }
+    </style>
+</head>
+<body class="is-preload">
+
+<!-- Wrapper -->
+<div id="wrapper" class="divided">
+
+    <!-- main -->
+    <section
+            class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
+        <div class="content">
+            <img src="/images/logo.png" alt="">
+            <br>
+            <br>
+            <th:block th:if="${session.user == null }">
+                <h2 class="major">어서 오세요<br>분위기에 맞는<br>칵테일을 추천해 드릴게요</h2>
+            </th:block>
+            <th:block th:if="${session.user != null }">
+                <h2 th:Text="'[ ' + ${session.user.getName() +' ] 님 환영합니다.'}"></h2>
+            </th:block>
+            <br>
+            <ul class="actions stacked">
+                <th:block th:if="${session.user != null }">
+                    <li><a href="apply/add" class="button big wide smooth-scroll-middle">요청하기</a></li>
+                    <li><a href="apply/find" class="button big wide smooth-scroll-middle">요청글 목록</a></li>
+                </th:block>
+
+                <th:block th:if="${session.user == null }">
+                    <li><img src="/images/kakao_login_large_narrow.png" onclick="location.href='/oauth2/authorization/kakao'"></li>
+                </th:block>
+            </ul>
+
+        </div>
+
+        <div class="image">
+            <img src="/images/alcohol.jpg" alt="main-image"/>
+        </div>
+    </section>
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.scrollex.min.js"></script>
+<script src="/js/jquery.scrolly.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>

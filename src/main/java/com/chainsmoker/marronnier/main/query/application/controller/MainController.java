@@ -7,12 +7,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 @Controller
-@RequestMapping("/home")
+@RequestMapping("/*")
 public class MainController {
+
+    /* 동적 메인 페이지 연결*/
+    @RequestMapping(value = {"/", "/home"})
+    public String home() {
+
+        return "home";
+    }
 
     @GetMapping("")
     public String homeView(Authentication authentication, Model model) {
