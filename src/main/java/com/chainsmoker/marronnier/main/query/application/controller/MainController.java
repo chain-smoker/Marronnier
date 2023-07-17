@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/*")
+@RequestMapping("")
 public class MainController {
 
     /* 동적 메인 페이지 연결*/

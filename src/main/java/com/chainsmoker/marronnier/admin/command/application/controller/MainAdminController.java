@@ -18,7 +18,6 @@ public class MainAdminController {
 
     @GetMapping("home")
     public String AdminMainView(Authentication authentication, Model model) {
-
         if(authentication.isAuthenticated()) {
             AdminDetail admin = (AdminDetail) authentication.getPrincipal();
 
