@@ -22,4 +22,13 @@
         WHERE
             id = #{id}
     </select>
+
+    <select id="findFeedMemberIdByFeedId" resultType="long">
+        SELECT
+            member_id
+        FROM
+            FEED_TB
+        WHERE
+            id = #{ id }
+    </select>
 </mapper>
