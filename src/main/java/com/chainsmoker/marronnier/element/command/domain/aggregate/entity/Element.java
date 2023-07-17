@@ -14,8 +14,6 @@ import javax.persistence.*;
 public class Element {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @Column
     private Long id;
 
     @Column
@@ -27,5 +25,17 @@ public class Element {
     private CategoryNameEnum category;
 
     //a 구현 재료사진, 요청번호 포링키
+
+
+    public Element(Long id, String name, CategoryNameEnum category) {
+        this.id = id;
+        this.name = name;
+        this.category = category;
+    }
+
+    public Element(String name, CategoryNameEnum category) {
+        this.name = name;
+        this.category = category;
+    }
 
 }
