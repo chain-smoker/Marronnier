@@ -35,6 +35,7 @@ public class FindBasketService {
             FindCocktailRecipeDTO cocktailRecipe = cocktailRecipeRequestService.getCocktailRecipeById(basket.getCockTailRecipeId());
 
             MemberCockTailBasketDTO memberCockTailBasketDTO = new MemberCockTailBasketDTO(
+                    basket.getId(),
                     member.getId(),
                     cocktailRecipe.getId(),
                     cocktailRecipe.getName(),

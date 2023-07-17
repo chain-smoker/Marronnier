@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/basket")
@@ -22,11 +23,12 @@ public class DeleteBasketController {
     }
 
     @PostMapping("/delete")
-    public String addBasket(Authentication authentication, @ModelAttribute("delete-basket") DeleteBasketDTO deleteBasketDTO) {
+    public String addBasket(Authentication authentication, @RequestParam Map<String, String> requestParam) {
         SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         long memberId = sessionUser.getId();
 
+        DeleteBasketDTO deleteBasketDTO = new DeleteBasketDTO(Long.parseLong(requestParam.get("basketId")), Long.parseLong(requestParam.get("cockTailRecipeId")));
         deleteBasketService.delete(deleteBasketDTO);
-        return "redirect:/";
+        return "redirect:/basket";
     }
 }
