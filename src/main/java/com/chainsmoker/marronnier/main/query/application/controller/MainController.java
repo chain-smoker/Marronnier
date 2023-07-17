@@ -12,17 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
 
     /* 동적 메인 페이지 연결*/
-    @RequestMapping(value = {"/", "/home"})
-    public String home() {
-
-        return "home";
-    }
-
     @GetMapping("")
-    public String homeView(Authentication authentication, Model model) {
-
-        SessionUser member = (SessionUser) authentication.getPrincipal();
-        model.addAttribute("member", member);
-        return "main/home";
+    public String home(Authentication authentication, Model model) {
+        model.addAttribute("member", null);
+        if(authentication != null) {
+            SessionUser member = (SessionUser) authentication.getPrincipal();
+            model.addAttribute("member", member);
+        }
+        return "/home";
     }
 }

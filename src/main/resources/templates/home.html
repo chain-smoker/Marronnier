@@ -39,19 +39,19 @@
             <img alt="" src="/images/logo.png">
             <br>
             <br>
-            <th:block th:if="${session.user == null }">
+            <th:block th:if="${member == null }">
                 <h2 class="major">어서 오세요<br>분위기에 맞는<br>칵테일을 추천해 드릴게요</h2>
             </th:block>
-            <th:block th:if="${session.user != null }">
-                <h2 th:Text="'[ ' + ${session.user.getName() +' ] 님 환영합니다.'}"></h2>
+            <th:block th:if="${member != null }">
+                <h2 th:Text="'[ ' + ${member.getName() +' ] 님 환영합니다.'}"></h2>
             </th:block>
             <br>
             <ul class="actions stacked">
-                <th:block th:if="${session.user != null }">
+                <th:block th:if="${member != null }">
                     <li><a class="button big wide smooth-scroll-middle" href="apply/add">요청하기</a></li>
                     <li><a class="button big wide smooth-scroll-middle" href="apply/find">요청글 목록</a></li>
                 </th:block>
-                <th:block th:if="${session.user == null }">
+                <th:block th:if="${member == null }">
                     <li><img onclick="location.href='/oauth2/authorization/kakao'"
                              src="/images/kakao_login_large_narrow.png"></li>
                 </th:block>
