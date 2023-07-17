@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 @Getter
 public class MemberCockTailBasketDTO {
 
+    private final long id;
     private final long memberId;
     private final long cockTailRecipeId;
     private final String cockTailRecipeName;
@@ -15,7 +16,8 @@ public class MemberCockTailBasketDTO {
     private final String getCockTailRecipeImage;
     private final LocalDateTime createdDate;
 
-    public MemberCockTailBasketDTO(long memberId, long cockTailRecipeId, String cockTailRecipeName, String cockTailRecipeDescription, String cockTailRecipeDifficulty, LocalDateTime createdDate) {
+    public MemberCockTailBasketDTO(long id, long memberId, long cockTailRecipeId, String cockTailRecipeName, String cockTailRecipeDescription, String cockTailRecipeDifficulty, LocalDateTime createdDate) {
+        this.id = id;
         this.memberId = memberId;
         this.cockTailRecipeId = cockTailRecipeId;
         this.cockTailRecipeName = cockTailRecipeName;
@@ -28,9 +30,12 @@ public class MemberCockTailBasketDTO {
     @Override
     public String toString() {
         return "MemberCockTailBasketDTO{" +
-                "memberId=" + memberId +
+                "id=" + id +
+                ", memberId=" + memberId +
                 ", cockTailRecipeId=" + cockTailRecipeId +
                 ", cockTailRecipeName='" + cockTailRecipeName + '\'' +
+                ", cockTailRecipeDescription='" + cockTailRecipeDescription + '\'' +
+                ", cockTailRecipeDifficulty='" + cockTailRecipeDifficulty + '\'' +
                 ", getCockTailRecipeImage='" + getCockTailRecipeImage + '\'' +
                 ", createdDate=" + createdDate +
                 '}';
