@@ -19,7 +19,6 @@ bin/
 !**/src/test/**/bin/
 
 ### IntelliJ IDEA ###
-.idea
 *.iws
 *.iml
 *.ipr
@@ -37,3 +36,4 @@ application-oauth.yml
 
 ### VS Code ###
 .vscode/
+src/main/.DS_Store

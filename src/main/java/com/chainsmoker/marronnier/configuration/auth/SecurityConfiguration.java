@@ -28,12 +28,15 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.sessionManagement().invalidSessionUrl("/login");
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/","/auth/**", "/css/**", "/images/**",
-                "/js/**", "/h2-console/**","/login/**", "/admin/regist", "/admin/login", "/feed/feed","/admin/error","/main/error").permitAll()
-                .antMatchers("/home","/basket/**", "/profile/**", "/find/**", "/feed/**", "/apply/self").hasRole(Role.MEMBER.name())
+                .antMatchers("/","/auth/**", "/css/**",
+                        "/images/**", "/js/**", "/h2-console/**",
+                        "/login/**", "/admin/regist", "/admin/login",
+                        "/feed/feed", "/**/error").permitAll()
+                .antMatchers("/home","/basket/**", "/profile/**",
+                        "/find/**", "/feed/**", "/apply/add",
+                        "/apply/find").hasRole(Role.MEMBER.name())
                 .antMatchers("/apply/**", "/report/**", "/admin/**").hasRole(AdminRole.ADMIN.name())
                 .anyRequest().authenticated()
                 .and()
