@@ -11,12 +11,18 @@ public class UpdateMemberDTO {
     private String job;
     private LocalDate birthDate;
     private GenderEnum gender;
+    private String profileImage;
 
-    public UpdateMemberDTO(String address, String job, LocalDate birthDate, GenderEnum gender) {
+    public UpdateMemberDTO(String address, String job, LocalDate birthDate, GenderEnum gender, String profileImage) {
         this.address = address;
         this.job = job;
         this.birthDate = birthDate;
         this.gender = gender;
+        this.profileImage = profileImage;
+    }
+
+    public UpdateMemberDTO(String profileImage) {
+        this.profileImage = profileImage;
     }
 
     @Override

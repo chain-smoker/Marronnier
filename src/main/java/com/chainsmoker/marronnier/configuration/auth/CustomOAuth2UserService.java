@@ -6,7 +6,9 @@ import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import com.chainsmoker.marronnier.member.command.application.dto.CreateMemberDTO;
+import com.chainsmoker.marronnier.member.command.application.dto.UpdateMemberDTO;
 import com.chainsmoker.marronnier.member.command.application.service.RegistMemberService;
+import com.chainsmoker.marronnier.member.command.application.service.UpdateMemberService;
 import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.EnumType.Role;
 import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.Member;
 import com.chainsmoker.marronnier.member.query.application.dto.FindMemberDTO;
@@ -27,6 +29,7 @@ import lombok.RequiredArgsConstructor;
 public class CustomOAuth2UserService  extends DefaultOAuth2UserService {
     private final RegistMemberService registMemberService;
     private final FindMemberService findMemberService;
+    private final UpdateMemberService updateMemberService;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -49,11 +52,13 @@ public class CustomOAuth2UserService  extends DefaultOAuth2UserService {
         FindMemberDTO member = findMemberService.findByUid(attributes.getUid());
         SessionUser sessionUser = null;
         if (member == null) {
-            CreateMemberDTO createMemberDTO = new CreateMemberDTO(attributes.getUid(), attributes.getName(), Role.MEMBER);
+            CreateMemberDTO createMemberDTO = new CreateMemberDTO(attributes.getUid(), attributes.getName(), Role.MEMBER, attributes.getProfileImage());
             Member newMember = registMemberService.create(createMemberDTO);
             //sessionUser = SessionUser.builder().addId(newMember.getId()).name(newMember.getName()).build();
             sessionUser = SessionUser.builder(newMember.getId(), newMember.getName(), newMember.getRole()).build();
         } else {
+            UpdateMemberDTO updateMemberDTO = new UpdateMemberDTO(attributes.getProfileImage());
+            boolean updateMemberResult = updateMemberService.updateMemberInformation(member.getId(), updateMemberDTO);
             //sessionUser = SessionUser.builder().id(member.getId()).name(member.getName()).build();
             sessionUser = SessionUser.builder(member.getId(), member.getName(), member.getRole()).build();
         }
