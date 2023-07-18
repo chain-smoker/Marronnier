@@ -50,6 +50,7 @@
                 <th:block th:if="${member != null }">
                     <li><a class="button big wide smooth-scroll-middle" href="apply/add">요청하기</a></li>
                     <li><a class="button big wide smooth-scroll-middle" href="apply/find">요청글 목록</a></li>
+                    <li><a class="button big wide smooth-scroll-middle" href="/logout">로그아웃</a></li>
                 </th:block>
                 <th:block th:if="${member == null }">
                     <li><img onclick="location.href='/oauth2/authorization/kakao'"
