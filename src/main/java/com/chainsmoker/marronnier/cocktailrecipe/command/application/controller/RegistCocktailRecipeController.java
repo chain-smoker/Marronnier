@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 // a 등록 페이지 이동 컨트롤러
 
 @Controller
-@RequestMapping("regist")
+@RequestMapping("regist") //멘토님 cocktail 로 변경요청
 public class RegistCocktailRecipeController {
     private final RegistCocktailRecipeService registCocktailRecipeService;
     @Autowired
