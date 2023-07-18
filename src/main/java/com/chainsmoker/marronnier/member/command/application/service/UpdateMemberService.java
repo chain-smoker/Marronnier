@@ -22,10 +22,21 @@ public class UpdateMemberService {
         Optional<Member> findMember = memberRepository.findById(memberId);
         if (findMember.isPresent()) {
             Member updateMember = findMember.get();
-            updateMember.setAddress(updateMemberDTO.getAddress());
-            updateMember.setGender(updateMemberDTO.getGender());
-            updateMember.setBirthDate(updateMemberDTO.getBirthDate());
-            updateMember.setJob(updateMemberDTO.getJob());
+            if (updateMemberDTO.getAddress() != null) {
+                updateMember.setAddress(updateMemberDTO.getAddress());
+            }
+            if (updateMemberDTO.getGender() != null) {
+                updateMember.setGender(updateMemberDTO.getGender());
+            }
+            if (updateMemberDTO.getBirthDate() != null) {
+                updateMember.setBirthDate(updateMemberDTO.getBirthDate());
+            }
+            if (updateMemberDTO.getJob() != null) {
+                updateMember.setJob(updateMemberDTO.getJob());
+            }
+            if (updateMemberDTO.getProfileImage() != null) {
+                updateMember.setProfileImage(updateMemberDTO.getProfileImage());
+            }
             return true;
         } else {
             return false;

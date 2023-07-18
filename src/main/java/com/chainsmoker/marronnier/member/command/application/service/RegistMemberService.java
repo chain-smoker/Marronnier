@@ -1,6 +1,7 @@
 package com.chainsmoker.marronnier.member.command.application.service;
 
 import com.chainsmoker.marronnier.member.command.application.dto.CreateMemberDTO;
+import com.chainsmoker.marronnier.member.command.application.dto.UpdateMemberDTO;
 import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.EnumType.PlatformEnum;
 import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.Member;
 import com.chainsmoker.marronnier.member.command.domain.repository.MemberRepository;
@@ -27,7 +28,8 @@ public class RegistMemberService {
                 memberDTO.getName(),
                 memberDTO.getUID(),
                 PlatformEnum.KAKAO,
-                memberDTO.getRole()
+                memberDTO.getRole(),
+                memberDTO.getProfileImage()
         );
         return memberRepository.save(memberEntity);
     }

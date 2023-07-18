@@ -31,6 +31,9 @@ public class Member extends BaseTimeEntity {
 
     private String address;
 
+    @Column(length = 100, name = "profile_image")
+    private String profileImage;
+
     private String job;
 
     @Enumerated(EnumType.STRING)
@@ -59,11 +62,16 @@ public class Member extends BaseTimeEntity {
         this.job = job;
     }
 
-    public Member(String name, long uid, PlatformEnum platform, Role role) {
+    public Member(String name, long uid, PlatformEnum platform, Role role, String profileImage) {
         this.name = name;
         this.UID = uid;
         this.platform = platform;
         this.role = role;
+        this.profileImage = profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 
     public void setName(String name) {

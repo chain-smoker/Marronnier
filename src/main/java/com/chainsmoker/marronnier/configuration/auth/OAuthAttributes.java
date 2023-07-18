@@ -12,14 +12,16 @@ public class OAuthAttributes {
     private final Map<String, Object> attributes;
     private final String nameAttributeKey;
     private final String name;
+    private final String profileImage;
     private final Long uid;
     private final Long id;
 
     @Builder
-    public OAuthAttributes(Map<String, Object> attributes, String nameAttributeKey, String name, Long uid, String picture, Long id) {
+    public OAuthAttributes(Map<String, Object> attributes, String nameAttributeKey, String name, String profileImage, Long uid, String picture, Long id) {
         this.attributes = attributes;
         this.nameAttributeKey = nameAttributeKey;
         this.name = name;
+        this.profileImage = profileImage;
         this.uid = uid;
         this.id = id;
     }
@@ -35,11 +37,12 @@ public class OAuthAttributes {
 
     private static OAuthAttributes ofKakao(String userNameAttributeName, Map<String, Object> attributes) {
         Long uid = (Long) attributes.get("id");
-        Map<String, Object> kakaoAccount = (Map<String, Object>)attributes.get("kakao_account");
-        Map<String, Object> kakaoProfile = (Map<String, Object>)kakaoAccount.get("profile");
+        Map<String, Object> kakaoAccount = (Map<String, Object>) attributes.get("kakao_account");
+        Map<String, Object> kakaoProfile = (Map<String, Object>) kakaoAccount.get("profile");
 
         return OAuthAttributes.builder()
                 .name((String) kakaoProfile.get("nickname"))
+                .profileImage((String) kakaoProfile.get("profile_image_url"))
                 .uid(uid)
                 .nameAttributeKey(userNameAttributeName)
                 .attributes(attributes)

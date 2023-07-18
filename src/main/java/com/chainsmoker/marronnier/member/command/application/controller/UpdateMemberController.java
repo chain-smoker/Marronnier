@@ -38,8 +38,8 @@ public class UpdateMemberController {
                 updateMap.get("address"),
                 updateMap.get("job"),
                 LocalDate.parse(updateMap.get("birthDate")),
-                GenderEnum.valueOf(updateMap.get("gender"))
-        );
+                GenderEnum.valueOf(updateMap.get("gender")),
+                updateMap.get("profileImage"));
         System.out.println("updateMemberDTO = " + updateMemberDTO);
 
         SessionUser member = (SessionUser) authentication.getPrincipal();
