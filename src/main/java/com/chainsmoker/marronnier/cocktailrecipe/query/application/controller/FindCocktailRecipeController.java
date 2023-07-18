@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("find")
+@RequestMapping("cocktail")
 public class FindCocktailRecipeController {
     private final FindCocktailRecipeService findCocktailRecipeService;
 
@@ -20,11 +20,11 @@ public class FindCocktailRecipeController {
         this.findCocktailRecipeService=findCocktailRecipeService;
     }
     // 삭제 HomeController에 들어갈 요청
-    @GetMapping("/main")
+    @GetMapping("find/main")
     public String findMain(){
         return "cocktail/findMain";
     }
-    @GetMapping("/cocktailrecipe")
+    @GetMapping("find/cocktailrecipe")
     public String findAllCocktailRecipe(Model model){
         List<FindCocktailRecipeDTO> recipes=findCocktailRecipeService.findAllCocktailRecipe();
         model.addAttribute("recipes",recipes);

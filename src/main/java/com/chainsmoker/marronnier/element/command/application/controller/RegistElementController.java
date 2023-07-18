@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 // a 등록 페이지 이동 컨트롤러
 
 @Controller
-@RequestMapping("regist")
+@RequestMapping("cocktail/regist")
 public class RegistElementController {
 
     @GetMapping("/element")
