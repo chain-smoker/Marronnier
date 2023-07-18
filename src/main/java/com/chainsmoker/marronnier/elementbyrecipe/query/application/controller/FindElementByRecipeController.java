@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("find")
+@RequestMapping("cocktail")
 public class FindElementByRecipeController {
 
     private FindElementByRecipeService findElementByRecipeService;
@@ -24,7 +24,7 @@ public class FindElementByRecipeController {
         this.findElementByRecipeService=findElementByRecipeService;
     }
 
-    @PostMapping("/elementbyrecipe/{recipeId}")
+    @PostMapping("find/elementbyrecipe/{recipeId}")
     public String findElementByRecipe(CocktailRecipeDTO recipeDTO, @PathVariable Long recipeId, Model model){
         // 수정  현재 사용한 FindElementDTO는 Element Package에서 구현된 것
         // 수정  이걸 ElementByRecipe에서 따로 DTO를 만들어서 할까??

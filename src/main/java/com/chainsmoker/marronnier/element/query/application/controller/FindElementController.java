@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("find")
+@RequestMapping("cocktail")
 public class FindElementController {
     private final FindElementService findElementService;
 
@@ -20,7 +20,7 @@ public class FindElementController {
         this.findElementService=findElementService;
     }
 
-    @GetMapping("/element")
+    @GetMapping("find/element")
     public String findAllElement(Model model){
         List<FindElementDTO> elements=findElementService.findAllElement();
         model.addAttribute("elements", elements);

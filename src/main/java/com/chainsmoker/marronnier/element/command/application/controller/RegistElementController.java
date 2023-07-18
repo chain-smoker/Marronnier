@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 // a 등록 페이지 이동 컨트롤러
 
 @Controller
-@RequestMapping("regist") //멘토님 element 로 변경요청 (+ admin은 admin으로)
+@RequestMapping("cocktail/regist")
 public class RegistElementController {
 
     private final RegistElementService registElementService;

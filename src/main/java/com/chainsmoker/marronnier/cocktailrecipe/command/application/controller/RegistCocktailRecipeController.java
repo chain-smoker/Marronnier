@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 // a 등록 페이지 이동 컨트롤러
 
 @Controller
-@RequestMapping("regist") //멘토님 cocktail 로 변경요청
+@RequestMapping("cocktail")
 public class RegistCocktailRecipeController {
     private final RegistCocktailRecipeService registCocktailRecipeService;
     @Autowired
@@ -22,18 +22,18 @@ public class RegistCocktailRecipeController {
 
     //a Regist
     //a HomeController에 들어갈 요청
-    @GetMapping("/main")
+    @GetMapping("regist/main")
     public String registMain(){
         return "cocktail/registMain";
     }
-    @GetMapping("/cocktailrecipe")
+    @GetMapping("regist/cocktailrecipe")
     public String registCocktailRecipe(){
         return "cocktail/regist/cocktailRecipe";
     }
 
     //a Regist
 
-    @PostMapping("/cocktailrecipe")
+    @PostMapping("regist/cocktailrecipe")
     public String regist(RegistCocktailRecipeDTO recipeDTO){
         registCocktailRecipeService.regist(recipeDTO);
         return "cocktail/registMain";
