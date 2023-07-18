@@ -5,6 +5,19 @@
     <title>Title</title>
 </head>
 <body>
-  <h1>칵테일 재료 등록 페이지</h1>
+<h1>칵테일 재료 등록 페이지</h1>
+<form action="element" method="post">
+
+    <input type="text" name="name">재료 이름 <br>
+    <input type="text" name="categoryName" list="class-list">재료 구분<br>
+    <datalist id="class-list">
+        <option value="DRINK">DRINK</option>
+        <option value="FRUIT">FRUIT</option>
+        <option value="ETC">ETC</option>
+    </datalist>
+    <button type="submit">완료</button>
+
+
+</form>
 </body>
 </html>
