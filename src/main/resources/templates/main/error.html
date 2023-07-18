@@ -1,15 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Page Not Found</title>
+    <link type="text/css" rel="stylesheet" href="/css/404.css" />
+    <link rel="icon" type="image/x-icon" href="/images/tsParticles-64.png">
 </head>
-<body>
-    <h1 align="center" th:text="${ errorTitle }"></h1>
-    <h3 align="center" th:text="${ errorMessage }"></h3>
-    <div align="center">
-        <button onclick="location.href='/'">다시 로그인하러 가기</button>
-        <button onclick="location.href='/logout'">로그아웃</button>
-    </div>
+
+<body class="permission_denied">
+<div id="tsparticles"></div>
+<div class="denied__wrapper">
+    <h1>404</h1>
+    <h3>LOST IN <span>SPACE</span> App-Name? Hmm, looks like that page doesn't exist.</h3>
+    <img id="astronaut" src="/images/astronaut.svg" />
+    <img id="planet" src="/images/planet.svg" />
+    <a href="/"><button class="denied__link">Go Home</button></a>
+</div>
+
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/tsparticles@2.3.4/tsparticles.bundle.min.js"></script>
+<script type="text/javascript" src="/js/404.js"></script>
 </body>
 </html>
