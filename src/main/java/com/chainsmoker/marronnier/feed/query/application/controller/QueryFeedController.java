@@ -13,11 +13,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/feed")
@@ -53,25 +55,27 @@ public class QueryFeedController {
     }
 
     @GetMapping("/{feedId}")
-    public String feedDetail(Authentication authentication, @PathVariable long feedId, Model model) {
-        //pathvariable에 해당하는 피드 보는 페이지
+    @ResponseBody
+    public Map<String, Object> feedDetail(Authentication authentication, @PathVariable long feedId) {
+        System.out.println(feedId);
+        Map<String, Object> info = new HashMap<>();
         SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         long memberId = sessionUser.getId();
-        //session에서 \memberId 조회
-
-        QueryFeed queryFeed = findFeedService.findFeedById(feedId);
-        model.addAttribute("feed", queryFeed);
         Map<String, Long> parameter = new HashMap<>();
-        parameter.put("memberId", memberId);
-        parameter.put("feedId",feedId);
-        //memberId로 좋아요를 했는지 확인
-        model.addAttribute("whetherLike",likeService.checkLike(parameter));
-        model.addAttribute("NumberoFlIKE",likeService.numberOfLikes(feedId));
-
+        parameter.put("memberId", memberId);//current user Id
+        parameter.put("feedId",feedId);//feed Id
+        QueryFeed queryFeed = findFeedService.findFeedById(feedId);
+        info.put("feed", queryFeed);//feed info
+        info.put("memberId", memberId);//current user iD
+        info.put("feedId",feedId);//feed Id
+        info.put("whetherLike",likeService.checkLike(parameter));//whether like
+        info.put("NumberOfLike",likeService.numberOfLikes(feedId));//number of like
         //작성자확인
         long feedMemberId = findFeedService.findFeedMemberId(feedId);
-        model.addAttribute("whetherWriter", queryFeedService.isWriter(memberId,feedMemberId));
-        return "feed/detail";
+        String feedMemberName = queryFeedService.feedWriter(feedMemberId);
+        info.put("feedMemberName",feedMemberName);//feed writer name
+        info.put("whetherWriter", queryFeedService.isWriter(memberId,feedMemberId));//whether writer
+        return info;
     }
 
     @GetMapping("/update/{feedId}")

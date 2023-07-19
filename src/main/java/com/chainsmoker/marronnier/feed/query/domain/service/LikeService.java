@@ -20,8 +20,8 @@ public class LikeService {
         return new LikeDTO(memberId, feedId);
     }
 
-    public int checkLike(Map<String, Long> parameter) {
-        return checkLikeService.checkLikeByMemberIdAndFeedId(parameter);
+    public boolean checkLike(Map<String, Long> parameter) {
+        return checkLikeService.checkLikeByMemberIdAndFeedId(parameter) > 0;
     }
 
     public int numberOfLikes(long feedId) {

@@ -42,7 +42,7 @@ public class FeedController {
         SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         UpdateFeedDTO updateFeedDTO = feedService.saveUpdateData(feedInfos,sessionUser);
         feedUpdateService.updateFeed(updateFeedDTO);
-        return "redirect:/feed/"+feedId;
+        return "redirect:/feed";
     }
 
     @PostMapping("/delete/{feedId}")

@@ -25,7 +25,6 @@ public class PushLikeService {
 
     @Transactional
     public void cancelLike(LikeDTO likeDTO) {
-        LikeVO like = new LikeVO(likeDTO.getMemberId(),likeDTO.getFeedId());
         likeRepository.deleteByLike(likeDTO.getMemberId(),likeDTO.getFeedId());
     }
 }
