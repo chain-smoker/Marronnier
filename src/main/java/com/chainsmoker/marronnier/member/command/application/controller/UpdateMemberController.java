@@ -5,6 +5,9 @@ import com.chainsmoker.marronnier.configuration.auth.SessionUser;
 import com.chainsmoker.marronnier.member.command.application.dto.UpdateMemberDTO;
 import com.chainsmoker.marronnier.member.command.application.service.UpdateMemberService;
 import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.EnumType.GenderEnum;
+import com.chainsmoker.marronnier.member.command.domain.service.FindMemberRequest;
+import com.chainsmoker.marronnier.member.query.application.dto.FindMemberDTO;
+import com.chainsmoker.marronnier.member.query.application.service.FindMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -18,16 +21,22 @@ import java.util.Map;
 @RequestMapping("/member")
 public class UpdateMemberController {
     private final UpdateMemberService updateMemberService;
+    private final FindMemberRequest findMemberRequest;
+
     @Autowired
-    public UpdateMemberController(UpdateMemberService updateMemberService) {
+    public UpdateMemberController(UpdateMemberService updateMemberService, FindMemberRequest findMemberRequest) {
         this.updateMemberService = updateMemberService;
+        this.findMemberRequest = findMemberRequest;
     }
 
 
     @GetMapping("info")
     public String additionalMemberInformation(Authentication authentication, Model model) {
-        SessionUser member = (SessionUser) authentication.getPrincipal();
+        SessionUser authenticationMember = (SessionUser) authentication.getPrincipal();
+        boolean memberIsAuthenticated = authentication.isAuthenticated();
+        FindMemberDTO member = findMemberRequest.getMemberById(authenticationMember.getId());
         model.addAttribute("member", member);
+        model.addAttribute("memberIsAuthenticated", memberIsAuthenticated);
         return "member/additional";
     }
 

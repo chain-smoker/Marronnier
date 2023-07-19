@@ -1,29 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
     <title>사용자 추가 정보 입력</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/css/fontawesome.css">
+    <link rel="stylesheet" href="/css/templatemo-cyborg-gaming.css">
+    <link rel="stylesheet" href="/css/owl.css">
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!--
+
+    TemplateMo 579 Cyborg Gaming
+
+    https://templatemo.com/tm-579-cyborg-gaming
+
+    -->
 </head>
 <body>
-    <div align="center">
-        <h1>추가 정보 입력</h1>
-        <p th:text="|${member.getName()}님 반갑습니다!|"></p><br>
-        <p>보다 정확한 추천을 위해 회원님의 추가 정보를 알려주세요!</p>
-        <form action="/member/update" method="post">
-            <label>거주지</label> <input type="text" name="address"> <br>
-            <label>직업</label> <input type="text" name="job"><br>
-            <label>거주지</label> <input type="date" name="birthDate"><br>
-            <select name="gender" id="gender">
-                <option value="">성별 선택</option>
-                <option value="MALE">남성</option>
-                <option value="FEMALE">여성</option>
-                <option value="HIDDEN">숨김</option>
-            </select>
-            <br>
-            <button type="submit">완료</button>
-        </form>
-        <button onclick="location.href='/home'">홈으로 가기</button>
+
+    <!-- ***** Preloader Start ***** -->
+    <div id="js-preloader" class="js-preloader">
+        <div class="preloader-inner">
+            <span class="dot"></span>
+            <div class="dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </div>
 
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="/" class="logo">
+                            <img src="/images/logo_white.png" alt="">
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Search End ***** -->
+                        <div class="search-input">
+                            <form id="search" action="#">
+                                <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword" onkeypress="handle" />
+                                <i class="fa fa-search"></i>
+                            </form>
+                        </div>
+                        <!-- ***** Search End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li><a href="/feed">Feed</a></li>
+                            <li><a href="/cocktail/find/cocktailrecipe">Cocktail</a></li>
+                            <li><a href="/basket">Basket</a></li>
+                            <span th:if="${memberIsAuthenticated}">
+                            <li><a href="/member/profile" class="active"><p style="display: inline" th:text="${member.getName()}"></p> <img th:src="${member.getProfileImage()}" alt=""></a></li>
+                        </span>
+                            <span th:if="!${memberIsAuthenticated}">
+                            <li><a href="/" class="active">로그인</a></li>
+                        </span>
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ***** Form Area Start ***** -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-content">
+                    <div class="col-lg-10 align-self-center">
+                        <div class="heading-section">
+                            <h4>
+                                <em th:text="|${member.getName()}|"></em>
+                                님 반갑습니다!
+                            </h4>
+                        </div>
+                        <div class="main-info header-text"><h4>보다 정확한 추천을 위해 회원님의 추가 정보를 알려주세요!</h4>></div>
+                        <form action="/member/update" method="post">
+                            <h4 class="heading-section">거주지</h4> <input class="input-group-text" type="text" name="address"> <br>
+                            <h4 class="heading-section">직업</h4> <input class="input-group-text" type="text" name="job"><br>
+                            <h4 class="heading-section">생년월일</h4> <input class="input-group-text" type="date" name="birthDate"><br>
+                            <select name="gender" id="gender" class="btn btn-secondary btn-lg dropdown-toggle">
+                                <option class="dropdown-item" value="">성별 선택</option>
+                                <option class="dropdown-item" value="MALE">남성</option>
+                                <option class="dropdown-item" value="FEMALE">여성</option>
+                                <option class="dropdown-item" value="HIDDEN">숨김</option>
+                            </select>
+                            <br>
+                                <button class="customBtn" type="submit" style="float: right;">
+                                    <div class="main-button">
+                                        <a class="customLink=">완료</a>
+                                    </div>
+                                </button>
+                        </form>
+                            <button class="customBtn" onclick="location.href='/home'" style="float: right;">
+                                <div class="main-border-button">
+                                    <a class="customLink=">홈으로 가기</a>
+                                </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- ***** Form Area End ***** -->
+
+    <script src="/js/jquery/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+    <script src="/js/isotope.min.js"></script>
+    <script src="/js/owl-carousel.js"></script>
+    <script src="/js/tabs.js"></script>
+    <script src="/js/popup.js"></script>
+    <script src="/js/custom.js"></script>
 </body>
 </html>
