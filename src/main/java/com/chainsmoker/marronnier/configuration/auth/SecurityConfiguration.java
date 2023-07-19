@@ -36,7 +36,7 @@ public class SecurityConfiguration {
                         "/feed/feed", "/**/error").permitAll()
                 .antMatchers("/home","/basket/**", "/profile/**",
                         "/find/**", "/feed/**", "/apply/add",
-                        "/apply/find").hasRole(Role.MEMBER.name())
+                        "/apply/find", "/apply/detail/*").hasRole(Role.MEMBER.name())
                 .antMatchers("/apply/**", "/report/**", "/admin/**").hasRole(AdminRole.ADMIN.name())
                 .anyRequest().authenticated()
                 .and()

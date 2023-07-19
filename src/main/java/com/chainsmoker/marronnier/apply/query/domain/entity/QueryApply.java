@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 public class QueryApply {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;                     // 요청 번호
 

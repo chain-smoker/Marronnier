@@ -24,6 +24,11 @@
     <style>
         h1, h2, h3, h4, h5, h6, p {
             font-family: 'Nanum Pen Script' !important;
+            color: white;
+        }
+
+        body {
+            background-color: #17191A;
         }
     </style>
 </head>
@@ -36,7 +41,7 @@
     <section
             class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
         <div class="content">
-            <img alt="" src="/images/logo.png">
+            <img alt="" src="/images/logo-white.png">
             <br>
             <br>
             <th:block th:if="${member == null }">
@@ -52,13 +57,13 @@
                     <li><a class="button big wide smooth-scroll-middle" href="apply/find">요청글 목록</a></li>
                     <li><a class="button big wide smooth-scroll-middle" href="/logout">로그아웃</a></li>
                 </th:block>
+                <!-- 카카오 로그인 버튼 -->
                 <th:block th:if="${member == null }">
                     <li><img onclick="location.href='/oauth2/authorization/kakao'"
                              src="/images/kakao_login_large_narrow.png"></li>
                 </th:block>
             </ul>
         </div>
-        <!-- 카카오 로그인 버튼 -->
         <div class="image">
             <img alt="main-image" src="/images/alcohol.jpg"/>
         </div>

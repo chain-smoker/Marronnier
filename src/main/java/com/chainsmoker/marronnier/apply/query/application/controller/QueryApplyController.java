@@ -2,13 +2,16 @@ package com.chainsmoker.marronnier.apply.query.application.controller;
 
 import com.chainsmoker.marronnier.apply.query.application.dto.QueryApplyDTO;
 import com.chainsmoker.marronnier.apply.query.application.service.QueryApplyService;
+import com.chainsmoker.marronnier.apply.query.domain.entity.QueryApply;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 @RequestMapping("/apply/*")
@@ -23,7 +26,7 @@ public class QueryApplyController {
 
     @GetMapping("find")
     public String getApplys(@RequestParam(defaultValue = "1") int page,
-                            @RequestParam(defaultValue = "5") int pageSize,
+                            @RequestParam(defaultValue = "10") int pageSize,
                             @RequestParam(defaultValue = "id") String sortBy,
                             Model model) {
 
@@ -37,5 +40,15 @@ public class QueryApplyController {
 
         return "apply/find";
 
+    }
+
+    @GetMapping("detail/{id}")
+    public String applyDetail(@PathVariable long id, Model model) {
+
+        QueryApply queryApply = queryApplyService.findById(id);
+
+        model.addAttribute("apply", queryApply);
+
+        return "apply/detail";
     }
 }

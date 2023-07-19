@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class Apply extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;                     // 요청 번호
 
