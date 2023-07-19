@@ -48,4 +48,9 @@ public class QueryApplyService {
         dto.setRequesterId(queryApply.getRequesterId());
         return dto;
     }
+
+    public QueryApply findById(long id) {
+
+        return applyRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
 }
