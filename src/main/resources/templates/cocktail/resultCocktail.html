@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
           rel="stylesheet">
 
@@ -46,9 +46,11 @@
                         <li><a href="/cocktail/find/cocktailrecipe">Cocktail</a></li>
                         <li><a href="/basket">Basket</a></li>
                         <span th:if="${memberIsAuthenticated}">
-                            <li><a href="/member/profile" class="active"><p style="display: inline"
-                                                                            th:text="${member.getName()}"/> <img
-                                    th:src="${member.getProfileImage()}" alt=""></a></li>
+                            <li><a href="/member/profile" class="active">
+                                <p style="display: inline" th:text="${member.getName()}"/>
+<!--                                <img th:src="${member.getProfileImage()}" alt="">-->
+                            </a>
+                            </li>
                         </span>
                         <span th:if="!${memberIsAuthenticated}">
                             <li><a href="/" class="active">로그인</a></li>
@@ -68,14 +70,11 @@
         <div class="heading-section" align="center">
             <h4><em>Cocktail</em> 추천 결과 !!</h4>
         </div>
-    <div class="col-lg-12">
-
-            <div class="item" align="left" style="float: left; width: 33%;">
+    <th:block th:if="${size >= 3}">
+        <div class="col-lg-12">
+            <div class="item" align="center" style="float: left; width: 33%;">
                 <div class="thumb">
                     <img src="/images/stream-05.jpg" style="width: 300px; height: 300px">
-                </div>
-                <div class="down-content" align="left">
-                    <h4>Just Talking With Fans </h4>
                 </div>
             </div>
 
@@ -83,20 +82,111 @@
                 <div class="thumb">
                     <img src="/images/stream-05.jpg" style="width: 300px; height: 300px">
                 </div>
-                <div class="down-content" align="center">
-                    <h4>Just Talking With Fans </h4>
-                </div>
             </div>
 
-            <div class="item" align="right" style="float: left; width: 33%;">
+            <div class="item" align="center" style="float: left; width: 33%;">
                 <div class="thumb">
                     <img src="/images/stream-05.jpg" style="width: 300px; height: 300px">
                 </div>
-                <div class="down-content" align="right">
-                    <h4>Just Talking With Fans </h4>
+            </div>
+
+            <div class="description" align="center" style="float: left; width: 33%;">
+                <h3 th:text="${cocktails.get(0).getName()}"/>
+                <form th:action="@{'find/elementbyrecipe/'+${cocktails.get(0).getId()}}" method="post">
+                    <button type="submit" class="customBtn">
+                        <div class="main-border-button">
+                            <a class="customLink">상세보기</a>
+                        </div>
+                    </button>
+                </form>
+            </div>
+
+            <div class="description" align="center" style="float: left; width: 33%;">
+                <h3 th:text="${cocktails.get(1).getName()}"/>
+                <form th:action="@{'find/elementbyrecipe/'+${cocktails.get(1).getId()}}" method="post">
+                    <button type="submit" class="customBtn">
+                        <div class="main-border-button">
+                            <a class="customLink">상세보기</a>
+                        </div>
+                    </button>
+                </form>
+            </div>
+
+            <div class="description" align="center" style="float: left; width: 33%;">
+                <h3 th:text="${cocktails.get(2).getName()}"/>
+                <form th:action="@{'find/elementbyrecipe/'+${cocktails.get(2).getId()}}" method="post">
+                    <button type="submit" class="customBtn">
+                        <div class="main-border-button">
+                            <a class="customLink">상세보기</a>
+                        </div>
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </th:block>
+
+    <th:block th:if="${size == 2}">
+        <div class="col-lg-12">
+            <div class="item" align="center" style="float: left; width: 50%;">
+                <div class="thumb">
+                    <img src="/images/stream-05.jpg" style="width: 300px; height: 300px">
                 </div>
             </div>
-    </div>
+
+            <div class="item" align="center" style="float: left; width: 50%;">
+                <div class="thumb">
+                    <img src="/images/stream-05.jpg" style="width: 300px; height: 300px">
+                </div>
+            </div>
+
+            <div class="description" align="center" style="float: left; width: 50%;">
+                <h3 th:text="${cocktails.get(0).getName()}"/>
+                <form th:action="@{'find/elementbyrecipe/'+${cocktails.get(0).getId()}}" method="post">
+                    <button type="submit" class="customBtn">
+                        <div class="main-border-button">
+                            <a class="customLink">상세보기</a>
+                        </div>
+                    </button>
+                </form>
+            </div>
+
+            <div class="description" align="center" style="float: left; width: 50%;">
+                <h3 th:text="${cocktails.get(1).getName()}"/>
+                <form th:action="@{'find/elementbyrecipe/'+${cocktails.get(1).getId()}}" method="post">
+                    <button type="submit" class="customBtn">
+                        <div class="main-border-button">
+                            <a class="customLink">상세보기</a>
+                        </div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </th:block>
+
+    <th:block th:if="${size == 1}">
+        <div class="col-lg-12">
+            <div class="item" align="center" >
+                <div class="thumb">
+                    <img src="/images/stream-05.jpg" style="width: 300px; height: 300px">
+                </div>
+            </div>
+            <div class="description" align="center" >
+                <h3 th:text="${cocktails.get(0).getName()}"/>
+                <form th:action="@{'find/elementbyrecipe/'+${cocktails.get(0).getId()}}" method="post">
+                    <button type="submit" class="customBtn">
+                        <div class="main-border-button">
+                            <a class="customLink">상세보기</a>
+                        </div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </th:block>
+
+    <th:block th:if="${size == 0}">
+       <h1 align="center">현재 조건으로 검색되는 칵테일은 없습니다ㅜㅜㅜㅜ</h1>
+    </th:block>
 </div>
 <!-- ***** Live Stream End ***** -->
 

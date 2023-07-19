@@ -1,9 +1,10 @@
 package com.chainsmoker.marronnier.elementbyrecipe.query.application.service;
 
+import com.chainsmoker.marronnier.cocktailrecipe.query.application.dto.FindCocktailRecipeDTO;
 import com.chainsmoker.marronnier.element.query.application.dto.FindElementDTO;
-import com.chainsmoker.marronnier.elementbyrecipe.query.application.dto.FindElementByRecipeDTO;
 import com.chainsmoker.marronnier.elementbyrecipe.query.infra.repository.FindElementByRecipeMapper;
 import com.chainsmoker.marronnier.elementbyrecipe.query.infra.service.ElementRequestService;
+import com.chainsmoker.marronnier.elementbyrecipe.query.infra.service.RecipeRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +16,15 @@ public class FindElementByRecipeService {
 
     private FindElementByRecipeMapper findElementByRecipeMapper;
     private ElementRequestService elementRequestService;
+
+    private RecipeRequestService cocktailRecipeRequestService;
     @Autowired
     public FindElementByRecipeService(FindElementByRecipeMapper findElementByRecipeMapper,
-                                      ElementRequestService elementRequestService){
+                                      ElementRequestService elementRequestService,
+                                      RecipeRequestService cocktailRecipeRequestService){
         this.findElementByRecipeMapper=findElementByRecipeMapper;
         this.elementRequestService=elementRequestService;
+        this.cocktailRecipeRequestService=cocktailRecipeRequestService;
     }
     public List<FindElementDTO> findElementByRecipe(Long recipeId){
         List<Long> elementIdList = findElementByRecipeMapper.findElement(recipeId);
@@ -29,5 +34,10 @@ public class FindElementByRecipeService {
             elementList.add(elementRequestService.findByElementId(elementIdList.get(i)));
         }
         return elementList;
+    }
+
+    public FindCocktailRecipeDTO findRecipeById(Long recipeId) {
+        FindCocktailRecipeDTO recipeDTO=cocktailRecipeRequestService.findByCocktailRecipeId(recipeId);
+        return recipeDTO;
     }
 }

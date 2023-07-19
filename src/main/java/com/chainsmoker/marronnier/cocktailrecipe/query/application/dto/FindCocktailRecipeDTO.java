@@ -33,4 +33,16 @@ public class FindCocktailRecipeDTO {
         recipeDTO.setDifficulty(String.valueOf(queryCocktailRecipe.getDifficulty()));
         return recipeDTO;
     }
+
+    @Override
+    public String toString() {
+        return "FindCocktailRecipeDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", classification='" + classification + '\'' +
+                ", abv='" + abv + '\'' +
+                ", difficulty='" + difficulty + '\'' +
+                '}';
+    }
 }

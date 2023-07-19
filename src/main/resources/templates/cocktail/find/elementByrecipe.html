@@ -3,9 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <title>Cyborg - Awesome HTML5 Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/css/fontawesome.css">
+    <link rel="stylesheet" href="/css/templatemo-cyborg-gaming.css">
+    <link rel="stylesheet" href="/css/owl.css">
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 </head>
 <body>
-<h1>주조법별 재료 페이지입니다.</h1>
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="/" class="logo">
+                        <img src="/images/logo_white.png" alt="">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Search End ***** -->
+                    <div class="search-input">
+                        <form id="search" action="#">
+                            <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword"
+                                   onkeypress="handle"/>
+                            <i class="fa fa-search"></i>
+                        </form>
+                    </div>
+                    <!-- ***** Search End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a href="/feed">Feed</a></li>
+                        <li><a href="/cocktail/find/cocktailrecipe">Cocktail</a></li>
+                        <li><a href="/basket">Basket</a></li>
+                        <span th:if="${memberIsAuthenticated}">
+                            <li><a href="/member/profile" class="active">
+                                <p style="display: inline" th:text="${member.getName()}"/>
+                                <!--                                <img th:src="${member.getProfileImage()}" alt="">-->
+                            </a>
+                            </li>
+                        </span>
+                        <span th:if="!${memberIsAuthenticated}">
+                            <li><a href="/" class="active">로그인</a></li>
+                        </span>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-content">
+                <!-- ***** Details Start ***** -->
+                <div class="game-details">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="left-info">
+                                            <div align="center">
+                                                <h2 th:text="${recipe.getName()}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="right-info">
+                                            <ul>
+                                                <li><i class="fa fa-star"></i> 4.8</li>
+                                                <li><i class="fa fa-download"></i> 2.3M</li>
+                                                <li><i class="fa fa-server"></i> 36GB</li>
+                                                <li><i class="fa fa-gamepad"></i> Action</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <img src="/images/alcohol.jpg" alt="" style="border-radius: 23px; margin-bottom: 30px;">
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <p>Cyborg Gaming is free HTML CSS website template provided by TemplateMo. This is Bootstrap v5.2.0 layout. You can make a <a href="https://paypal.me/templatemo" target="_blank">small contribution via PayPal</a> to info [at] templatemo.com and thank you for supporting. If you want to get the PSD source files, please contact us. Lorem ipsum dolor sit consectetur es dispic dipiscingei elit, sed doers eiusmod lisum hored tempor.</p>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="main-border-button">
+                                            <a href="#">Download Fortnite Now!</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ***** Details End ***** -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <span>칵테일 번호 : </span><span th:text="${recipe.getId()}"></span><br>
 <span>칵테일 이름 : </span><span th:text="${recipe.getName()}"></span><br>
 <span>칵테일 설명 : </span><span th:text="${recipe.getDescription()}"></span><br>

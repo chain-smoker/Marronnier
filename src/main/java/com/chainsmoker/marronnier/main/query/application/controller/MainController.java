@@ -28,4 +28,8 @@ public class MainController {
         }
         return "/home";
     }
+    @GetMapping("cocktail/recommand")
+    public String recommandPage(){
+        return "cocktail/question";
+    }
 }
