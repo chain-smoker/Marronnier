@@ -6,6 +6,7 @@ import com.chainsmoker.marronnier.feed.query.application.service.FindFeedService
 import com.chainsmoker.marronnier.feed.query.domain.entity.QueryFeed;
 import com.chainsmoker.marronnier.feed.query.domain.service.LikeService;
 import com.chainsmoker.marronnier.feed.query.domain.service.QueryFeedService;
+import com.chainsmoker.marronnier.member.query.application.dto.FindMemberDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -38,9 +39,13 @@ public class QueryFeedController {
 
     @GetMapping("")
     public String viewAllFeed(Authentication authentication, Model model) {
+        boolean memberIsAuthenticated = authentication.isAuthenticated();
         List<CheckFeedDTO> checkFeedDTO = findFeedService.findAllFeeds();
         SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
+        FindMemberDTO member = queryFeedService.findMemberById(sessionUser.getId());
         model.addAttribute("feeds", checkFeedDTO);
+        model.addAttribute("memberIsAuthenticated", memberIsAuthenticated);
+        model.addAttribute("member",member);
         return "feed/feed";
     }
 
