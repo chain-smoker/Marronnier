@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="/css/owl.css">
     <link rel="stylesheet" href="/css/animate.css">
     <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!--
 
     TemplateMo 579 Cyborg Gaming
@@ -68,7 +69,18 @@
                         <li><a href="/cocktail/find/cocktailrecipe">Cocktail</a></li>
                         <li><a href="/basket">Basket</a></li>
                         <span th:if="${memberIsAuthenticated}">
-                            <li><a href="/member/profile" class="active"><p style="display: inline" th:text="${member.getName()}"></p> <img th:src="${member.getProfileImage()}" alt=""></a></li>
+                            <li class="nav-item dropdown">
+                                <a href="/member/profile" class="active nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <p style="display: inline" th:text="${member.getName()}">
+                                    </p>
+                                    <img th:src="${member.getProfileImage()}" alt="">
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                                    <li><p class="dropdown-item" onclick="location.href='/member/profile'">프로필</p></li>
+                                    <li><p class="dropdown-item" onclick="location.href='/apply/add'">요청글 쓰기</p></li>
+                                    <li><p class="dropdown-item" onclick="location.href='/logout'">로그아웃</p></li>
+                                </ul>
+                            </li>
                         </span>
                         <span th:if="!${memberIsAuthenticated}">
                             <li><a href="/" class="active">로그인</a></li>
@@ -109,6 +121,11 @@
                                         <li>거주지 <span th:text="${member.getAddress()}"></span></li>
                                         <li>성별 <span th:text="${member.getGender()}"></span></li>
                                     </ul>
+                                    <button class="customBtn" style="float: right;">
+                                        <div class="main-border-button">
+                                            <a class="customLink" onclick="location.href='/member/info'">프로필 정보 수정</a>
+                                        </div>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -154,8 +171,7 @@
         <!-- ***** Banner End ***** -->
 
 <script src="/js/jquery/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 <script src="/js/isotope.min.js"></script>
 <script src="/js/owl-carousel.js"></script>
 <script src="/js/tabs.js"></script>
