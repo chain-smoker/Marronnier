@@ -12,7 +12,6 @@ import java.io.Serializable;
 
 
 @Getter
-
 public class QueryLike implements Serializable {
     long feedId;
     long memberId;

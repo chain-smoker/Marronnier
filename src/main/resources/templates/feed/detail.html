@@ -3,50 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+    <script>
+        window.onload = function() {
+            let flag = '[[${whetherLike}]]';
+            if (flag){
+                $('.no1')[0].style.display = "inline-block";
+                $('.no2')[0].style.display = "none";
+            } else {
+                $('.no1')[0].style.display = "none";
+                $('.no2')[0].style.display = "inline-block";
+            }
+        }
+        function pushLike(arg) {
+            id=arg.value
+            $.ajax({
+                url: "/like", // (Required) 요청이 전송될 URL 주소
+                type: "POST", // (default: ‘GET’) http 요청 방식
+                data: {
+                    feedId:id
+                },
+                success: function (data, status, xhr) {
+
+                    document.getElementsByClassName("no1")[0].style.display = "none";
+                    document.getElementsByClassName("no2")[0].style.display = "inline-block";
+                    document.getElementsByClassName("NumberOfLike")[0].value = data.numberOfLike
+                },
+                error: function (xhr, status, error) {
+                    // 응답을 받지 못하거나 정상적인 응답이지만 데이터 형식을 확인할 수 없는 경우
+                },
+
+            });
+        }
+        function deleteLike(arg) {
+            id = arg.value
+            $.ajax({
+                url: "/like/cancel", // (Required) 요청이 전송될 URL 주소
+                type: "POST", // (default: ‘GET’) http 요청 방식
+                data: {
+                    feedId:id
+                },
+                success: function (data, status, xhr) {
+                    document.getElementsByClassName("no1")[0].style.display = "inline-block";
+                    document.getElementsByClassName("no2")[0].style.display = "none";
+                    document.getElementsByClassName("NumberOfLike")[0].value = data.numberOfLike
+                },
+                error: function (xhr, status, error) {
+                },
+
+            });
+        }
+    </script>
+
 </head>
 <body>
 <table>
-  <thead>
-  <tr>
-    <th>피드번호</th>
-    <th>피드쓴사람</th>
-    <th>술</th>
-    <th>내용</th>
-  </tr>
-  </thead>
+    <thead>
+    <tr>
+        <th>피드번호</th>
+        <th>피드쓴사람</th>
+        <th>술</th>
+        <th>내용</th>
+    </tr>
+    </thead>
     <td><span th:text="${feed.getId()}"></span>
     </td>
     <td>
-     <span th:text="${feed.getMemberId()}"></span>
+        <span th:text="${feed.getMemberId()}"></span>
     </td>
     <td>
-     <span th:text="${feed.getCocktailId()}"></span>
+        <span th:text="${feed.getCocktailId()}"></span>
     </td>
     <td>
-    <span th:text="${feed.getContent()}"></span>
+        <span th:text="${feed.getContent()}"></span>
     </td>
-  <a th:href="@{'/feed/update/'+${feed.getId()}}">
-    <button>수정</button>
-  </a>
-  </tr>
-  <th:block th:if="${whetherLike ==0}">
-  <form action="/like" method="post">
-    <input type="text" th:value="${feed.getId()}" name="feedId" hidden>
-    <button type="submit">좋아요</button>
-  </form>
-  </th:block>
-
-  <th:block th:if="${whetherLike ==1}">
-    <form action="/like/cancel" method="post">
-      <input type="text" th:value="${feed.getId()}" name="feedId" hidden>
-      <button type="submit">좋아요취소</button>
-    </form>
-  </th:block>
+    <a th:href="@{'/feed/update/'+${feed.getId()}}">
+        <button>수정</button>
+    </a>
+    </tr>
 </table>
+    <div class="no1" >
+        <button th:value = "${feed.getId()}" onclick=pushLike(this)>좋아용</button>
+    </div>
+    <div class="no2" >
+        <button th:value = "${feed.getId()}" onclick=deleteLike(this)>좋아용취소</button>
+    </div>
 <div>
-  좋아요 수
+    좋아요 수
 </div>
-<input type="text" th:value="${NumberoFlIKE}" readonly>
+<input class="NumberOfLike" type="text" th:value="${NumberOfLike}" readonly>
 
 <br>
 <br>
@@ -54,9 +100,9 @@
 <br>
 
 <th:block th:if="${whetherWriter==1}">
-<form th:action="@{'/feed/delete/'+${feed.getId()}}" method="post">
-  <button type="submit">삭제</button>
-</form>
+    <form th:action="@{'/feed/delete/'+${feed.getId()}}" method="post">
+        <button type="submit">삭제</button>
+    </form>
 </th:block>
 
 </body>
