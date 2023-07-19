@@ -34,8 +34,8 @@
                     AND ABV > 16
                 </if>
             </if>
-            <if test="drink1 != null">
-                AND CLASSIFICATION = #{ drink1 }
+            <if test="drink != null">
+                AND CLASSIFICATION = #{ drink }
             </if>
         </trim>
 

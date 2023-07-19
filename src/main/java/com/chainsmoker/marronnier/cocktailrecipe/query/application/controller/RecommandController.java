@@ -30,20 +30,18 @@ public class RecommandController {
 //        recommandService.recommandCocktail(map);
 //        return "cocktail/recommand";
 //    }
-    @GetMapping("recommand")
-    public String recommandPage(){
-        return "cocktail/question";
-    }
 
     @PostMapping("recommand")
     public String recommandCocktail(@RequestParam Map<String, String> recommandInfo, Model model, Authentication authentication){
         SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
-//        model.addAttribute("memberIsAuthenticated", authentication.isAuthenticated());
+        boolean memberIsAuthenticated = authentication.isAuthenticated();
+
         model.addAttribute("member", sessionUser);
+        model.addAttribute("memberIsAuthenticated", memberIsAuthenticated);
 
         List<FindCocktailRecipeDTO> cocktails=recommandService.recommandCocktail(recommandInfo);
+        model.addAttribute("size",cocktails.size());
         model.addAttribute("cocktails",cocktails);
-        //추가 세션에 있는 memeber정보도 가져와야함
         return "cocktail/resultCocktail";
     }
 
