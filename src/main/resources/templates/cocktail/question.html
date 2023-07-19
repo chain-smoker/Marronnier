@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>어떤 칵테일을 원하시나요?</h1>
+
+    <form action="/cocktail/recommand" method="post">
+        <h2>소주와 맥주를 곁들인 간단한 칵테일? or 좀더 다채로운 칵테일?</h2>
+        <select name="drink">
+            <option value="A">소맥</option>
+            <option value="B">칵테일</option>
+        </select>
+        <h2>당신의 칵테일 재조 실력은???!</h2>
+        <select name="difficulty">
+            <option value="EASY">초보자</option>
+            <option value="NORMAL">보통</option>
+            <option value="HARD">장인</option>
+        </select>
+        <h2>오늘은 얼마나 취하고 싶으신가요 ~(헤롱헤롱 이모티콘)</h2>
+        <select name="abv">
+            <option value="1">1~7</option>
+            <option value="2">8~15</option>
+            <option value="3">만취</option>
+        </select>
+        <button type="submit">추천받기</button>
+    </form>
+</body>
+</html>

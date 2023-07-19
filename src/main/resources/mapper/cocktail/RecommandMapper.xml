@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chainsmoker.marronnier.cocktailrecipe.query.infra.repository.RecommandMapper">
+    <resultMap id="QueryCocktailRecipeMap"
+               type="com.chainsmoker.marronnier.cocktailrecipe.query.domain.entity.QueryCocktailRecipe">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="classification" column="classification"/>
+        <result property="abv" column="abv"/>
+        <result property="difficulty" column="difficulty"/>
+    </resultMap>
+    <select id="findRecommandCocktail" resultMap="QueryCocktailRecipeMap" parameterType="hashmap">
+        SELECT
+        ID
+        , NAME
+        , DESCRIPTION
+        , CLASSIFICATION
+        , ABV
+        , DIFFICULTY
+        FROM cocktailrecipe_tb
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="difficulty != null">
+                    DIFFICULTY = #{difficulty}
+            </if>
+            <if test="abv != null">
+                <if test="abv eq 1">
+                    AND ABV BETWEEN 1 AND 7
+                </if>
+                <if test="abv eq 2">
+                    AND ABV BETWEEN 8 AND 15
+                </if>
+                <if test="abv eq 3">
+                    AND ABV > 16
+                </if>
+            </if>
+            <if test="drink1 != null">
+                AND CLASSIFICATION = #{ drink1 }
+            </if>
+        </trim>
+
+    </select>
+</mapper>
