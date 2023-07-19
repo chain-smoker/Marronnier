@@ -16,16 +16,18 @@ public class SessionUser implements OAuth2User {
     private final long id;
     private final String name;
     private final Role role;
+    private final String profileImage;
 
     private SessionUser(Builder builder) {
         this.id = builder.id;
         this.name = builder.name;
         this.role = builder.role;
+        this.profileImage = builder.profileImg;
     }
 
 
-    public static Builder builder(long id, String name, Role role) {
-        return new Builder(id, name, role);
+    public static Builder builder(long id, String name, Role role, String profileImg) {
+        return new Builder(id, name, role, profileImg);
     }
 
     @Override
@@ -50,11 +52,13 @@ public class SessionUser implements OAuth2User {
         private final long id;
         private final String name;
         private final Role role;
+        private final String profileImg;
 
-        private Builder(long id, String name, Role role) {
+        private Builder(long id, String name, Role role, String profileImg) {
             this.id = id;
             this.name = name;
             this.role = role;
+            this.profileImg = profileImg;
         }
 
         /**

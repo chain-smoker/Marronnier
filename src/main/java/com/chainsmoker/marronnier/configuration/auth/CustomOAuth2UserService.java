@@ -55,12 +55,12 @@ public class CustomOAuth2UserService  extends DefaultOAuth2UserService {
             CreateMemberDTO createMemberDTO = new CreateMemberDTO(attributes.getUid(), attributes.getName(), Role.MEMBER, attributes.getProfileImage());
             Member newMember = registMemberService.create(createMemberDTO);
             //sessionUser = SessionUser.builder().addId(newMember.getId()).name(newMember.getName()).build();
-            sessionUser = SessionUser.builder(newMember.getId(), newMember.getName(), newMember.getRole()).build();
+            sessionUser = SessionUser.builder(newMember.getId(), newMember.getName(), newMember.getRole(), newMember.getProfileImage()).build();
         } else {
             UpdateMemberDTO updateMemberDTO = new UpdateMemberDTO(attributes.getProfileImage());
             boolean updateMemberResult = updateMemberService.updateMemberInformation(member.getId(), updateMemberDTO);
             //sessionUser = SessionUser.builder().id(member.getId()).name(member.getName()).build();
-            sessionUser = SessionUser.builder(member.getId(), member.getName(), member.getRole()).build();
+            sessionUser = SessionUser.builder(member.getId(), member.getName(), member.getRole(), member.getProfileImage()).build();
         }
         return sessionUser;
     }
