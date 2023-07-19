@@ -38,4 +38,7 @@ public class QueryMember extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
+
+    @Column(length = 100, name = "profile_image")
+    private String profileImage;
 }

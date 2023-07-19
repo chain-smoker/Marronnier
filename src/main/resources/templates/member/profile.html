@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title th:text="|${member.getName()}님 의 프로필|"></title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/css/fontawesome.css">
+    <link rel="stylesheet" href="/css/templatemo-cyborg-gaming.css">
+    <link rel="stylesheet" href="/css/owl.css">
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="/css/custom.css">
+    <!--
+
+    TemplateMo 579 Cyborg Gaming
+
+    https://templatemo.com/tm-579-cyborg-gaming
+
+    -->
+</head>
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="/" class="logo">
+                        <img src="/images/logo_white.png" alt="">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Search End ***** -->
+                    <div class="search-input">
+                        <form id="search" action="#">
+                            <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword" onkeypress="handle" />
+                            <i class="fa fa-search"></i>
+                        </form>
+                    </div>
+                    <!-- ***** Search End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a href="/feed">Feed</a></li>
+                        <li><a href="/cocktail/find/cocktailrecipe">Cocktail</a></li>
+                        <li><a href="/basket">Basket</a></li>
+                        <span th:if="${memberIsAuthenticated}">
+                            <li><a href="/member/profile" class="active"><p style="display: inline" th:text="${member.getName()}"></p> <img th:src="${member.getProfileImage()}" alt=""></a></li>
+                        </span>
+                        <span th:if="!${memberIsAuthenticated}">
+                            <li><a href="/" class="active">로그인</a></li>
+                        </span>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-content">
+                <!-- ***** Banner Start ***** -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="main-profile ">
+                            <div class="row">
+                                <div class="col-lg-4 align-self-center">
+                                    <img th:src="${member.getProfileImage()}" alt="" style="border-radius: 23px;">
+                                </div>
+                                <div class="col-lg-4 align-self-center">
+                                    <div class="main-info header-text">
+                                        <h4 th:text="${member.getName()}"></h4>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 align-self-center">
+                                    <ul>
+                                        <li>생년월일 <span th:text="${member.getBirthDate()}"></span></li>
+                                        <li>거주지 <span th:text="${member.getAddress()}"></span></li>
+                                        <li>성별 <span th:text="${member.getGender()}"></span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- ***** Banner End ***** -->
+
+                <!-- ***** Gaming Library Start ***** -->
+                <div class="gaming-library profile-library">
+                    <div class="col-lg-12">
+                        <div class="heading-section">
+                            <h4><em>칵테일</em> 바구니</h4>
+                        </div>
+                        <div class="item" th:each="basket : ${baskets}">
+                            <ul>
+                                <li><img th:src="${member.getProfileImage()}" alt="" class="templatemo-item"></li>
+                                <li><h4>칵테일 이름</h4><span th:text="${basket.getCockTailRecipeName()}"></span></li>
+                                <!--<li><h4>칵테일 설명</h4><span th:text="${basket.getCockTailRecipeDescription()}"></span></li>-->
+                                <li><h4>칵테일 제작 난이도</h4><span th:text="${basket.getCockTailRecipeDifficulty()}"></span></li>
+                                <li><h4>칵테일 추가 날짜</h4><span th:text="${basket.getCreatedDate()}"></span></li>
+                                <li><div class="main-border-button"><a href="/feed/write">피드 작성</a></div></li>
+                                <li>
+                                    <form action="/basket/delete" method="post">
+                                                <input th:value="${basket.getId()}" hidden="hidden" name="basketId">
+                                                <input th:value="${basket.getCockTailRecipeId()}" hidden="hidden" name="cockTailRecipeId">
+                                                <button type="submit" class="customBtn">
+                                                    <div class="main-border-button">
+                                                        <a class="customLink">삭제</a>
+                                                    </div>
+                                                </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <!-- ***** Gaming Library End ***** -->
+            </div>
+        </div>
+    </div>
+</div>
+
+        <!-- ***** Banner End ***** -->
+
+<script src="/js/jquery/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+<script src="/js/isotope.min.js"></script>
+<script src="/js/owl-carousel.js"></script>
+<script src="/js/tabs.js"></script>
+<script src="/js/popup.js"></script>
+<script src="/js/custom.js"></script>
+</body>
+</html>
