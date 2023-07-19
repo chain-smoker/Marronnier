@@ -25,7 +25,8 @@ public class FindMemberService {
                     member.getAddress(),
                     member.getGender(),
                     member.getBirthDate(),
-                    member.getRole()
+                    member.getRole(),
+                    member.getProfileImage()
             ).build();
         } else {
             return null;
@@ -41,7 +42,8 @@ public class FindMemberService {
                     member.getAddress(),
                     member.getGender(),
                     member.getBirthDate(),
-                    member.getRole()
+                    member.getRole(),
+                    member.getProfileImage()
             ).build();
         } else {
             return null;

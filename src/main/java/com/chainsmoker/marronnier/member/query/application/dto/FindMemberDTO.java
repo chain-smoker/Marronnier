@@ -13,10 +13,11 @@ public class FindMemberDTO {
     private final String address;
     private final GenderEnum gender;
     private final LocalDate birthDate;
+    private final String profileImage;
     private final Role role;
 
-    public static Builder builder(Long id, String name, String address, GenderEnum gender, LocalDate birthDate, Role role) {
-        return new Builder(id, name, address, gender, birthDate, role);
+    public static Builder builder(Long id, String name, String address, GenderEnum gender, LocalDate birthDate, Role role , String profileImage) {
+        return new Builder(id, name, address, gender, birthDate, role, profileImage);
     }
 
     private FindMemberDTO(Builder builder) {
@@ -26,6 +27,7 @@ public class FindMemberDTO {
         this.gender = builder.gender;
         this.birthDate = builder.birthDate;
         this.role = builder.role;
+        this.profileImage = builder.profileImage;
     }
 
     public static class Builder {
@@ -35,14 +37,16 @@ public class FindMemberDTO {
         private final GenderEnum gender;
         private final LocalDate birthDate;
         private final Role role;
+        private final String profileImage;
 
-        public Builder(Long id, String name, String address, GenderEnum gender, LocalDate birthDate, Role role) {
+        public Builder(Long id, String name, String address, GenderEnum gender, LocalDate birthDate, Role role, String profileImage) {
             this.id = id;
             this.name = name;
             this.address = address;
             this.gender = gender;
             this.birthDate = birthDate;
             this.role = role;
+            this.profileImage = profileImage;
         }
 
         public FindMemberDTO build() {
