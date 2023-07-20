@@ -23,27 +23,26 @@ public class FindElementByRecipeController {
     private FindElementByRecipeService findElementByRecipeService;
 
     @Autowired
-    public FindElementByRecipeController(FindElementByRecipeService findElementByRecipeService){
-        this.findElementByRecipeService=findElementByRecipeService;
+    public FindElementByRecipeController(FindElementByRecipeService findElementByRecipeService) {
+        this.findElementByRecipeService = findElementByRecipeService;
     }
 
     @PostMapping("find/elementbyrecipe/{recipeId}")
-    public String findElementByRecipe(CocktailRecipeDTO recipeDTO, @PathVariable Long recipeId, Model model, Authentication authentication){
+    public String findElementByRecipe(CocktailRecipeDTO recipeDTO, @PathVariable Long recipeId, Model model, Authentication authentication) {
         // 수정  현재 사용한 FindElementDTO는 Element Package에서 구현된 것
         // 수정  이걸 ElementByRecipe에서 따로 DTO를 만들어서 할까??
-        if(recipeDTO.getName()==null){
-            FindCocktailRecipeDTO recipe=findElementByRecipeService.findRecipeById(recipeId);
-            model.addAttribute("recipe",recipe);
-        }else {
+        if (recipeDTO.getName() == null) {
+            FindCocktailRecipeDTO recipe = findElementByRecipeService.findRecipeById(recipeId);
+            model.addAttribute("recipe", recipe);
+        } else {
             model.addAttribute("recipe", recipeDTO);
         }
         SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         boolean memberIsAuthenticated = authentication.isAuthenticated();
-
         model.addAttribute("member", sessionUser);
         model.addAttribute("memberIsAuthenticated", memberIsAuthenticated);
-        List<FindElementDTO> elements=findElementByRecipeService.findElementByRecipe(recipeId);
-        model.addAttribute("elements",elements);
+        List<FindElementDTO> elements = findElementByRecipeService.findElementByRecipe(recipeId);
+        model.addAttribute("elements", elements);
         return "cocktail/find/elementByrecipe";
     }
 }

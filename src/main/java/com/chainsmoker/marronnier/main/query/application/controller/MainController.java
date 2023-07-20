@@ -28,8 +28,14 @@ public class MainController {
         }
         return "home";
     }
-    @GetMapping("cocktail/recommand")
-    public String recommandPage(){
-        return "cocktail/question";
+    @GetMapping("cocktail/recommand/first")
+    public String recommandPage(Model model, Authentication authentication){
+        SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
+        boolean memberIsAuthenticated = authentication.isAuthenticated();
+
+        model.addAttribute("member", sessionUser);
+        model.addAttribute("memberIsAuthenticated", memberIsAuthenticated);
+
+        return "cocktail/question/first";
     }
 }
