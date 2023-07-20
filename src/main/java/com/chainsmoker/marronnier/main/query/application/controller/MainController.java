@@ -26,7 +26,7 @@ public class MainController {
                 model.addAttribute("admin", admin);
             }
         }
-        return "/home";
+        return "home";
     }
     @GetMapping("cocktail/recommand")
     public String recommandPage(){

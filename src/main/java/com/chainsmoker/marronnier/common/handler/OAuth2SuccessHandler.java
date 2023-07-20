@@ -38,7 +38,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
                         .build().toUriString();
             }
         } else {
-            targetUrl = UriComponentsBuilder.fromUriString("/")
+            targetUrl = UriComponentsBuilder.fromUriString("")
                     .build().toUriString();
         }
         getRedirectStrategy().sendRedirect(request, response, targetUrl);

@@ -6,9 +6,9 @@ import com.chainsmoker.marronnier.configuration.auth.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -27,13 +27,17 @@ public class CreateBasketController {
         return "basket/add";
     }
 
-    @PostMapping("add")
-    public String addBasket(Authentication authentication, @ModelAttribute("cockTailRecipeId") long cockTailRecipeId) {
+    //@PostMapping("add/{cockTailRecipeId}")
+    @PostMapping("add/{cockTailRecipeId}")
+    public String addBasket(HttpServletRequest request, Authentication authentication, @PathVariable long cockTailRecipeId) {
         SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
+        String referer = request.getHeader("Referer");
+        System.out.println("originalPath = " + referer);
+
         long memberId = sessionUser.getId();
 
         CreateBasketDTO createBasketDTO = new CreateBasketDTO(memberId, cockTailRecipeId);
         long addResult = registBasketService.create(createBasketDTO);
-        return "redirect:/basket";
+        return "redirect:" + referer;
     }
 }

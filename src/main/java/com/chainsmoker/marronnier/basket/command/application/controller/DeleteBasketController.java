@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
@@ -23,12 +24,14 @@ public class DeleteBasketController {
     }
 
     @PostMapping("/delete")
-    public String addBasket(Authentication authentication, @RequestParam Map<String, String> requestParam) {
+    public String addBasket(HttpServletRequest request, Authentication authentication, @RequestParam Map<String, String> requestParam) {
         SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         long memberId = sessionUser.getId();
 
         DeleteBasketDTO deleteBasketDTO = new DeleteBasketDTO(Long.parseLong(requestParam.get("basketId")), Long.parseLong(requestParam.get("cockTailRecipeId")));
         deleteBasketService.delete(deleteBasketDTO);
-        return "redirect:/basket";
+        String referer = request.getHeader("Referer");
+
+        return "redirect:" + referer;
     }
 }
