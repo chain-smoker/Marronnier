@@ -54,6 +54,11 @@ public class QueryFeedController {
         SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         String memberName = sessionUser.getName();
         long memberId = sessionUser.getId();
+        FindMemberDTO member = queryFeedService.findMemberById(sessionUser.getId());
+        boolean memberIsAuthenticated = authentication.isAuthenticated();
+
+        model.addAttribute("member",member);
+        model.addAttribute("memberIsAuthenticated", memberIsAuthenticated);
         model.addAttribute("memberName", memberName);
         model.addAttribute("memberId", memberId);
         return "feed/write";
@@ -84,9 +89,14 @@ public class QueryFeedController {
     }
 
     @GetMapping("/update/{feedId}")
-    public String moveToFeedUpdate(@PathVariable Long feedId, Model model) {
+    public String moveToFeedUpdate(Authentication authentication, @PathVariable Long feedId, Model model) {
+        SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         QueryFeed queryFeed = findFeedService.findFeedById(feedId);
         model.addAttribute("feed", queryFeed);
+        FindMemberDTO member = queryFeedService.findMemberById(sessionUser.getId());
+        boolean memberIsAuthenticated = authentication.isAuthenticated();
+        model.addAttribute("member",member);
+        model.addAttribute("memberIsAuthenticated", memberIsAuthenticated);
         return "feed/update";
     }
 
