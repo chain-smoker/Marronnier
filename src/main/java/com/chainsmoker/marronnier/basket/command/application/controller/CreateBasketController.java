@@ -31,13 +31,11 @@ public class CreateBasketController {
     @PostMapping("add/{cockTailRecipeId}")
     public String addBasket(HttpServletRequest request, Authentication authentication, @PathVariable long cockTailRecipeId) {
         SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
-        String referer = request.getHeader("Referer");
-        System.out.println("originalPath = " + referer);
 
         long memberId = sessionUser.getId();
 
         CreateBasketDTO createBasketDTO = new CreateBasketDTO(memberId, cockTailRecipeId);
         long addResult = registBasketService.create(createBasketDTO);
-        return "redirect:" + referer;
+        return "redirect:/member/profile";
     }
 }
