@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,12 +22,6 @@ public class RecommandController {
         this.recommandService = recommandService;
     }
 
-    //    @GetMapping("recommand")
-//    public String  recommandCocktail(){
-//        Map<String ,String> map=new HashMap<>();
-//        recommandService.recommandCocktail(map);
-//        return "cocktail/recommand";
-//    }
     @PostMapping("recommand/second")
     public String recommandPageSecond(Model model, Authentication authentication, @RequestParam Map<String,String> recommandInfo) {
         SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
@@ -58,8 +53,13 @@ public class RecommandController {
         model.addAttribute("memberIsAuthenticated", memberIsAuthenticated);
 
         List<FindCocktailRecipeDTO> cocktails = recommandService.recommandCocktail(recommandInfo);
-        model.addAttribute("size", cocktails.size());
+
+        if(cocktails.size()>1){
+            Collections.shuffle(cocktails);
+        }
+
         model.addAttribute("cocktails", cocktails);
+        model.addAttribute("size", cocktails.size());
         return "cocktail/resultCocktail";
     }
 
