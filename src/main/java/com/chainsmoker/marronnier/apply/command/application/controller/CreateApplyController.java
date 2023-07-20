@@ -6,6 +6,7 @@ import com.chainsmoker.marronnier.configuration.auth.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -23,7 +24,11 @@ public class CreateApplyController {
     }
 
     @GetMapping("add")
-    public String addApplyView() {
+    public String addApplyView(Authentication authentication, Model model) {
+        SessionUser member = (SessionUser) authentication.getPrincipal();
+        boolean memberIsAuthenticated = authentication.isAuthenticated();
+        model.addAttribute("member", member);
+        model.addAttribute("memberIsAuthenticated", memberIsAuthenticated);
         return "apply/add";
     }
 
@@ -40,7 +45,7 @@ public class CreateApplyController {
 
         registApplyService.create(createApplyDTO);
 
-        return "redirect:/";
+        return "redirect:/member/profile";
     }
 
 }
