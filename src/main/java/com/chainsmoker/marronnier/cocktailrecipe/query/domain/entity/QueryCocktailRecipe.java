@@ -28,19 +28,10 @@ public class QueryCocktailRecipe {
     private String abv;
 
     @Column
+    private String recipe;
+
+    @Column
     @Enumerated(EnumType.STRING)
     private DifficultyEnum difficulty;
 
-    //a 삭제 필요
-    @Override
-    public String toString() {
-        return "QueryCocktailRecipe{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", classification='" + classification + '\'' +
-                ", abv='" + abv + '\'' +
-                ", difficulty=" + difficulty +
-                '}';
-    }
 }
