@@ -18,7 +18,7 @@
         , CLASSIFICATION
         , ABV
         , DIFFICULTY
-        FROM cocktailrecipe_tb
+        FROM COCKTAILRECIPE_TB
         <trim prefix="WHERE" prefixOverrides="AND | OR">
             <if test="difficulty != null">
                     DIFFICULTY = #{difficulty}

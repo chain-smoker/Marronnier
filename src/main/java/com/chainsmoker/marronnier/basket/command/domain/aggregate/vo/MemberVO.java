@@ -11,7 +11,6 @@ import javax.persistence.Embeddable;
 
 @Getter
 @Embeddable
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MemberVO {
 
     @Column(nullable = false, name = "member_id")
@@ -20,4 +19,6 @@ public class MemberVO {
     public MemberVO(long id) {
         this.id = id;
     }
+
+    protected MemberVO() {}
 }

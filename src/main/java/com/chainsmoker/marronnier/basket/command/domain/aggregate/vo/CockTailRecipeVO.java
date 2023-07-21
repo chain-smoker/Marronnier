@@ -10,7 +10,6 @@ import javax.persistence.Embeddable;
 
 @Getter
 @Embeddable
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CockTailRecipeVO {
     @Column(nullable = false, name = "cocktail_recipe_id")
     private long id;
@@ -18,4 +17,6 @@ public class CockTailRecipeVO {
     public CockTailRecipeVO(long id) {
         this.id = id;
     }
+
+    protected CockTailRecipeVO() {}
 }

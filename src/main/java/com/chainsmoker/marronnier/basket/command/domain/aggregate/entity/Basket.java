@@ -1,33 +1,39 @@
 package com.chainsmoker.marronnier.basket.command.domain.aggregate.entity;
 
-import com.chainsmoker.marronnier.basket.command.domain.aggregate.vo.CockTailRecipeVO;
-import com.chainsmoker.marronnier.basket.command.domain.aggregate.vo.MemberVO;
 import com.chainsmoker.marronnier.common.entity.BaseTimeEntity;
-import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name="BASKET_TB")
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Basket extends BaseTimeEntity {
+public class Basket {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @EmbeddedId
+    private BasketCompositeKey basketInfo;
 
-    @Embedded
-    private MemberVO memberId;
+    @CreatedDate
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
 
-    @Embedded
-    private CockTailRecipeVO cockTailRecipeId;
+    public Basket(BasketCompositeKey basketInfo) {
+        this.basketInfo = basketInfo;
+        this.createdDate = LocalDateTime.now();
+    }
 
-    public Basket(MemberVO memberId, CockTailRecipeVO cockTailRecipeId) {
-        this.memberId = memberId;
-        this.cockTailRecipeId = cockTailRecipeId;
+    protected Basket() {};
+
+    public BasketCompositeKey getBasketInfo() {
+        return basketInfo;
+    }
+
+    @Override
+    public String toString() {
+        return "Basket{" +
+                "basketInfo=" + basketInfo +
+                '}';
     }
 }

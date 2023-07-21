@@ -1,22 +1,17 @@
 package com.chainsmoker.marronnier.basket.query.domain.entity;
 
-import com.chainsmoker.marronnier.common.entity.BaseTimeEntity;
 import lombok.Getter;
 
-import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "BASKET_TB")
 @Getter
-public class QueryBasket extends BaseTimeEntity {
+public class QueryBasket implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @Column(nullable = false, name = "member_id")
     private long memberId;
 
-    @Column(nullable = false, name = "cocktail_recipe_id")
     private long cockTailRecipeId;
+
+    private LocalDateTime createdDate;
+
 }

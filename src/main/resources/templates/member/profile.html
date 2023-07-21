@@ -148,7 +148,6 @@
                                 <li><div class="main-border-button"><a href="/feed/write">피드 작성</a></div></li>
                                 <li>
                                     <form action="/basket/delete" method="post">
-                                                <input th:value="${basket.getId()}" hidden="hidden" name="basketId">
                                                 <input th:value="${basket.getCockTailRecipeId()}" hidden="hidden" name="cockTailRecipeId">
                                                 <button type="submit" class="customBtn">
                                                     <div class="main-border-button">

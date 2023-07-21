@@ -14,7 +14,6 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/basket")
-@SessionAttributes("user")
 public class DeleteBasketController {
 
     private final DeleteBasketService deleteBasketService;
@@ -28,10 +27,10 @@ public class DeleteBasketController {
         SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         long memberId = sessionUser.getId();
 
-        DeleteBasketDTO deleteBasketDTO = new DeleteBasketDTO(Long.parseLong(requestParam.get("basketId")), Long.parseLong(requestParam.get("cockTailRecipeId")));
+        DeleteBasketDTO deleteBasketDTO = new DeleteBasketDTO(memberId, Long.parseLong(requestParam.get("cockTailRecipeId")));
         deleteBasketService.delete(deleteBasketDTO);
         String referer = request.getHeader("Referer");
 
-        return "redirect:" + referer;
+        return "redirect:/member/profile";
     }
 }
