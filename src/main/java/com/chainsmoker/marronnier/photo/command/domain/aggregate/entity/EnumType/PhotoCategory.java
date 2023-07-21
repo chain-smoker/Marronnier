@@ -1,4 +1,4 @@
-package com.chainsmoker.marronnier.photo.command.domain.aggregate.entity;
+package com.chainsmoker.marronnier.photo.command.domain.aggregate.entity.EnumType;
 
 public enum PhotoCategory {
     COCKTAIL_RECIPE,    // 칵테일 조주법

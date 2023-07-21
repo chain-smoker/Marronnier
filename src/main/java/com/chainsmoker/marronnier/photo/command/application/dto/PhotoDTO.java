@@ -1,8 +1,10 @@
 package com.chainsmoker.marronnier.photo.command.application.dto;
 
-import com.chainsmoker.marronnier.photo.command.domain.aggregate.entity.PhotoCategory;
+import com.chainsmoker.marronnier.photo.command.domain.aggregate.entity.EnumType.PhotoCategory;
 
 public class PhotoDTO {
+
+    private long originId;          //호출데이터 아이디
     private String photoName;       //오리지널 이름
     private String photoRename;     //변경 후 이름
     private PhotoCategory photoCategory;   //사진 구분(조주법, 재료, 피드)
@@ -11,11 +13,21 @@ public class PhotoDTO {
     public PhotoDTO() {
     }
 
-    public PhotoDTO(String photoName, String photoRename, PhotoCategory photoCategory, String photoRoot) {
+    public PhotoDTO(long originId, String photoName, String photoRename, PhotoCategory photoCategory, String photoRoot) {
+        this.originId = originId;
         this.photoName = photoName;
         this.photoRename = photoRename;
         this.photoCategory = photoCategory;
         this.photoRoot = photoRoot;
+    }
+
+
+    public long getOriginId() {
+        return originId;
+    }
+
+    public void setOriginId(long originId) {
+        this.originId = originId;
     }
 
     public String getPhotoName() {
@@ -53,7 +65,8 @@ public class PhotoDTO {
     @Override
     public String toString() {
         return "PhotoDTO{" +
-                "photoName='" + photoName + '\'' +
+                "originId=" + originId +
+                ", photoName='" + photoName + '\'' +
                 ", photoRename='" + photoRename + '\'' +
                 ", photoCategory=" + photoCategory +
                 ", photoRoot='" + photoRoot + '\'' +

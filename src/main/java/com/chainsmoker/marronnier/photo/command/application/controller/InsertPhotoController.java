@@ -2,7 +2,7 @@ package com.chainsmoker.marronnier.photo.command.application.controller;
 
 import com.chainsmoker.marronnier.photo.command.application.dto.PhotoDTO;
 import com.chainsmoker.marronnier.photo.command.application.service.InsertPhotoService;
-import com.chainsmoker.marronnier.photo.command.domain.aggregate.entity.PhotoCategory;
+import com.chainsmoker.marronnier.photo.command.domain.aggregate.entity.EnumType.PhotoCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +37,8 @@ public class InsertPhotoController {
 
     @PostMapping("add")
     public String addPhoto(@RequestParam MultipartFile photo,
-                           @RequestParam PhotoCategory category) throws IOException {
+                           @RequestParam PhotoCategory category,
+                           @RequestParam(defaultValue = "1") long id) throws IOException {
 
         /* 파일 저장 static 경로 가져옴 */
         String root = new File("src/main/resources/static").getAbsolutePath();
@@ -61,7 +62,7 @@ public class InsertPhotoController {
             String path = "/photo" + "/" + savedName;
             try {
                 photo.transferTo(new File(photoPath + "/" + savedName));
-                PhotoDTO photoinfo = new PhotoDTO(originPhotoName, savedName, category, path);
+                PhotoDTO photoinfo = new PhotoDTO(id, originPhotoName, savedName, category, path);
 
                 insertPhotoService.insertPhoto(photoinfo);
 
