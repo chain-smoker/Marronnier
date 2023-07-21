@@ -38,40 +38,11 @@ public class InsertPhotoController {
     @PostMapping("add")
     public String addPhoto(@RequestParam MultipartFile photo,
                            @RequestParam PhotoCategory category,
-                           @RequestParam(defaultValue = "1") long id) throws IOException {
+                           @RequestParam(defaultValue = "1") long originId) throws IOException {
 
-        /* 파일 저장 static 경로 가져옴 */
-        String root = new File("src/main/resources/static").getAbsolutePath();
 
-        String photoPath = root + "/photo";
+        insertPhotoService.insertPhoto(originId, photo, category);
 
-        /* 파일 저장 객체 생성 */
-        File dir = new File(photoPath);
-        if (!dir.exists()) {
-            dir.mkdirs();
+            return "redirect:/home";
         }
-
-        String originPhotoName = photo.getOriginalFilename();
-        if (originPhotoName != null) {
-
-            /* 확장자 명으로 분리 */
-            String ext = originPhotoName.substring(originPhotoName.lastIndexOf("."));
-
-            String savedName = UUID.randomUUID().toString().replace("-", "") + ext;
-
-            String path = "/photo" + "/" + savedName;
-            try {
-                photo.transferTo(new File(photoPath + "/" + savedName));
-                PhotoDTO photoinfo = new PhotoDTO(id, originPhotoName, savedName, category, path);
-
-                insertPhotoService.insertPhoto(photoinfo);
-
-            } catch (IOException e) {
-                Files.delete(Path.of(path));
-            }
-        }
-
-        return "redirect:/home";
-    }
-
 }

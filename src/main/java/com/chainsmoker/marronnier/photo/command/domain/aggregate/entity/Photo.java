@@ -1,11 +1,13 @@
 package com.chainsmoker.marronnier.photo.command.domain.aggregate.entity;
 
 import com.chainsmoker.marronnier.photo.command.domain.aggregate.entity.EnumType.PhotoCategory;
+import lombok.Getter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "PHOTO_TB")
+@Getter
 public class Photo {
 //    @Id
 //    @Column(name = "PHOTO_ID")
