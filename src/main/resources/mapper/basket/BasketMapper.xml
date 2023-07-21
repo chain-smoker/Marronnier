@@ -2,20 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.chainsmoker.marronnier.basket.query.domain.repository.BasketMapper">
     <resultMap id="QueryBasketMap" type="com.chainsmoker.marronnier.basket.query.domain.entity.QueryBasket">
-        <id property="id" column="id" />
         <result property="memberId" column="member_id"/>
         <result property="cockTailRecipeId" column="cocktail_recipe_id"/>
         <result property="createdDate" column="created_date"/>
-        <result property="modifiedDate" column="modified_date"/>
     </resultMap>
 
     <select id="findByMemberId" resultMap="QueryBasketMap">
         SELECT
-              id
-            , member_id
+              member_id
             , cocktail_recipe_id
             , created_date
-            , modified_date
         FROM
             BASKET_TB
         WHERE

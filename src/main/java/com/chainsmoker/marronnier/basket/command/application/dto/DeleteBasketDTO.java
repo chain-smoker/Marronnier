@@ -7,11 +7,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DeleteBasketDTO {
-    private long basketId;
+    private long memberId;
     private long cockTailRecipeId;
 
-    public DeleteBasketDTO(long basketId, long cockTailRecipeId) {
-        this.basketId = basketId;
+    public DeleteBasketDTO(long memberId, long cockTailRecipeId) {
+        this.memberId = memberId;
         this.cockTailRecipeId = cockTailRecipeId;
     }
 }

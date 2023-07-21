@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/basket")
-@SessionAttributes("user")
 public class CreateBasketController {
 
     private final RegistBasketService registBasketService;
@@ -35,7 +34,7 @@ public class CreateBasketController {
         long memberId = sessionUser.getId();
 
         CreateBasketDTO createBasketDTO = new CreateBasketDTO(memberId, cockTailRecipeId);
-        long addResult = registBasketService.create(createBasketDTO);
+        registBasketService.create(createBasketDTO);
         return "redirect:/member/profile";
     }
 }
