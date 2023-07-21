@@ -6,6 +6,7 @@ import com.chainsmoker.marronnier.feed.query.application.service.FindFeedService
 import com.chainsmoker.marronnier.feed.query.domain.entity.QueryFeed;
 import com.chainsmoker.marronnier.feed.query.domain.service.LikeService;
 import com.chainsmoker.marronnier.feed.query.domain.service.QueryFeedService;
+import com.chainsmoker.marronnier.member.query.application.dto.FindMemberDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -38,9 +39,13 @@ public class QueryFeedController {
 
     @GetMapping("")
     public String viewAllFeed(Authentication authentication, Model model) {
+        boolean memberIsAuthenticated = authentication.isAuthenticated();
         List<CheckFeedDTO> checkFeedDTO = findFeedService.findAllFeeds();
         SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
+        FindMemberDTO member = queryFeedService.findMemberById(sessionUser.getId());
         model.addAttribute("feeds", checkFeedDTO);
+        model.addAttribute("memberIsAuthenticated", memberIsAuthenticated);
+        model.addAttribute("member",member);
         return "feed/feed";
     }
 
@@ -49,6 +54,11 @@ public class QueryFeedController {
         SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         String memberName = sessionUser.getName();
         long memberId = sessionUser.getId();
+        FindMemberDTO member = queryFeedService.findMemberById(sessionUser.getId());
+        boolean memberIsAuthenticated = authentication.isAuthenticated();
+
+        model.addAttribute("member",member);
+        model.addAttribute("memberIsAuthenticated", memberIsAuthenticated);
         model.addAttribute("memberName", memberName);
         model.addAttribute("memberId", memberId);
         return "feed/write";
@@ -79,9 +89,14 @@ public class QueryFeedController {
     }
 
     @GetMapping("/update/{feedId}")
-    public String moveToFeedUpdate(@PathVariable Long feedId, Model model) {
+    public String moveToFeedUpdate(Authentication authentication, @PathVariable Long feedId, Model model) {
+        SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         QueryFeed queryFeed = findFeedService.findFeedById(feedId);
         model.addAttribute("feed", queryFeed);
+        FindMemberDTO member = queryFeedService.findMemberById(sessionUser.getId());
+        boolean memberIsAuthenticated = authentication.isAuthenticated();
+        model.addAttribute("member",member);
+        model.addAttribute("memberIsAuthenticated", memberIsAuthenticated);
         return "feed/update";
     }
 
