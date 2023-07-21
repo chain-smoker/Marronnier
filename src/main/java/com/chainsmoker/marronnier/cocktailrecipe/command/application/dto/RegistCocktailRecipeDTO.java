@@ -15,6 +15,7 @@ public class RegistCocktailRecipeDTO {
     private String description;
     private String classification;
     private String abv;
+    private String recipe;
     private DifficultyEnum difficulty;
 
     // 삭제 static이 필요한가???
@@ -25,6 +26,7 @@ public class RegistCocktailRecipeDTO {
         recipeDTO.setDescription(cocktailRecipe.getDescription());
         recipeDTO.setClassification(cocktailRecipe.getClassification());
         recipeDTO.setAbv(cocktailRecipe.getAbv());
+        recipeDTO.setRecipe(cocktailRecipe.getRecipe());
         recipeDTO.setDifficulty(cocktailRecipe.getDifficulty());
         return recipeDTO;
     }
