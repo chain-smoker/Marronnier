@@ -1,4 +1,4 @@
-package com.chainsmoker.marronnier;
+package com.chainsmoker.marronnier.basket;
 
 
 import com.chainsmoker.marronnier.basket.command.application.dto.CreateBasketDTO;

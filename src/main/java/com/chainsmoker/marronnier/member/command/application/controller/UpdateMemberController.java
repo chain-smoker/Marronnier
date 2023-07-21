@@ -10,6 +10,8 @@ import com.chainsmoker.marronnier.member.query.application.dto.FindMemberDTO;
 import com.chainsmoker.marronnier.member.query.application.service.FindMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -43,13 +45,21 @@ public class UpdateMemberController {
     @PostMapping("update")
     public String updateMemberInformation(@RequestParam Map<String, String> updateMap, Authentication authentication) {
 
-        UpdateMemberDTO updateMemberDTO = new UpdateMemberDTO(
-                updateMap.get("address"),
-                updateMap.get("job"),
-                LocalDate.parse(updateMap.get("birthDate")),
-                GenderEnum.valueOf(updateMap.get("gender")),
-                updateMap.get("profileImage"));
-        System.out.println("updateMemberDTO = " + updateMemberDTO);
+        UpdateMemberDTO updateMemberDTO = new UpdateMemberDTO();
+        if (!updateMap.get("address").equals("")) {
+            updateMemberDTO.setAddress(updateMap.get("address"));
+        }
+        if (!updateMap.get("job").equals("")) {
+            updateMemberDTO.setJob(updateMap.get("job"));
+        }
+        if(!updateMap.get("birthDate").equals("")) {
+            updateMemberDTO.setBirthDate(LocalDate.parse(updateMap.get("birthDate")));
+        }
+        if(!updateMap.get("gender").equals("")) {
+            updateMemberDTO.setGender(GenderEnum.valueOf(updateMap.get("gender")));
+        }
+
+        System.out.println("sessionUser = " + authentication.getPrincipal());
 
         SessionUser member = (SessionUser) authentication.getPrincipal();
         long memberId = member.getId();
