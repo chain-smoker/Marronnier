@@ -16,5 +16,7 @@
             BASKET_TB
         WHERE
             member_id = #{memberId}
+        ORDER
+            BY created_date DESC
     </select>
 </mapper>

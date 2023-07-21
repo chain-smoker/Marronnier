@@ -144,8 +144,8 @@
                                 <li><h4>칵테일 이름</h4><span th:text="${basket.getCockTailRecipeName()}"></span></li>
                                 <!--<li><h4>칵테일 설명</h4><span th:text="${basket.getCockTailRecipeDescription()}"></span></li>-->
                                 <li><h4>칵테일 제작 난이도</h4><span th:text="${basket.getCockTailRecipeDifficulty()}"></span></li>
-                                <li><h4>칵테일 추가 날짜</h4><span th:text="${basket.getCreatedDate()}"></span></li>
-                                <li><div class="main-border-button"><a href="/feed/write">피드 작성</a></div></li>
+                                <li><h4>추가 날짜</h4><span th:text="${basket.getCreatedDate()}"></span></li>
+                                <li><div class="main-border-button"><a th:href="@{/feed/write/{cocktailRecipeId}(cocktailRecipeId = ${basket.getCockTailRecipeId()})}">피드 작성</a></div></li>
                                 <li>
                                     <form action="/basket/delete" method="post">
                                                 <input th:value="${basket.getCockTailRecipeId()}" hidden="hidden" name="cockTailRecipeId">

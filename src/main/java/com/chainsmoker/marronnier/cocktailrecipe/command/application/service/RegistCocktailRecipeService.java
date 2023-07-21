@@ -21,6 +21,7 @@ public class RegistCocktailRecipeService {
                         recipeDTO.getDescription(),
                         recipeDTO.getClassification(),
                         recipeDTO.getAbv(),
+                        recipeDTO.getRecipe(),
                         recipeDTO.getDifficulty()
                 );
         cocktailRecipeRepository.save(cocktailRecipe);
