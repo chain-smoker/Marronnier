@@ -1,8 +1,5 @@
 package com.chainsmoker.marronnier.configuration.auth;
 
-import java.util.Collections;
-
-import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import com.chainsmoker.marronnier.member.command.application.dto.CreateMemberDTO;
@@ -13,6 +10,7 @@ import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.EnumTyp
 import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.Member;
 import com.chainsmoker.marronnier.member.query.application.dto.FindMemberDTO;
 import com.chainsmoker.marronnier.member.query.application.service.FindMemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
@@ -20,16 +18,19 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
-
-import lombok.RequiredArgsConstructor;
-
 @Transactional
-@RequiredArgsConstructor
 @Service
 public class CustomOAuth2UserService  extends DefaultOAuth2UserService {
     private final RegistMemberService registMemberService;
     private final FindMemberService findMemberService;
     private final UpdateMemberService updateMemberService;
+
+    @Autowired
+    public CustomOAuth2UserService(RegistMemberService registMemberService, FindMemberService findMemberService, UpdateMemberService updateMemberService) {
+        this.registMemberService = registMemberService;
+        this.findMemberService = findMemberService;
+        this.updateMemberService = updateMemberService;
+    }
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {

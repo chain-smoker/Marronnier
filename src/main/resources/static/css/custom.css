@@ -6,3 +6,34 @@
 .customLink {
     color: #ec6090;
 }
+
+.pagination > li > a
+{
+    background-color: #1f2122;
+    color: #ec6090;
+    border-color: #1f2122;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: #ec6090;
+    background-color: #1f2122;
+    border-color: #1f2122;
+}
+
+.pagination > .active > a
+{
+    color: #eee;
+    background-color: #1f2122 !Important;
+    border: solid 1px #1f2122 !Important;
+}
+
+.pagination > .active > a:hover
+{
+    color: #eee;
+    background-color: #1f2122 !Important;
+    border: solid 1px #ec6090;
+}

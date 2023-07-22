@@ -21,6 +21,6 @@ public class RequestMemberBasketService implements RequestMemberBasket {
 
     @Override
     public List<MemberCockTailBasketDTO> findBasketByMemberId(long memberId) {
-        return findBasketService.findByMemberId(memberId);
+        return findBasketService.findAllByMemberId(memberId);
     }
 }
