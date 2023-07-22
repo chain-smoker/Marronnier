@@ -11,4 +11,4 @@ public interface FeedMapper {
     QueryFeed findFeedById(long id);
 
     long findFeedMemberIdByFeedId(long feedId);
-}
+ }
