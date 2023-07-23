@@ -22,33 +22,32 @@ public class RecommandController {
         this.recommandService = recommandService;
     }
 
-    @PostMapping("recommand/second")
-    public String recommandPageSecond(Model model, Authentication authentication, @RequestParam Map<String,String> recommandInfo) {
+    @GetMapping("recommand/{drink}")
+    public String recommandPageSecond(Model model, Authentication authentication, @PathVariable String drink) {
         SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         boolean memberIsAuthenticated = authentication.isAuthenticated();
-        model.addAttribute("recommandInfo",recommandInfo.get("drink"));
+        model.addAttribute("drink",drink);
         model.addAttribute("member", sessionUser);
         model.addAttribute("memberIsAuthenticated", memberIsAuthenticated);
 
         return "cocktail/question/second";
     }
-    @PostMapping("recommand/third")
-    public String recommandPageThrid(Model model, Authentication authentication,  @RequestParam Map<String,String> recommandInfo) {
+    @GetMapping("recommand/question")
+    public String recommandPageThrid(Model model, Authentication authentication,  @RequestParam("drink") String drink,
+                                     @RequestParam("difficulty") String difficulty) {
         SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         boolean memberIsAuthenticated = authentication.isAuthenticated();
-
-        model.addAttribute("recommandInfo1",recommandInfo.get("drink"));
-        model.addAttribute("recommandInfo2",recommandInfo.get("difficulty"));
+        model.addAttribute("drink",drink);
+        model.addAttribute("difficulty",difficulty);
         model.addAttribute("member", sessionUser);
         model.addAttribute("memberIsAuthenticated", memberIsAuthenticated);
 
         return "cocktail/question/third";
     }
-    @PostMapping("recommand/result")
+    @GetMapping("recommand/result")
     public String recommandCocktail(@RequestParam Map<String, String> recommandInfo, Model model, Authentication authentication) {
         SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         boolean memberIsAuthenticated = authentication.isAuthenticated();
-
         model.addAttribute("member", sessionUser);
         model.addAttribute("memberIsAuthenticated", memberIsAuthenticated);
 

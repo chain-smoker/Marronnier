@@ -113,22 +113,23 @@
                                       margin-bottom: 50px;">
                                 <h2>Q1.어떤 칵테일을 원하시나요?</h2>
                             </div>
-                            <form action="/cocktail/recommand/second" method="post" >
+
                                 <div align="center" style="float:left;width: 50%;">
-                                    <button type="submit" name="drink" value="A"  class="customBtn">
+                                    <button  onclick="location.href='/cocktail/recommand/A'"  class="customBtn">
                                         <div class="main-border-button">
                                             <a class="customLink" >소주와 맥주를 섞은 간단한 칵테일</a>
                                         </div>
                                     </button>
                                 </div>
                                 <div align="center" style="float:right;width: 50%;">
-                                    <button type="submit" name="drink" value="B"  class="customBtn">
+                                    <button onclick="location.href='/cocktail/recommand/B'"  class="customBtn">
                                         <div class="main-border-button">
                                             <a class="customLink">좀 더 다채롭고 새로운 칵테일</a>
                                         </div>
                                     </button>
                                 </div>
-                            </form>
+
+
                         </div>
                     </div>
                 </div>
@@ -136,7 +137,9 @@
         </div>
     </div>
 </div>
+<script>
 
+</script>
 <!-- ***** Banner End ***** -->
 
 <script src="/js/jquery/jquery.min.js"></script>
