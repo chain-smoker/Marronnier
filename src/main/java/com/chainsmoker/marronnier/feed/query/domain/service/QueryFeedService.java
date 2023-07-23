@@ -12,9 +12,11 @@ import java.util.List;
 @Service
 public class QueryFeedService {
     private final CheckMemberService checkMemberService;
+    private final CheckLikeService checkLikeService;
     @Autowired
-    public QueryFeedService(CheckMemberService checkMemberService) {
+    public QueryFeedService(CheckMemberService checkMemberService, CheckLikeService checkLikeService) {
         this.checkMemberService = checkMemberService;
+        this.checkLikeService = checkLikeService;
     }
 
     public List<CheckFeedDTO> saveInfo(List<QueryFeed> queryFeeds) {
@@ -37,5 +39,14 @@ public class QueryFeedService {
     }
     public FindMemberDTO findMemberById(long memberId){
         return checkMemberService.findById(memberId);
+    }
+
+    public void addDetails(List<CheckFeedDTO> checkFeedDTOS) {
+        for(int i = 0 ; i <checkFeedDTOS.size(); i++){
+            long feedId= checkFeedDTOS.get(i).getId();
+            long memberId= checkFeedDTOS.get(i).getMemberId();
+            checkFeedDTOS.get(i).setLike(checkLikeService.numberOfLike(feedId));
+            checkFeedDTOS.get(i).setWriter(checkMemberService.findMemberNameByMemberId(memberId));
+        }
     }
 }

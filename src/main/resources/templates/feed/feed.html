@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -64,7 +64,7 @@
                     document.getElementsByClassName("feedContent")[0].textContent = data.feed.content;
                     document.getElementsByClassName("feedWriter")[0].textContent = data.feedMemberName;
                     document.getElementsByClassName("cocktailName")[0].textContent = data.feed.cocktailId;
-                    document.getElementsByClassName("NumberOfLike")[0].value = data.NumberOfLike;
+                    document.getElementsByClassName("NumberOfLike")[0].textContent = data.NumberOfLike;
                     document.getElementsByClassName("like")[0].value = data.feedId;
                     document.getElementsByClassName("hate")[0].value = data.feedId;
                     document.getElementsByClassName("deleteFeed")[0].action = "/feed/delete/" + id;
@@ -90,7 +90,7 @@
 
                     document.getElementsByClassName("no1")[0].style.display = "none";
                     document.getElementsByClassName("no2")[0].style.display = "inline-block";
-                    document.getElementsByClassName("NumberOfLike")[0].value = data.numberOfLike
+                    document.getElementsByClassName("NumberOfLike")[0].textContent = data.numberOfLike;
                 },
                 error: function (xhr, status, error) {
                     // 응답을 받지 못하거나 정상적인 응답이지만 데이터 형식을 확인할 수 없는 경우
@@ -110,7 +110,7 @@
                 success: function (data, status, xhr) {
                     document.getElementsByClassName("no1")[0].style.display = "inline-block";
                     document.getElementsByClassName("no2")[0].style.display = "none";
-                    document.getElementsByClassName("NumberOfLike")[0].value = data.numberOfLike
+                    document.getElementsByClassName("NumberOfLike")[0].textContent = data.numberOfLike;
                 },
                 error: function (xhr, status, error) {
                 },
@@ -198,10 +198,10 @@
                                      th:each="feed:${feeds}" class="col-lg-4 col-sm-6" onclick="onClick(this)">
                                     <div class="item">
                                         <img th:value="${feed.getId()}" th:src="${member.getProfileImage()}" alt="">
-                                        <h4 th:text="@{'#'+${feed.getId()}}"></h4><br>
+                                        <h4 th:text="@{'# '+${feed.getWriter()}}"></h4><br>
                                         <h4><span th:text="${feed.getCocktailId()}"></span></h4>
                                         <ul>
-                                            <li><i class="fa fa-heart"></i> 2.3M</li>
+                                            <li ><i style="display: inline" class="fa fa-heart" ></i> <a th:text="@{' '+${feed.getLike()}}"></a> </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -226,19 +226,22 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade border-0" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
         <div class="modal-content">
 
 
-
+<!--modal header start-->
             <div class="modal-header border-0" style="background-color: #1F2122">
                 <h1 class="modal-title fs-5" id="feedWriter"><i class="bi bi-person-square"
                                                                 style="color: cornflowerblue "></i><span
                         class="feedWriter" style="margin-left: 5px"></span></h1>
                 <a type="button" class="active" data-bs-dismiss="modal">확인</a>
             </div>
+            <!--modal header end-->
 
+
+            <!--modal body start-->
 
             <div class="modal-body border-0" style="background-color: #27292A">
                 <svg class="bd-placeholder-img rounded mx-auto d-block" width="250" height="250"
@@ -247,23 +250,31 @@
                     <rect width="100%" height="100%" fill="#868e96"></rect>
                     <text x="50%" y="50%" fill="#dee2e6" dy=".3em">200x200</text>
                 </svg>
-                <div class="card mx-auto" style="width: 18rem; margin-top:10px">
-                    <p class="cocktailName">술이름</p>
+                <div class="d-flex justify-content-center">
+                    <p class="cocktailName" style="color: white;">술이름</p>
                 </div>
-                <p class="feedContent"></p>
+                <div class="d-flex justify-content-center">
+                <p class="feedContent" style="color: whitesmoke"></p>
+                </div>
 
+                <div style="margin-top: 20px" class="d-flex justify-content-center">
+                    <div class="no1">
+                                <button style="background-color: transparent;border: none " class="like" onclick=pushLike(this)><i class="bi bi-emoji-heart-eyes-fill" style="font-size: 1.5rem;color: #ADB5BD"></i></button>
+                            </div>
+                    <div class="no2">
+                                <button  style="background-color: transparent;border: none " class="hate" onclick=deleteLike(this)><i class="bi bi-emoji-heart-eyes-fill" style="font-size: 1.5rem; color: #EC6090"></i>
+                                </button>
+                            </div>
+                </div>
+                <div style="margin-top: -8px; margin-bottom: -15px" class="d-flex justify-content-center">
+                <p style="font-size: 12px; color: white" class="NumberOfLike"></p>
+                </div>
 
-
-                <input class="NumberOfLike">
-                <span class="no1">
-                                <button class="like" onclick=pushLike(this)>좋아용</button>
-                            </span>
-                <span class="no2">
-                                <button class="hate" onclick=deleteLike(this)>좋아용취소</button>
-                            </span>
 
             </div>
+            <!--modal body end-->
 
+            <!--modal footer start-->
 
             <div class="modal-footer border-0" style="background-color: #1F2122;">
 
@@ -273,15 +284,14 @@
                             <form class="updateFeed" method="get">
                                 <button>수정</button>
                             </form>
-
             </div>
 
+            <!--modal footer end-->
 
         </div>
     </div>
 </div>
-
-
+<!--modal end-->
 </body>
 </html>
 

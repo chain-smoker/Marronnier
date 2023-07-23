@@ -23,6 +23,7 @@ public class FindFeedService {
     public List<CheckFeedDTO> findAllFeeds() {
         List<QueryFeed> queryFeeds = feedMapper.findAllFeeds();
         List<CheckFeedDTO> checkFeedDTOS = queryFeedService.saveInfo(queryFeeds);
+        queryFeedService.addDetails(checkFeedDTOS);
         return checkFeedDTOS;
     }
 
