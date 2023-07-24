@@ -100,7 +100,7 @@
 
             <div class="description" align="center" style="float: left; width: 33%;">
                 <h3 th:text="${cocktails.get(0).getName()}"/>
-                <form th:action="@{'/cocktail/find/elementbyrecipe/'+${cocktails.get(0).getId()}}" method="post">
+                <form th:action="@{'/cocktail/find/elementbyrecipe/'+${cocktails.get(0).getId()}}" method="get">
                     <button type="submit" class="customBtn">
                         <div class="main-border-button">
                             <a class="customLink">상세보기</a>
@@ -111,7 +111,7 @@
 
             <div class="description" align="center" style="float: left; width: 33%;">
                 <h3 th:text="${cocktails.get(1).getName()}"/>
-                <form th:action="@{'/cocktail/find/elementbyrecipe/'+${cocktails.get(1).getId()}}" method="post">
+                <form th:action="@{'/cocktail/find/elementbyrecipe/'+${cocktails.get(1).getId()}}" method="get">
                     <button type="submit" class="customBtn">
                         <div class="main-border-button">
                             <a class="customLink">상세보기</a>
@@ -122,7 +122,7 @@
 
             <div class="description" align="center" style="float: left; width: 33%;">
                 <h3 th:text="${cocktails.get(2).getName()}"/>
-                <form th:action="@{'/cocktail/find/elementbyrecipe/'+${cocktails.get(2).getId()}}" method="post">
+                <form th:action="@{'/cocktail/find/elementbyrecipe/'+${cocktails.get(2).getId()}}" method="get">
                     <button type="submit" class="customBtn">
                         <div class="main-border-button">
                             <a class="customLink">상세보기</a>
@@ -149,7 +149,7 @@
 
             <div class="description" align="center" style="float: left; width: 50%;">
                 <h3 th:text="${cocktails.get(0).getName()}"/>
-                <form th:action="@{'/cocktail/find/elementbyrecipe/'+${cocktails.get(0).getId()}}" method="post">
+                <form th:action="@{'/cocktail/find/elementbyrecipe/'+${cocktails.get(0).getId()}}" method="get">
                     <button type="submit" class="customBtn">
                         <div class="main-border-button">
                             <a class="customLink">상세보기</a>
@@ -160,7 +160,7 @@
 
             <div class="description" align="center" style="float: left; width: 50%;">
                 <h3 th:text="${cocktails.get(1).getName()}"/>
-                <form th:action="@{'/cocktail/find/elementbyrecipe/'+${cocktails.get(1).getId()}}" method="post">
+                <form th:action="@{'/cocktail/find/elementbyrecipe/'+${cocktails.get(1).getId()}}" method="get">
                     <button type="submit" class="customBtn">
                         <div class="main-border-button">
                             <a class="customLink">상세보기</a>
@@ -181,7 +181,7 @@
 
             <div class="description" align="center" >
                 <h3 th:text="${cocktails.get(0).getName()}"/>
-                <form th:action="@{'/cocktail/find/elementbyrecipe/'+${cocktails.get(0).getId()}}" method="post">
+                <form th:action="@{'/cocktail/find/elementbyrecipe/'+${cocktails.get(0).getId()}}" method="get">
                     <button type="submit" class="customBtn">
                         <div class="main-border-button">
                             <a class="customLink">상세보기</a>

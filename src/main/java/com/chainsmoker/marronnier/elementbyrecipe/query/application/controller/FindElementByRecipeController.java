@@ -27,7 +27,7 @@ public class FindElementByRecipeController {
         this.findElementByRecipeService = findElementByRecipeService;
     }
 
-    @PostMapping("find/elementbyrecipe/{recipeId}")
+    @GetMapping("find/elementbyrecipe/{recipeId}")
     public String findElementByRecipe(CocktailRecipeDTO recipeDTO, @PathVariable Long recipeId, Model model, Authentication authentication) {
         // 수정  현재 사용한 FindElementDTO는 Element Package에서 구현된 것
         // 수정  이걸 ElementByRecipe에서 따로 DTO를 만들어서 할까??

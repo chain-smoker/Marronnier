@@ -28,7 +28,7 @@ public class MainController {
         }
         return "home";
     }
-    @GetMapping("cocktail/recommand/first")
+    @GetMapping("/cocktail/recommand")
     public String recommandPage(Model model, Authentication authentication){
         SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         boolean memberIsAuthenticated = authentication.isAuthenticated();
@@ -38,4 +38,5 @@ public class MainController {
 
         return "cocktail/question/first";
     }
+
 }

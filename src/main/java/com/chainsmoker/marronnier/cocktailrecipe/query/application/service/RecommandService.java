@@ -21,10 +21,6 @@ public class RecommandService {
     }
 
     public List<FindCocktailRecipeDTO> recommandCocktail(Map<String, String> recommandInfo){
-        //test 용 정보 입력
-        // 1. drink1(소주),drink2(맥주) or null
-        // 2. difficulty(HARD,NORMAL,EASY)
-        // 3. abv(1: 1~7, 2: 8~15, 3: 16)
         List<QueryCocktailRecipe> recipes=recommandMapper.findRecommandCocktail(recommandInfo);
         List<FindCocktailRecipeDTO> recipeDTOS=new ArrayList<>();
         for (QueryCocktailRecipe recipe:recipes){

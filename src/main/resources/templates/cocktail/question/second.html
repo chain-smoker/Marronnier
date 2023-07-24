@@ -113,30 +113,29 @@
                                       margin-bottom: 50px;">
                                 <h2>Q2.당신의 실력은 어느정도인가요?</h2>
                             </div>
-                            <form action="/cocktail/recommand/third" method="post">
-                                <input name="drink" th:value="${recommandInfo}" hidden="hidden"/>
+
                                 <div align="center" style="float: left;width: 33%;">
-                                    <button type="submit" name="difficulty"value="EASY" class="customBtn">
+                                    <button  class="customBtn">
                                         <div class="main-border-button">
-                                            <a class="customLink">응애응애~ 아기</a>
+                                            <a class="customLink" th:href="@{/cocktail/recommand/question(drink=${drink}, difficulty='EASY')}">응애응애~ 아기</a>
                                         </div>
                                     </button>
                                 </div>
                                 <div align="center" style="float: left; width: 33%;">
-                                    <button type="submit" name="difficulty"value="NORMAL" class="customBtn">
+                                    <button  class="customBtn">
                                         <div class="main-border-button">
-                                            <a class="customLink">나 정도면 평균아닌가?</a>
+                                            <a class="customLink" th:href="@{/cocktail/recommand/question(drink=${drink}, difficulty='NORMAL')}">나 정도면 평균아닌가?</a>
                                         </div>
                                     </button>
                                 </div>
                                 <div align="center" style="float: left; width: 33%;">
-                                    <button type="submit" name="difficulty"value="HARD" class="customBtn">
+                                    <button  class="customBtn">
                                         <div class="main-border-button">
-                                            <a class="customLink">씹고수</a>
+                                            <a class="customLink" th:href="@{/cocktail/recommand/question(drink=${drink}, difficulty='HARD')}">씹고수</a>
                                         </div>
                                     </button>
                                 </div>
-                            </form>
+
                         </div>
                     </div>
                 </div>

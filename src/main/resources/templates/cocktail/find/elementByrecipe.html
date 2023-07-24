@@ -81,10 +81,10 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="page-content">
-                <!-- ***** Details Start ***** -->
                 <div class="game-details">
                     <div class="row">
-                        <div class="col-lg-12">
+                    <!-- 칵테일 description -->
+                        <div class="col-lg-12" style="margin-bottom: 40px;">
                             <div class="content">
                                 <div class="row">
                                     <div align="center" style="background-color: #27292a;
@@ -115,19 +115,35 @@
                                     <div class="col-lg-12">
                                         <h4 th:text="${recipe.getDescription()}"/>
                                     </div>
-                                    <form th:action="@{'/basket/add/'+${recipe.getId()}}" method="post" >
-                                            <button type="submit" class="customBtn">
-                                                <div class="main-border-button">
-                                                    <a class="customLink" >술바구니에 추가하기!</a>
-                                                </div>
-                                            </button>
+                                    <form th:action="@{'/basket/add/'+${recipe.getId()}}" method="post">
+                                        <button type="submit" class="customBtn">
+                                            <div class="main-border-button">
+                                                <a class="customLink">술바구니에 추가하기!</a>
+                                            </div>
+                                        </button>
                                     </form>
                                 </div>
                             </div>
                         </div>
+                        <!-- 칵테일 조주법 -->
+                        <div class="col-lg-12">
+                            <div class="content">
+                                <div class="row" style="text-align: center">
+                                    <th:block th:each="element : ${elements}">
+                                    <div style="background-color: #27292a;
+                                                        padding: 30px 0;
+                                                        margin-bottom: 30px;
+                                                        border-radius: 15px;
+                                                        text-align: center">
+                                        <h4 th:text="${element.getName()}"/>
+                                    </div>
+                                </th:block>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-                <!-- ***** Details End ***** -->
             </div>
         </div>
     </div>
