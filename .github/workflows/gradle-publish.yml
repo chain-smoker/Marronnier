@@ -39,11 +39,17 @@ jobs:
                  
           touch ./application.yml
           
-          echo "$MAPPER_LOCATIONS" >> ./application.yml
-          echo "$JDBC_URL" >> ./application.yml
-          echo "$USERNAME" >> ./application.yml
-          echo "$PASSWORD" >> ./application.yml
+          echo "spring.datasource.mapper-locations=$MAPPER_LOCATIONS" >> ./application.yml
+          echo "spring.datasource.jdbc-url=$JDBC_URL" >> ./application.yml
+          echo "spring.datasource.username=$USERNAME" >> ./application.yml
+          echo "spring.datasource.password=$PASSWORD" >> ./application.yml
           shell: bash
+        env:
+          MAPPER_LOCATIONS: ${{ secrets.MAPPER_LOCATIONS }}
+          JDBC_URL: ${{ secrets.JDBC_URL }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+
 
       - name: Test with Gradle
         run: ./gradlew --info test
