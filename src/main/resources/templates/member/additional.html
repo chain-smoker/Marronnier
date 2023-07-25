@@ -109,7 +109,7 @@
                         </div>
                         <div class="main-info header-text"><h4>보다 정확한 추천을 위해 회원님의 추가 정보를 알려주세요!</h4>></div>
                         <form action="/member/update" method="post">
-                            <h4 class="heading-section ">거주지</h4> <input class="input-group-text" type="text" name="address" id="address_kakao" readonly style="width: 30%"> <br>
+                            <h4 class="heading-section ">거주지</h4> <input onclick="execDaumPostcode()" class="input-group-text" type="text" name="address" id="address_kakao" readonly style="width: 30%"> <br>
                             <h4 class="heading-section ">직업</h4> <input class="input-group-text" type="text" name="job"><br>
                             <h4 class="heading-section ">생년월일</h4> <input class="input-group-text" type="date" name="birthDate"><br>
                             <select name="gender" id="gender" class="btn btn-secondary btn-lg dropdown-toggle required">
@@ -146,9 +146,9 @@
     <script src="/js/popup.js"></script>
     <script src="/js/custom.js"></script>
 
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
-            document.getElementById("address_kakao").addEventListener("click", function() { //주소입력칸을 클릭하면
+        function execDaumPostcode() {
                 //카카오 지도 발생
                 new daum.Postcode({
                     oncomplete: function (data) { //선택시 입력값 세팅
@@ -157,7 +157,7 @@
                         document.querySelector("input[name=address]").focus(); //상세입력 포커싱
                     }
                 }).open();
-            });
+        }
     </script>
 </body>
 </html>
