@@ -39,10 +39,10 @@ jobs:
                  
           touch ./application.yml
           
-          echo "${{ secrets.MAPPER_LOCATIONS }}" >> ./application.yml
-          echo "${{ secrets.JDBC_URL }}" >> ./application.yml
-          echo "${{ secrets.USERNAME }}" >> ./application.yml
-          echo "${{ secrets.PASSWORD }}" >> ./application.yml
+          echo "$MAPPER_LOCATIONS" >> ./application.yml
+          echo "$JDBC_URL" >> ./application.yml
+          echo "$USERNAME" >> ./application.yml
+          echo "$PASSWORD" >> ./application.yml
           shell: bash
 
       - name: Test with Gradle
