@@ -34,12 +34,9 @@ jobs:
 
       - name: make application.yaml
         run: |
-          touch ./src/main/resources/application.yml
-          echo "$APPLICATION" >> ./src/main/resources/application.yml
-          cat ./src/main/resources/application.yml
-        env:
-          APPLICATION: ${{ secrets.APPLICATION }}
-        shell: bash
+          touch ./src/main/resources/application.properties
+          echo "${{ secrets.APPLICATION }}" >> ./src/main/resources/application.properties
+          cat ./src/main/resources/application.properties
 
 
       - name: Test with Gradle
