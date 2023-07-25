@@ -4,6 +4,7 @@ import com.chainsmoker.marronnier.photo.command.domain.aggregate.entity.EnumType
 
 public class PhotoDTO {
 
+    private long photoId;           //사진 아이디
     private long originId;          //호출데이터 아이디
     private String photoName;       //오리지널 이름
     private String photoRename;     //변경 후 이름
@@ -21,6 +22,23 @@ public class PhotoDTO {
         this.photoRoot = photoRoot;
     }
 
+    public PhotoDTO(long photoId , long originId, String photoName, String photoRename, PhotoCategory photoCategory, String photoRoot) {
+        this.photoId = photoId;
+        this.originId = originId;
+        this.photoName = photoName;
+        this.photoRename = photoRename;
+        this.photoCategory = photoCategory;
+        this.photoRoot = photoRoot;
+    }
+
+
+    public long getPhotoId() {
+        return photoId;
+    }
+
+    public void setPhotoId(long photoId) {
+        this.photoId = photoId;
+    }
 
     public long getOriginId() {
         return originId;
@@ -65,7 +83,8 @@ public class PhotoDTO {
     @Override
     public String toString() {
         return "PhotoDTO{" +
-                "originId=" + originId +
+                "photoId=" + photoId +
+                ", originId=" + originId +
                 ", photoName='" + photoName + '\'' +
                 ", photoRename='" + photoRename + '\'' +
                 ", photoCategory=" + photoCategory +
