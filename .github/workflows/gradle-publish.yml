@@ -29,21 +29,17 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
-      - name: Copy Secret
+      - name: Adding secret
+        run: |
+            echo APPLICATION >> src/main/resources/application.yml
+            cat src/main/resources/application.yml
+        shell: bash
         env:
-          OCCUPY_SECRET: ${{ secrets.APPLICATION }}
-          OCCUPY_SECRET_DIR: ./src/main/resources
-          OCCUPY_SECRET_DIR_FILE_NAME: application.yml
-        run: echo $OCCUPY_SECRET | base64 --decode > $OCCUPY_SECRET_DIR/$OCCUPY_SECRET_DIR_FILE_NAME
+          APPLICATION: ${{secrets.APPLICATION}}
+
 
       - name: Add permission
         run: chmod +x gradlew
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: application.yml
-          path: ./src/main/resources/application.yml
-
 
       - name: Test with Gradle
         run: ./gradlew --info test
