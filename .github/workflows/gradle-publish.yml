@@ -33,10 +33,9 @@ jobs:
         run: chmod +x gradlew
 
       - uses: actions/checkout@v3
-        run: |
-          touch ./src/main/resources/application.properties
-          echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application.properties
-          cat ./src/main/resources/application.properties
+      - run: touch ./src/main/resources/application.properties
+      - run : echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application.properties
+      - run : cat ./src/main/resources/application.properties
 
       - uses: actions/upload-artifact@v3
         with:
