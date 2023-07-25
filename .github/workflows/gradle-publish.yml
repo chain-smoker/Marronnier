@@ -32,12 +32,12 @@ jobs:
       - name: Add permission
         run: chmod +x gradlew
 
-      - name: make application.yaml
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
         run: |
           touch ./src/main/resources/application.properties
           echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application.properties
           cat ./src/main/resources/application.properties
+
       - uses: actions/upload-artifact@v3
         with:
           name: application.properties
