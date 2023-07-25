@@ -33,22 +33,10 @@ jobs:
         run: chmod +x gradlew
 
           ## create application-database.yaml
-      - name: make application.yaml
-        run: |
-          cd ./src/main/resources
-                 
-          touch ./application.yml
-          
-          echo "spring.datasource.mapper-locations=$MAPPER_LOCATIONS" >> ./application.yml
-          echo "spring.datasource.jdbc-url=$JDBC_URL" >> ./application.yml
-          echo "spring.datasource.username=$USERNAME" >> ./application.yml
-          echo "spring.datasource.password=$PASSWORD" >> ./application.yml
-          shell: bash
-        env:
-          MAPPER_LOCATIONS: ${{ secrets.MAPPER_LOCATIONS }}
-          JDBC_URL: ${{ secrets.JDBC_URL }}
-          USERNAME: ${{ secrets.USERNAME }}
-          PASSWORD: ${{ secrets.PASSWORD }}
+      - uses: actions/checkout@v3
+      - run: touch ./src/main/resources/application.yml
+      - run: echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application.yml
+      - run: cat ./src/main/resources/application.yml
 
 
       - name: Test with Gradle
