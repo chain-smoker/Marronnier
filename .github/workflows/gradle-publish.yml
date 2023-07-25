@@ -31,7 +31,7 @@ jobs:
 
       - name: Adding secret
         run: |
-            echo APPLICATION >> src/main/resources/application.yml
+            echo $APPLICATION >> src/main/resources/application.yml
             cat src/main/resources/application.yml
         shell: bash
         env:
