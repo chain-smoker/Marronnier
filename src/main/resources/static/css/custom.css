@@ -37,3 +37,9 @@
     background-color: #1f2122 !Important;
     border: solid 1px #ec6090;
 }
+
+.nav-item > a > img
+{
+    width: 30px;
+    height: 30px;
+}
