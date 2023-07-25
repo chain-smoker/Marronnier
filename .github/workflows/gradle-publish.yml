@@ -32,7 +32,7 @@ jobs:
       - name: Copy Secret
         env:
           OCCUPY_SECRET: ${{ secrets.APPLICATION }}
-          OCCUPY_SECRET_DIR: src/main/resources
+          OCCUPY_SECRET_DIR: ./src/main/resources
           OCCUPY_SECRET_DIR_FILE_NAME: application.yml
         run: echo $OCCUPY_SECRET | base64 --decode > $OCCUPY_SECRET_DIR/$OCCUPY_SECRET_DIR_FILE_NAME
 
@@ -42,7 +42,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: application.properties
-          path: src/main/resources/application.yml
+          path: ./src/main/resources/application.yml
 
 
       - name: Test with Gradle
