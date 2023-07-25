@@ -41,7 +41,7 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: application.properties
+          name: application.yml
           path: ./src/main/resources/application.yml
 
 
