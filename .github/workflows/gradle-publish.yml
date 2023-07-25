@@ -29,12 +29,14 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
-      - name: Create application properties
-        uses: actions/checkout@v3
-        run: | 
-            touch ./src/main/resources/application.properties
-            echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application.properties
-            cat ./src/main/resources/application.properties
+      - name: Copy Secret
+        env:
+          OCCUPY_SECRET: ${{ secrets.APPLICATION }}
+          OCCUPY_SECRET_DIR: src/main/resources
+          OCCUPY_SECRET_TEST_DIR: src/test/resources
+          OCCUPY_SECRET_DIR_FILE_NAME: application.properties
+        run: echo $OCCUPY_SECRET | base64 --decode > $OCCUPY_SECRET_DIR/$OCCUPY_SECRET_DIR_FILE_NAME &&
+              echo $OCCUPY_SECRET | base64 --decode > $OCCUPY_SECRET_TEST_DIR/$OCCUPY_SECRET_DIR_FILE_NAME
 
       - name: Add permission
         run: chmod +x gradlew
@@ -47,6 +49,7 @@ jobs:
 
       - name: Test with Gradle
         run: ./gradlew --info test
+
       - name: Build with Gradle
         uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
         with:
