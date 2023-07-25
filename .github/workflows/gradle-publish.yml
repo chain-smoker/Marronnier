@@ -29,13 +29,14 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
-      - name: Adding secret
-        run: |
-            echo $APPLICATION >> src/main/resources/application.yml
-            cat src/main/resources/application.yml
+      - name: make application.properties
+        run:
+          mkdir ./src/main/resources |
+          touch ./src/main/resources/application.properties
         shell: bash
-        env:
-          APPLICATION: ${{secrets.APPLICATION}}
+      - name: deliver application.properties
+        run: echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application.properties
+        shell: bash
 
 
       - name: Add permission
