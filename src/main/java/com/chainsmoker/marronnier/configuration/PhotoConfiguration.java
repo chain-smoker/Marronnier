@@ -20,9 +20,6 @@ public class PhotoConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // 기본 resources/upload-images 경로 설정
-        registry.addResourceHandler("/resources/upload-images/**")
-                .addResourceLocations("classpath:/META-INF/resources/");
 
         List<String> imageFolders = Arrays.asList("recipe", "element", "feed");
         for (String imageFolder : imageFolders) {

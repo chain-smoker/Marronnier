@@ -11,9 +11,9 @@ import javax.persistence.*;
 @Getter
 public class Photo {
     @Id
-    @Column(name = "PHOTO_ID")
+    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long photoId;               //사진 ID
+    private long id;                    //사진 ID
 
     @Column(name = "ORIGIN_ID", nullable = false)
     private OriginVO originId;          // (조주법, 재료, 피드) ID

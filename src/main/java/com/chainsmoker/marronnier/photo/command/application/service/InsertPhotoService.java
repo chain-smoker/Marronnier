@@ -37,13 +37,11 @@ public class InsertPhotoService {
                                 PhotoCategory photoCategory) throws IOException {
 
         if (photo.isEmpty()) {
-            // 사진이 없으면 예외를 발생시키는데 IllegalArgumentException() 말고 적합한 예외가 있는지?
-            // domain.service로 이동?
-            throw new IllegalArgumentException();
+
+            return null;
         }
 
-        // 폴더명 정하는 검증로직 domain.service로 이동?,
-        // EnumType.PhotoCategory import 하지말고 String으로 비교 가능하면 변경하는 게 괜찮은가?
+        // 폴더명 정하는 검증로직
         String savedFolder = null;
         if (photoCategory.equals(COCKTAIL_RECIPE)) {
             savedFolder = "recipe/";
@@ -90,7 +88,7 @@ public class InsertPhotoService {
                 photoRepository.save(photoEntity);
 
                 return new PhotoDTO(
-                        photoEntity.getPhotoId(),
+                        photoEntity.getId(),
                         photoEntity.getOriginId().getId(),
                         photoEntity.getPhotoName(),
                         photoEntity.getPhotoRename(),
