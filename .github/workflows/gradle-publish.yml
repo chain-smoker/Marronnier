@@ -29,12 +29,20 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
-      - name: make application.properties
+      - name: Setup MySQL
+        uses: samin/mysql-action@v1
+        with:
+          character set server: 'utf8'
+          mysql database: 'marronnier'
+          mysql user: ${{ secrets.MYSQL_USERNAME }}
+          mysql password: ${{ secrets.MYSQL_PASSWORD }}
+
+      - name: make application.yml
         run:
-          touch ./src/main/resources/application.properties
+          touch ./src/main/resources/application.yml
         shell: bash
-      - name: deliver application.properties
-        run: echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application.properties
+      - name: deliver application.yml
+        run: echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application.yml
         shell: bash
 
 
