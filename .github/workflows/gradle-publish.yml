@@ -32,12 +32,14 @@ jobs:
       - name: Add permission
         run: chmod +x gradlew
 
-          ## create application-database.yaml
       - name: make application.yaml
         run: |
           touch ./src/main/resources/application.yml
-          echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application.yml
+          echo "$APPLICATION" >> ./src/main/resources/application.yml
           cat ./src/main/resources/application.yml
+        env:
+          APPLICATION: ${{ secrets.APPLICATION }}
+        shell: bash
 
 
       - name: Test with Gradle
