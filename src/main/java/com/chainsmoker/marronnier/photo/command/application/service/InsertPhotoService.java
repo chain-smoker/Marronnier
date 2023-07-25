@@ -3,10 +3,10 @@ package com.chainsmoker.marronnier.photo.command.application.service;
 import com.chainsmoker.marronnier.photo.command.application.dto.PhotoDTO;
 import com.chainsmoker.marronnier.photo.command.domain.aggregate.entity.EnumType.PhotoCategory;
 import com.chainsmoker.marronnier.photo.command.domain.aggregate.entity.Photo;
-import com.chainsmoker.marronnier.photo.command.domain.aggregate.entity.PhotoCompositeKey;
 import com.chainsmoker.marronnier.photo.command.domain.aggregate.vo.OriginVO;
 import com.chainsmoker.marronnier.photo.command.domain.repository.PhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,13 +14,17 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.UUID;
+
+import static com.chainsmoker.marronnier.photo.command.domain.aggregate.entity.EnumType.PhotoCategory.*;
 
 @Service
 public class InsertPhotoService {
 
     private final PhotoRepository photoRepository;
+    /* yml 외부 경로 설정 가져오기 */
+    @Value("${custom.path.upload-images}")
+    private String uploadPath;
 
     @Autowired
     public InsertPhotoService(PhotoRepository photoRepository) {
@@ -32,53 +36,70 @@ public class InsertPhotoService {
                                 MultipartFile photo,
                                 PhotoCategory photoCategory) throws IOException {
 
-        /* 파일 저장 static 경로 가져옴 */
-        String root = new File("src/main/resources/static").getAbsolutePath();
+        if (photo.isEmpty()) {
 
-        String photoPath = root + "/photo";
-
-        /* 파일 저장 객체 생성 */
-        File dir = new File(photoPath);
-        if (!dir.exists()) {
-            dir.mkdirs();
+            return null;
         }
 
-        String originPhotoName = photo.getOriginalFilename();
+        // 폴더명 정하는 검증로직
+        String savedFolder = null;
+        if (photoCategory.equals(COCKTAIL_RECIPE)) {
+            savedFolder = "recipe/";
+        } else if (photoCategory.equals(ELEMENT)) {
+            savedFolder = "element/";
+        } else if (photoCategory.equals(FEED)) {
+            savedFolder = "feed/";
+        }
 
-        if (originPhotoName != null) {
 
-            /* 확장자 명으로 분리 */
-            String ext = originPhotoName.substring(originPhotoName.lastIndexOf("."));
+        File savedFile = null;
+        try {
+            // 사진 저장 폴더가 없는 경우 생성
+            File photoFolder = new File(uploadPath + savedFolder);
+            if (!photoFolder.exists()) {
+                photoFolder.mkdirs();
+            }
 
-            String savedName = UUID.randomUUID().toString().replace("-", "") + ext;
+            String originPhotoName = photo.getOriginalFilename();
 
-            String path = "/photo" + "/" + savedName;
-            try {
-                photo.transferTo(new File(photoPath + "/" + savedName));
-                PhotoDTO photoInfo = new PhotoDTO(originId, originPhotoName, savedName, photoCategory, path);
+            if (originPhotoName != null) {
+
+                // 확장자 명으로 분리
+                String ext = originPhotoName.substring(originPhotoName.lastIndexOf("."));
+
+                // 저장 될 파일명 변경
+                String savedName = UUID.randomUUID().toString().replace("-", "") + ext;
+
+                String savedPath = "/static/upload-images/" + savedFolder + savedName;
+
+                savedFile = new File(photoFolder, savedName);
+                photo.transferTo(savedFile);
+
+                PhotoDTO photoInfo = new PhotoDTO(originId, originPhotoName, savedName, photoCategory, savedPath);
 
                 Photo photoEntity = new Photo(
-
-                        new PhotoCompositeKey(new OriginVO(photoInfo.getOriginId()), photoInfo.getPhotoCategory()),
+                        new OriginVO(photoInfo.getOriginId()),
+                        photoInfo.getPhotoCategory(),
                         photoInfo.getPhotoName(),
                         photoInfo.getPhotoRename(),
                         photoInfo.getPhotoRoot()
                 );
+
                 photoRepository.save(photoEntity);
+
                 return new PhotoDTO(
-                        photoEntity.getPhotoInfo().getOriginId().getId(),
+                        photoEntity.getId(),
+                        photoEntity.getOriginId().getId(),
                         photoEntity.getPhotoName(),
                         photoEntity.getPhotoRename(),
-                        photoEntity.getPhotoInfo().getPhotoCategory(),
-                        photoEntity.getPhotoRoot()
-                );
-            } catch (IOException e) {
-                Files.delete(Path.of(path));
-                return null;
+                        photoEntity.getPhotoCategory(),
+                        photoEntity.getPhotoRoot());
             }
+
+        } catch (IOException e) {
+            Files.delete(savedFile.toPath());
+            e.printStackTrace();
         }
         return null;
     }
-
-
 }
