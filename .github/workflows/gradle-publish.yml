@@ -28,8 +28,26 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
+
       - name: Add permission
         run: chmod +x gradlew
+
+          ## create application-database.yaml
+      - name: make application.yaml
+        run: |
+        ## create application-database.yaml
+          cd ./src/main/resources
+                 
+        # application-database.yaml 파일 생성
+          touch ./application.yml
+                 
+        # GitHub-Actions 에서 설정한 값을 application-database.yaml 파일에 쓰기
+          echo "${{ secrets.MAPPER_LOCATIONS }}" >> ./application.yml
+          echo "${{ secrets.JDBC_URL }}" >> ./application.yml
+          echo "${{ secrets.USERNAME }}" >> ./application.yml
+          echo "${{ secrets.PASSWORD }}" >> ./application.yml
+          shell: bash
+
       - name: Test with Gradle
         run: ./gradlew --info test
       - name: Build with Gradle
