@@ -1,9 +1,8 @@
 package com.chainsmoker.marronnier.feed.query.domain.service;
 
 import com.chainsmoker.marronnier.feed.query.application.dto.CheckFeedDTO;
-import com.chainsmoker.marronnier.feed.query.application.service.FindFeedService;
 import com.chainsmoker.marronnier.feed.query.domain.entity.QueryFeed;
-import com.chainsmoker.marronnier.feed.query.domain.repository.FeedMapper;
+import com.chainsmoker.marronnier.feed.query.infra.repository.FeedMapper;
 import com.chainsmoker.marronnier.member.query.application.dto.FindMemberDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
