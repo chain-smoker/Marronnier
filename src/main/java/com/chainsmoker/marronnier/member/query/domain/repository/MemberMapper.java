@@ -1,6 +1,6 @@
 package com.chainsmoker.marronnier.member.query.domain.repository;
 
-import com.chainsmoker.marronnier.member.query.domain.entity.QueryMember;
+import com.chainsmoker.marronnier.member.query.domain.entity.aggregate.QueryMember;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
