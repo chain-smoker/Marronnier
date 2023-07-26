@@ -9,6 +9,6 @@ import java.util.List;
 public interface FeedMapper {
     List<QueryFeed> findAllFeeds();
     QueryFeed findFeedById(long id);
-
     long findFeedMemberIdByFeedId(long feedId);
+    List<QueryFeed> findFeedsByMemberId(long memberId);
  }

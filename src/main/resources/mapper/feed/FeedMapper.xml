@@ -31,4 +31,12 @@
         WHERE
             id = #{ id }
     </select>
+
+    <select id="findFeedsByMemberId" resultMap="QueryFeedMap">
+        SELECT *
+        FROM
+            FEED_TB
+        WHERE
+            member_id = #{memberId}
+    </select>
 </mapper>
