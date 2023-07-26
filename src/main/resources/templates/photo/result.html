@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <h1>사진 결과 페이지</h1>
+    <th:block th:each="photo : ${photos}">
+      <img th:src="${photo.photoRoot}"/>
+    </th:block>
+</body>
+</html>
