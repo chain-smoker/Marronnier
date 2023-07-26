@@ -3,8 +3,15 @@ package com.chainsmoker.marronnier.admin.command.application.controller;
 import com.chainsmoker.marronnier.admin.command.application.dto.CreateAdminDTO;
 import com.chainsmoker.marronnier.admin.command.application.service.RegistAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/admin")
@@ -23,14 +30,30 @@ public class CreateAdminController {
     }
 
     @PostMapping("regist")
-    public String registAdmin(CreateAdminDTO createAdminDTO) {
-        // @ModelAttribute("adminName") String adminName, @ModelAttribute("loginId") String loginId, @ModelAttribute("password") String password
-        long addResult = registAdminService.create(createAdminDTO);
-        if (addResult > 0) {
-            return "redirect:/admin/login";
-        } else {
+    public String registAdmin(RedirectAttributes rttr, CreateAdminDTO createAdminDTO) {
+        try {
+            // @ModelAttribute("adminName") String adminName, @ModelAttribute("loginId") String loginId, @ModelAttribute("password") String password
+            long addResult = registAdminService.create(createAdminDTO);
+            if (addResult > 0) {
+                return "redirect:/admin/login";
+            } else {
+                return "redirect:/admin/regist";
+            }
+        } catch (DataIntegrityViolationException exception) {
+            String reasonValue = exception.getCause().getCause().getLocalizedMessage().split(" ")[2].replaceAll("'", "");
+            String reasonKey = reasonValue.equals(createAdminDTO.getLoginId()) ? "관리자 아이디" : reasonValue.equals(createAdminDTO.getName()) ? "관리자 이름" : "";
+            System.out.println("reasonKey = " + reasonKey);
+            rttr.addFlashAttribute("errorMessage", exception.getMessage());
             return "redirect:/admin/regist";
         }
     }
-
+    private <K, V> Set<K> getKeys(Map<K, V> map, V value) {
+        Set<K> keys = new HashSet<>();
+        for (Map.Entry<K, V> entry : map.entrySet()) {
+            if (entry.getValue().equals(value)) {
+                keys.add(entry.getKey());
+            }
+        }
+        return keys;
+    }
 }

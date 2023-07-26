@@ -13,7 +13,7 @@ public class Admin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 30)
+    @Column(length = 30, nullable = false ,unique = true)
     private String name;
 
     @Enumerated(EnumType.STRING)
@@ -23,7 +23,7 @@ public class Admin {
     @Column(nullable = false)
     private String password;
 
-    @Column(name = "login_id")
+    @Column(name = "login_id", nullable = false ,unique = true)
     private String loginId;
 
     public Admin() {}
