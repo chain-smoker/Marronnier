@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.chainsmoker.marronnier.feed.query.infra.repository.FeedMapper">
+<mapper namespace="com.chainsmoker.marronnier.feed.query.domain.repository.FeedMapper">
     <resultMap id="QueryFeedMap" type="com.chainsmoker.marronnier.feed.query.domain.entity.QueryFeed">
         <id property="id" column="id"/>
         <result property="memberId" column="member_id"/>
@@ -30,5 +30,13 @@
             FEED_TB
         WHERE
             id = #{ id }
+    </select>
+
+    <select id="findFeedsByMemberId" resultMap="QueryFeedMap">
+        SELECT *
+        FROM
+            FEED_TB
+        WHERE
+            member_id = #{memberId}
     </select>
 </mapper>

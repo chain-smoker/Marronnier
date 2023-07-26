@@ -1,10 +1,11 @@
 package com.chainsmoker.marronnier.feed.query.domain.service;
 
 import com.chainsmoker.marronnier.feed.query.application.dto.CheckFeedDTO;
+import com.chainsmoker.marronnier.feed.query.application.service.FindFeedService;
 import com.chainsmoker.marronnier.feed.query.domain.entity.QueryFeed;
+import com.chainsmoker.marronnier.feed.query.domain.repository.FeedMapper;
 import com.chainsmoker.marronnier.member.query.application.dto.FindMemberDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,11 +16,13 @@ public class QueryFeedService {
     private final CheckMemberService checkMemberService;
     private final CheckLikeService checkLikeService;
     private final CheckCocktatilService checkCocktatilService;
+    private  final FeedMapper feedMapper;
     @Autowired
-    public QueryFeedService(CheckMemberService checkMemberService, CheckLikeService checkLikeService, CheckCocktatilService checkCocktatilService) {
+    public QueryFeedService(CheckMemberService checkMemberService, CheckLikeService checkLikeService, CheckCocktatilService checkCocktatilService,  FeedMapper feedMapper) {
         this.checkMemberService = checkMemberService;
         this.checkLikeService = checkLikeService;
         this.checkCocktatilService = checkCocktatilService;
+        this.feedMapper = feedMapper;
     }
 
     public List<CheckFeedDTO> saveInfo(List<QueryFeed> queryFeeds) {
@@ -28,7 +31,6 @@ public class QueryFeedService {
             CheckFeedDTO checkFeedDTO = new CheckFeedDTO(feed);
             feedDTOS.add(checkFeedDTO);
         }
-
         return feedDTOS;
     }
 
@@ -55,9 +57,17 @@ public class QueryFeedService {
             checkFeedDTOS.get(i).setCocktailName(findCocktailNameById(cocktailId));
         }
     }
-
-
     public String findCocktailNameById(long cocktailId){
         return checkCocktatilService.findByCocktailId(cocktailId);
+    }
+
+    public List<CheckFeedDTO> findFeedsByMemberId(long memberId){
+        List<QueryFeed> list = feedMapper.findFeedsByMemberId(memberId);
+        List<CheckFeedDTO> res = new ArrayList<>();
+        for (int i =0 ; i<list.size();i++){
+            res.add(new CheckFeedDTO(list.get(i)));
+        }
+        addDetails(res);
+        return res;
     }
 }

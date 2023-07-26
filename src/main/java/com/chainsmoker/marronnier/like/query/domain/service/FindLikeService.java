@@ -21,9 +21,4 @@ public class FindLikeService {
     public int findAllLike(long feedId){
         return likeMapper.findNumberOfLike(feedId);
     }
-
-    public List<Long> findLikedFeedByMemberId(long memberId){
-        List<Long> list = likeMapper.findLikedFeedByMemberId(memberId);
-        return list;
-    }
 }
