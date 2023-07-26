@@ -86,5 +86,14 @@
 <script src="/js/popup.js"></script>
 <script src="/js/custom.js"></script>
 
+<script th:inline="javascript">
+    window.onload = function () {
+        let exceptionMessage = [[${ errorMessage }]];
+        if(exceptionMessage !== null) {
+            alert(exceptionMessage);
+        }
+    }
+</script>
+
 </body>
 </html>

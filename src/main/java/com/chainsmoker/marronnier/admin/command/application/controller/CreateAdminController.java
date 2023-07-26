@@ -43,7 +43,7 @@ public class CreateAdminController {
             String reasonValue = exception.getCause().getCause().getLocalizedMessage().split(" ")[2].replaceAll("'", "");
             String reasonKey = reasonValue.equals(createAdminDTO.getLoginId()) ? "관리자 아이디" : reasonValue.equals(createAdminDTO.getName()) ? "관리자 이름" : "";
             System.out.println("reasonKey = " + reasonKey);
-            rttr.addFlashAttribute("errorMessage", exception.getMessage());
+            rttr.addFlashAttribute("errorMessage", "이미 존재하는 " + reasonKey + " 입니다.");
             return "redirect:/admin/regist";
         }
     }
