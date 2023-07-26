@@ -7,7 +7,7 @@
     <result property="UID" column="uid"/>
     <result property="address" column="address" />
     <result property="gender" column="gender"/>
-    <result property="bitrhDate" column="bitrh_date"/>
+    <result property="birthDate" column="birth_date"/>
     <result property="platform" column="platform"/>
     <result property="createdDate" column="created_date"/>
     <result property="modifiedDate" column="modified_date"/>
