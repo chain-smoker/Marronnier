@@ -4,6 +4,7 @@ import com.chainsmoker.marronnier.feed.query.application.dto.CheckFeedDTO;
 import com.chainsmoker.marronnier.feed.query.domain.entity.QueryFeed;
 import com.chainsmoker.marronnier.member.query.application.dto.FindMemberDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,15 +14,16 @@ import java.util.List;
 public class QueryFeedService {
     private final CheckMemberService checkMemberService;
     private final CheckLikeService checkLikeService;
+    private final CheckCocktatilService checkCocktatilService;
     @Autowired
-    public QueryFeedService(CheckMemberService checkMemberService, CheckLikeService checkLikeService) {
+    public QueryFeedService(CheckMemberService checkMemberService, CheckLikeService checkLikeService, CheckCocktatilService checkCocktatilService) {
         this.checkMemberService = checkMemberService;
         this.checkLikeService = checkLikeService;
+        this.checkCocktatilService = checkCocktatilService;
     }
 
     public List<CheckFeedDTO> saveInfo(List<QueryFeed> queryFeeds) {
         List<CheckFeedDTO> feedDTOS = new ArrayList<>();
-
         for (QueryFeed feed : queryFeeds) {
             CheckFeedDTO checkFeedDTO = new CheckFeedDTO(feed);
             feedDTOS.add(checkFeedDTO);
@@ -45,10 +47,17 @@ public class QueryFeedService {
         for(int i = 0 ; i <checkFeedDTOS.size(); i++){
             long feedId= checkFeedDTOS.get(i).getId();
             long memberId= checkFeedDTOS.get(i).getMemberId();
+            long cocktailId = checkFeedDTOS.get(i).getCocktailId();
             checkFeedDTOS.get(i).setLike(checkLikeService.numberOfLike(feedId));
             FindMemberDTO writer =checkMemberService.findById(memberId);
             checkFeedDTOS.get(i).setWriter(writer.getName());
             checkFeedDTOS.get(i).setProfileImage(writer.getProfileImage());
+            checkFeedDTOS.get(i).setCocktailName(findCocktailNameById(cocktailId));
         }
+    }
+
+
+    public String findCocktailNameById(long cocktailId){
+        return checkCocktatilService.findByCocktailId(cocktailId);
     }
 }

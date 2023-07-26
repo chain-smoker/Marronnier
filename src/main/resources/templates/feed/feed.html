@@ -62,7 +62,7 @@
                     document.getElementsByClassName("feedContent")[0].textContent = data.feed.content;
                     document.getElementsByClassName("feedWriter")[0].textContent = data.feedWriter.name;
                     document.getElementsByClassName("writerProfile")[0].src=data.feedWriter.profileImage;
-                    document.getElementsByClassName("cocktailName")[0].textContent = data.feed.cocktailId;
+                    document.getElementsByClassName("cocktailName")[0].textContent = data.cocktailName;
                     document.getElementsByClassName("NumberOfLike")[0].textContent = data.NumberOfLike;
                     document.getElementsByClassName("like")[0].value = data.feedId;
                     document.getElementsByClassName("hate")[0].value = data.feedId;
@@ -198,7 +198,7 @@
                                     <div class="item">
                                         <img th:value="${feed.getId()}" th:src="${member.getProfileImage()}" alt="">
                                         <h4 th:text="@{'# '+${feed.getWriter()}}"></h4><br>
-                                        <h4><span th:text="${feed.getCocktailId()}"></span></h4>
+                                        <h4><span th:text="${feed.getCocktailName()}"></span></h4>
                                         <ul>
                                             <li ><i style="display: inline" class="fa fa-heart" ></i> <a th:text="@{' '+${feed.getLike()}}"></a> </li>
                                         </ul>

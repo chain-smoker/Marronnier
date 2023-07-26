@@ -97,23 +97,13 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="page-content">
-
-<!--                피드 쓰러온 페이지입니다.-->
-<!--                <form action="/feed" method="post">-->
-<!--                    <input th:value="${memberName}" name="memberName" readonly><br>-->
-<!--                    <input th:value="${memberId}" name="memberId" readonly><br>-->
-<!--                    <input type="text" name="cocktailId">칵테일<br>-->
-<!--                    <input type="text" name="content">내용<br>-->
-<!--                    <button type="submit">완료</button>-->
-<!--                </form>-->
-
                 <form action="/feed" method="post">
 
                     <div class="mb-3 row">
                         <label for="writer" style="color: #d3d6d8" class="col-sm-2 col-form-label fw-semibold">작성자</label>
                         <div class="col-sm-10">
                             <input type="text" style="color: #d3d6d8" readonly class="form-control-plaintext fw-semibold" id="writer"
-                                   th:value="${memberName}"
+                                   th:value="${member.getName()}"
                                    name="memberName">
                         </div>
                     </div>
@@ -121,11 +111,12 @@
                         <label style="color: #d3d6d8" for="cocktail" class="col-sm-2 col-form-label fw-semibold">칵테일</label>
                         <div class="col-sm-10">
                             <input type="text" style="color: #d3d6d8" readonly class="form-control-plaintext fw-semibold" id="cocktail"
-                                   th:value="${memberId}" name="cocktailId">
+                                   th:value="${cocktailName}" name="cocktailName">
                         </div>
                     </div>
 
-                    <input th:value="${memberId}" name="memberId" hidden="hidden"><br>
+                    <input th:value="${member.getId()}" name="memberId" hidden="hidden"><br>
+                    <input th:value="${cocktailId}" name="cocktailId" hidden="hidden"><br>
 
                     <div class="mb-3 row">
                         <label for="inputContent" class="col-sm-2 col-form-label text-white fw-semibold">내용</label>
