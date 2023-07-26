@@ -21,5 +21,13 @@
          FROM LIKE_TB
         WHERE feed_id = #{ feedId } AND member_id = #{ memberId }
     </select>
-    
+
+    <select id="findLikedFeedByMemberId" parameterType="hashmap" resultType="_long">
+        SELECT
+            feed_id
+        FROM LIKE_TB
+        WHERE member_id = #{ memberId }
+    </select>
+
+
 </mapper>
