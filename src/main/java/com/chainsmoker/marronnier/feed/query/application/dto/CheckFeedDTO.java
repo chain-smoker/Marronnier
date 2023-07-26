@@ -17,6 +17,7 @@ public class CheckFeedDTO {
     private Long cocktailId;
     private String content;
     private int like;
+    private String profileImage;
 
     public CheckFeedDTO(QueryFeed feed){
         this.Id= feed.getId();
@@ -24,13 +25,14 @@ public class CheckFeedDTO {
         this.cocktailId = feed.getCocktailId() ;
         this.content = feed.getContent();
     }
-    public CheckFeedDTO(QueryFeed feed,int like, String writer){
+    public CheckFeedDTO(QueryFeed feed,int like, String writer, String profileImage){
         this.Id= feed.getId();
         this.memberId = feed.getMemberId();
         this.cocktailId = feed.getCocktailId() ;
         this.content = feed.getContent();
         this.like=like;
         this.writer=writer;
+        this.profileImage = profileImage;
     }
 
     public void setWriter(String writer) {
@@ -39,5 +41,9 @@ public class CheckFeedDTO {
 
     public void setLike(int like) {
         this.like = like;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 }

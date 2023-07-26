@@ -46,7 +46,9 @@ public class QueryFeedService {
             long feedId= checkFeedDTOS.get(i).getId();
             long memberId= checkFeedDTOS.get(i).getMemberId();
             checkFeedDTOS.get(i).setLike(checkLikeService.numberOfLike(feedId));
-            checkFeedDTOS.get(i).setWriter(checkMemberService.findMemberNameByMemberId(memberId));
+            FindMemberDTO writer =checkMemberService.findById(memberId);
+            checkFeedDTOS.get(i).setWriter(writer.getName());
+            checkFeedDTOS.get(i).setProfileImage(writer.getProfileImage());
         }
     }
 }

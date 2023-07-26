@@ -74,6 +74,7 @@ public class QueryFeedController {
         Map<String, Long> parameter = new HashMap<>();
         parameter.put("memberId", memberId);//current user Id
         parameter.put("feedId",feedId);//feed Id
+
         QueryFeed queryFeed = findFeedService.findFeedById(feedId);
         info.put("feed", queryFeed);//feed info
         info.put("memberId", memberId);//current user iD
@@ -82,8 +83,8 @@ public class QueryFeedController {
         info.put("NumberOfLike",likeService.numberOfLikes(feedId));//number of like
         //작성자확인
         long feedMemberId = findFeedService.findFeedMemberId(feedId);
-        String feedMemberName = queryFeedService.feedWriter(feedMemberId);
-        info.put("feedMemberName",feedMemberName);//feed writer name
+        FindMemberDTO writer = queryFeedService.findMemberById(feedMemberId);
+        info.put("feedWriter",writer);//feed writer name
         info.put("whetherWriter", queryFeedService.isWriter(memberId,feedMemberId));//whether writer
         return info;
     }

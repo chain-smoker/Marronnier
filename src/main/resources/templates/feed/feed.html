@@ -37,7 +37,7 @@
     <script>
         function onClick(arg) {
             id = arg.children[0].children[0].attributes[0].nodeValue;
-            console.log();
+
             $.ajax({
                 url: "/feed/" + id, // (Required) 요청이 전송될 URL 주소
                 type: "GET", // (default: ‘GET’) http 요청 방식
@@ -55,14 +55,13 @@
                     }
                     let whetherWriter = data.whetherWriter
                     if (whetherWriter) {
-                        //$('#updateDelete')[0].style.display = "inline-block"
                     } else {
                         $('#updateDelete')[0].style.display = "none"
 
                     }
-                    console.log(data.feedMemberName);
                     document.getElementsByClassName("feedContent")[0].textContent = data.feed.content;
-                    document.getElementsByClassName("feedWriter")[0].textContent = data.feedMemberName;
+                    document.getElementsByClassName("feedWriter")[0].textContent = data.feedWriter.name;
+                    document.getElementsByClassName("writerProfile")[0].src=data.feedWriter.profileImage;
                     document.getElementsByClassName("cocktailName")[0].textContent = data.feed.cocktailId;
                     document.getElementsByClassName("NumberOfLike")[0].textContent = data.NumberOfLike;
                     document.getElementsByClassName("like")[0].value = data.feedId;
@@ -233,9 +232,8 @@
 
 <!--modal header start-->
             <div class="modal-header border-0" style="background-color: #1F2122">
-                <h1 class="modal-title fs-5" id="feedWriter"><i class="bi bi-person-square"
-                                                                style="color: cornflowerblue "></i><span
-                        class="feedWriter" style="margin-left: 5px"></span></h1>
+                <span><img style="border-radius: 50%; height: 30px;width: 30px" class="writerProfile" src="">
+                        <span class="feedWriter" style="margin-left: 5px; color: white;font-size: 20px;margin-top: 5px"></span></span>
                 <a type="button" class="active" data-bs-dismiss="modal">확인</a>
             </div>
             <!--modal header end-->
@@ -276,14 +274,15 @@
 
             <!--modal footer start-->
 
-            <div class="modal-footer border-0" style="background-color: #1F2122;">
-
+            <div id="updateDelete" class="modal-footer border-0" style="background-color: #1F2122;">
+<!--                <div class="updateDelete">-->
                             <form class="deleteFeed" method="post">
                                 <button type="submit">삭제</button>
                             </form>
                             <form class="updateFeed" method="get">
                                 <button>수정</button>
                             </form>
+<!--                </div>-->
             </div>
 
             <!--modal footer end-->
