@@ -49,18 +49,16 @@ public class QueryFeedController {
         return "feed/feed";
     }
 
-    @GetMapping("/write")
-    public String moveToFeedWrite(Authentication authentication, Model model) {
+    @GetMapping("/write/{cocktailRecipeId}")
+    public String moveToFeedWrite(Authentication authentication, Model model,@PathVariable(name = "cocktailRecipeId") long cocktailId) {
         SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
-        String memberName = sessionUser.getName();
-        long memberId = sessionUser.getId();
         FindMemberDTO member = queryFeedService.findMemberById(sessionUser.getId());
         boolean memberIsAuthenticated = authentication.isAuthenticated();
-
+        String cocktailName = queryFeedService.findCocktailNameById(cocktailId);
         model.addAttribute("member",member);
         model.addAttribute("memberIsAuthenticated", memberIsAuthenticated);
-        model.addAttribute("memberName", memberName);
-        model.addAttribute("memberId", memberId);
+        model.addAttribute("cocktailName",cocktailName);
+        model.addAttribute("cocktailId",cocktailId);
         return "feed/write";
     }
 
@@ -76,6 +74,7 @@ public class QueryFeedController {
         parameter.put("feedId",feedId);//feed Id
 
         QueryFeed queryFeed = findFeedService.findFeedById(feedId);
+        info.put("cocktailName", queryFeedService.findCocktailNameById(queryFeed.getCocktailId()));
         info.put("feed", queryFeed);//feed info
         info.put("memberId", memberId);//current user iD
         info.put("feedId",feedId);//feed Id
