@@ -7,6 +7,7 @@ import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.EnumTyp
 import java.time.LocalDate;
 
 import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.EnumType.Role;
+import com.chainsmoker.marronnier.member.command.domain.aggregate.vo.BirthDateVO;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,8 +40,8 @@ public class Member extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private GenderEnum gender;
 
-    @Column(name = "birth_date")
-    private LocalDate birthDate;
+    @Embedded
+    private BirthDateVO birthDate;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -51,7 +52,7 @@ public class Member extends BaseTimeEntity {
     private Role role;
 
 
-    public Member(String name, Long uid, String address, GenderEnum gender, LocalDate birthDate, PlatformEnum platform, String job) {
+    public Member(String name, Long uid, String address, GenderEnum gender, BirthDateVO birthDate, PlatformEnum platform, String job) {
         this.name = name;
         this.UID = uid;
         this.address = address;
@@ -86,7 +87,7 @@ public class Member extends BaseTimeEntity {
         this.gender = gender;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
+    public void setBirthDate(BirthDateVO birthDate) {
         this.birthDate = birthDate;
     }
 

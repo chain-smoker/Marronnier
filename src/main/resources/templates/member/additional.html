@@ -159,5 +159,14 @@
                 }).open();
         }
     </script>
+
+    <script th:inline="javascript">
+        window.onload = function () {
+            let exceptionMessage = [[${ errorMessage }]];
+            if(exceptionMessage !== null) {
+                alert(exceptionMessage);
+            }
+        }
+    </script>
 </body>
 </html>
