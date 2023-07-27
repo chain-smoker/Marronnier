@@ -4,7 +4,7 @@ import com.chainsmoker.marronnier.feed.query.application.dto.CheckFeedDTO;
 
 import java.util.List;
 
-public interface RequestMemberLikedFeed {
+public interface RequestMemberWroteFeed {
 
-    List<CheckFeedDTO> findLikedFeed(long memberId);
+    List<CheckFeedDTO> findWroteFeed(long memberId);
 }
