@@ -12,6 +12,13 @@
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 
     <!-- Additional CSS Files -->
@@ -21,6 +28,15 @@
     <link rel="stylesheet" href="/css/animate.css">
     <link rel="stylesheet" href="/css/custom.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="/js/jquery/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/isotope.min.js"></script>
+    <script src="/js/owl-carousel.js"></script>
+    <script src="/js/tabs.js"></script>
+    <script src="/js/popup.js"></script>
+    <script src="/js/custom.js"></script>
+    <script src="/js/jquery/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
     <!--
 
     TemplateMo 579 Cyborg Gaming
@@ -134,20 +150,208 @@
                         </div>
                     </div>
                 <!-- ***** Banner End ***** -->
-
             </div>
         </div>
+    </div>
+        <div class="row justify-content-center" style="margin-top: 20px;">
+            <div class="col-6">
+                <!-- ***** Tab Start ***** -->
+                <ul class="nav nav-pills nav-fill">
+                    <th:block th:if="${feedCategory == 'wrote'}">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/member/profile?feed=wrote">내가 쓴 피드</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/member/profile?feed=like">좋아요한 피드</a>
+                        </li>
+                    </th:block>
+                    <th:block th:if="${feedCategory == 'like'}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/member/profile?feed=wrote">내가 쓴 피드</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/member/profile?feed=like">좋아요한 피드</a>
+                        </li>
+                    </th:block>
+                </ul>
+                <!-- ***** Tab End ***** -->
+            </div>
+            <hr class="my-2" style="color: whitesmoke">
+        </div>
+        <!-- ***** Feed Start ***** -->
+        <div class="most-popular" style="margin-top: 20px; padding-top: 10px;">
+            <div class="row">
+                <div data-bs-toggle="modal" data-bs-target="#exampleModal"
+                     th:each="feed:${feedList}" class="col-lg-4 col-sm-6" onclick="onClick(this)">
+                    <div class="item">
+                        <img th:value="${feed.getId()}" th:src="${member.getProfileImage()}" alt="">
+                        <h4 th:text="@{'# '+${feed.getWriter()}}"></h4><br>
+                        <h4><span th:text="${feed.getCocktailName()}"></span></h4>
+                        <ul>
+                            <li ><i style="display: inline" class="fa fa-heart" ></i> <a th:text="@{' '+${feed.getLike()}}"></a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ***** Feed End ***** -->
     </div>
 </div>
 
         <!-- ***** Banner End ***** -->
 
-<script src="/js/jquery/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-<script src="/js/isotope.min.js"></script>
-<script src="/js/owl-carousel.js"></script>
-<script src="/js/tabs.js"></script>
-<script src="/js/popup.js"></script>
-<script src="/js/custom.js"></script>
+
+<!-- Modal -->
+<div class="modal fade border-0" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+
+
+            <!--modal header start-->
+            <div class="modal-header border-0" style="background-color: #1F2122">
+                <span><img style="border-radius: 50%; height: 30px;width: 30px" class="writerProfile" src="">
+                        <span class="feedWriter" style="margin-left: 5px; color: white;font-size: 20px;margin-top: 5px"></span></span>
+                <a type="button" class="active" data-bs-dismiss="modal">확인</a>
+            </div>
+            <!--modal header end-->
+
+
+            <!--modal body start-->
+
+            <div class="modal-body border-0" style="background-color: #27292A">
+                <svg class="bd-placeholder-img rounded mx-auto d-block" width="250" height="250"
+                     xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 200x200"
+                     preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#868e96"></rect>
+                    <text x="50%" y="50%" fill="#dee2e6" dy=".3em">200x200</text>
+                </svg>
+                <div class="d-flex justify-content-center">
+                    <p class="cocktailName" style="color: white;">술이름</p>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <p class="feedContent" style="color: whitesmoke"></p>
+                </div>
+
+                <div style="margin-top: 20px" class="d-flex justify-content-center">
+                    <div class="no1">
+                        <button style="background-color: transparent;border: none " class="like" onclick=pushLike(this)><i class="bi bi-emoji-heart-eyes-fill" style="font-size: 1.5rem;color: #ADB5BD"></i></button>
+                    </div>
+                    <div class="no2">
+                        <button  style="background-color: transparent;border: none " class="hate" onclick=deleteLike(this)><i class="bi bi-emoji-heart-eyes-fill" style="font-size: 1.5rem; color: #EC6090"></i>
+                        </button>
+                    </div>
+                </div>
+                <div style="margin-top: -8px; margin-bottom: -15px" class="d-flex justify-content-center">
+                    <p style="font-size: 12px; color: white" class="NumberOfLike"></p>
+                </div>
+
+
+            </div>
+            <!--modal body end-->
+
+            <!--modal footer start-->
+
+            <div id="updateDelete" class="modal-footer border-0" style="background-color: #1F2122;">
+                <!--                <div class="updateDelete">-->
+                <form class="deleteFeed" method="post">
+                    <button type="submit">삭제</button>
+                </form>
+                <form class="updateFeed" method="get">
+                    <button>수정</button>
+                </form>
+                <!--                </div>-->
+            </div>
+
+            <!--modal footer end-->
+
+        </div>
+    </div>
+</div>
+<!--modal end-->
+
+<script>
+    function onClick(arg) {
+        id = arg.children[0].children[0].attributes[0].nodeValue;
+
+        $.ajax({
+            url: "/feed/" + id, // (Required) 요청이 전송될 URL 주소
+            type: "GET", // (default: ‘GET’) http 요청 방식
+            data: {
+                feedId: id
+            },
+            success: function (data, status, xhr) {
+                let whetherLike = data.whetherLike;
+                if (!whetherLike) {
+                    $('.no1')[0].style.display = "inline-block";
+                    $('.no2')[0].style.display = "none";
+                } else {
+                    $('.no1')[0].style.display = "none";
+                    $('.no2')[0].style.display = "inline-block";
+                }
+                let whetherWriter = data.whetherWriter
+                if (whetherWriter) {
+                } else {
+                    $('#updateDelete')[0].style.display = "none"
+
+                }
+                document.getElementsByClassName("feedContent")[0].textContent = data.feed.content;
+                document.getElementsByClassName("feedWriter")[0].textContent = data.feedWriter.name;
+                document.getElementsByClassName("writerProfile")[0].src=data.feedWriter.profileImage;
+                document.getElementsByClassName("cocktailName")[0].textContent = data.cocktailName;
+                document.getElementsByClassName("NumberOfLike")[0].textContent = data.NumberOfLike;
+                document.getElementsByClassName("like")[0].value = data.feedId;
+                document.getElementsByClassName("hate")[0].value = data.feedId;
+                document.getElementsByClassName("deleteFeed")[0].action = "/feed/delete/" + id;
+                document.getElementsByClassName("updateFeed")[0].action = "/feed/update/" + id;
+
+            },
+            error: function (xhr, status, error) {
+                // 응답을 받지 못하거나 정상적인 응답이지만 데이터 형식을 확인할 수 없는 경우
+            },
+
+        });
+    }
+
+    function pushLike(arg) {
+        id = arg.value
+        $.ajax({
+            url: "/like", // (Required) 요청이 전송될 URL 주소
+            type: "POST", // (default: ‘GET’) http 요청 방식
+            data: {
+                feedId: id
+            },
+            success: function (data, status, xhr) {
+
+                document.getElementsByClassName("no1")[0].style.display = "none";
+                document.getElementsByClassName("no2")[0].style.display = "inline-block";
+                document.getElementsByClassName("NumberOfLike")[0].textContent = data.numberOfLike;
+            },
+            error: function (xhr, status, error) {
+                // 응답을 받지 못하거나 정상적인 응답이지만 데이터 형식을 확인할 수 없는 경우
+            },
+
+        });
+    }
+
+    function deleteLike(arg) {
+        id = arg.value
+        $.ajax({
+            url: "/like/cancel", // (Required) 요청이 전송될 URL 주소
+            type: "POST", // (default: ‘GET’) http 요청 방식
+            data: {
+                feedId: id
+            },
+            success: function (data, status, xhr) {
+                document.getElementsByClassName("no1")[0].style.display = "inline-block";
+                document.getElementsByClassName("no2")[0].style.display = "none";
+                document.getElementsByClassName("NumberOfLike")[0].textContent = data.numberOfLike;
+            },
+            error: function (xhr, status, error) {
+            },
+
+        });
+    }
+
+</script>
 </body>
 </html>

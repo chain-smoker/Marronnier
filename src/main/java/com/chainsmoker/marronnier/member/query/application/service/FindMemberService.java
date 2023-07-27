@@ -1,7 +1,7 @@
 package com.chainsmoker.marronnier.member.query.application.service;
 
 import com.chainsmoker.marronnier.member.query.application.dto.FindMemberDTO;
-import com.chainsmoker.marronnier.member.query.domain.entity.QueryMember;
+import com.chainsmoker.marronnier.member.query.domain.entity.aggregate.QueryMember;
 import com.chainsmoker.marronnier.member.query.domain.repository.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

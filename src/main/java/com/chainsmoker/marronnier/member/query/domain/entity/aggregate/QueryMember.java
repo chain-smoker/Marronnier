@@ -1,4 +1,4 @@
-package com.chainsmoker.marronnier.member.query.domain.entity;
+package com.chainsmoker.marronnier.member.query.domain.entity.aggregate;
 
 import com.chainsmoker.marronnier.common.entity.BaseTimeEntity;
 import com.chainsmoker.marronnier.member.command.domain.aggregate.entity.EnumType.GenderEnum;
