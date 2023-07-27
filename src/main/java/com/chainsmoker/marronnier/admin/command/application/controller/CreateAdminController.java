@@ -8,11 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 @Controller
 @RequestMapping("/admin")
 public class CreateAdminController {
