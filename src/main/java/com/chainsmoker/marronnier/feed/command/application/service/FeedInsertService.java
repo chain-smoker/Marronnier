@@ -17,17 +17,17 @@ public class FeedInsertService {
         this.feedReposiroty = feedReposiroty;
     }
 
-    public void saveFeed(CreateFeedDTO feedWriteDTO) {
+    public long saveFeed(CreateFeedDTO feedWriteDTO) {
         MemberVO memberId = MemberVO.builder()
                 .memberId(feedWriteDTO.getMemberId()).build();
         CocktailRecipeVO cocktailRecipeVO = CocktailRecipeVO.builder()
                 .cocktailId(feedWriteDTO.getCocktailId()).build();
 
-        feedReposiroty.save(Feed.builder()
+        return feedReposiroty.save(Feed.builder()
                 .content(feedWriteDTO.getContent())
                 .memberId(memberId)
                 .cocktailId(cocktailRecipeVO)
                 .build()
-        );
+        ).getId();
     }
 }

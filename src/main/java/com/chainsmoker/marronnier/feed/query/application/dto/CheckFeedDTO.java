@@ -19,6 +19,7 @@ public class CheckFeedDTO {
     private int like;
     private String profileImage;
     private String cocktailName;
+    private String photoRoot;
 
     public CheckFeedDTO(QueryFeed feed){
         this.Id= feed.getId();
@@ -41,5 +42,9 @@ public class CheckFeedDTO {
 
     public void setCocktailId(Long cocktailId) {
         this.cocktailId = cocktailId;
+    }
+
+    public void setPhotoRoot(String photoRoot) {
+        this.photoRoot = photoRoot;
     }
 }
