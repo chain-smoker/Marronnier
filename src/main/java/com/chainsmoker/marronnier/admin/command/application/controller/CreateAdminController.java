@@ -37,7 +37,7 @@ public class CreateAdminController {
         } catch (DataIntegrityViolationException exception) {
             String reasonValue = exception.getCause().getCause().getLocalizedMessage().split(" ")[2].replaceAll("'", "");
             String reasonKey = reasonValue.equals(createAdminDTO.getLoginId()) ? "관리자 아이디" : reasonValue.equals(createAdminDTO.getName()) ? "관리자 이름" : "";
-            String errorMessage = !reasonKey.equals("") ? "이미 존재하는 " + reasonKey + " 입니다." : "회원가입 중 에러가 발생하였습니다.";
+            String errorMessage = !reasonKey.equals("") ? "이미 존재하는 " + reasonKey + " 입니다." : "관리자 회원가입 중 에러가 발생하였습니다.";
             rttr.addFlashAttribute("errorMessage", errorMessage);
             return "redirect:/admin/regist";
         }
