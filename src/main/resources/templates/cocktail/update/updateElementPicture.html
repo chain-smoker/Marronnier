@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>재료 사진 저장 페이지입니다.</h1>
+<form action="/cocktail/update/element" method="post" enctype="multipart/form-data">
+    <input type="file" name="photo"/>
+    <input type="text" th:value="${elementId}" name="originId" hidden="hidden"/>
+    <input type="hidden" value="ELEMENT" name="category"/>
+    <input type="submit"/>
+</form>
+</body>
+</html>
