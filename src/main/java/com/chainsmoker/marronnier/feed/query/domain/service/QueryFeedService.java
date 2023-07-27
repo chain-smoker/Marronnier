@@ -4,6 +4,8 @@ import com.chainsmoker.marronnier.feed.query.application.dto.CheckFeedDTO;
 import com.chainsmoker.marronnier.feed.query.domain.entity.QueryFeed;
 import com.chainsmoker.marronnier.feed.query.infra.repository.FeedMapper;
 import com.chainsmoker.marronnier.member.query.application.dto.FindMemberDTO;
+import com.chainsmoker.marronnier.photo.command.domain.aggregate.entity.EnumType.PhotoCategory;
+import com.chainsmoker.marronnier.photo.query.application.dto.FindPhotoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +18,14 @@ public class QueryFeedService {
     private final CheckLikeService checkLikeService;
     private final CheckCocktatilService checkCocktatilService;
     private  final FeedMapper feedMapper;
+    private final CheckPhotoService checkPhotoService;
     @Autowired
-    public QueryFeedService(CheckMemberService checkMemberService, CheckLikeService checkLikeService, CheckCocktatilService checkCocktatilService,  FeedMapper feedMapper) {
+    public QueryFeedService(CheckMemberService checkMemberService, CheckLikeService checkLikeService, CheckCocktatilService checkCocktatilService, FeedMapper feedMapper, CheckPhotoService checkPhotoService) {
         this.checkMemberService = checkMemberService;
         this.checkLikeService = checkLikeService;
         this.checkCocktatilService = checkCocktatilService;
         this.feedMapper = feedMapper;
+        this.checkPhotoService = checkPhotoService;
     }
 
     public List<CheckFeedDTO> saveInfo(List<QueryFeed> queryFeeds) {
@@ -54,8 +58,28 @@ public class QueryFeedService {
             checkFeedDTOS.get(i).setWriter(writer.getName());
             checkFeedDTOS.get(i).setProfileImage(writer.getProfileImage());
             checkFeedDTOS.get(i).setCocktailName(findCocktailNameById(cocktailId));
+            List<FindPhotoDTO> photo = checkPhotoService.findPhotoByIdAndCategory(feedId, PhotoCategory.valueOf("FEED"));
+            System.out.println(photo.size());
+            if(photo.size()>0){
+                checkFeedDTOS.get(i).setPhotoRoot(photo.get(0).getPhotoRoot());
+            }else{
+                checkFeedDTOS.get(i).setPhotoRoot("https://picsum.photos/250/250");
+            }
         }
     }
+
+    public void addDetails(CheckFeedDTO checkFeedDTO) {
+            long feedId= checkFeedDTO.getId();
+            long memberId= checkFeedDTO.getMemberId();
+            long cocktailId = checkFeedDTO.getCocktailId();
+            checkFeedDTO.setLike(checkLikeService.numberOfLike(feedId));
+            FindMemberDTO writer =checkMemberService.findById(memberId);
+            checkFeedDTO.setWriter(writer.getName());
+            checkFeedDTO.setProfileImage(writer.getProfileImage());
+            checkFeedDTO.setCocktailName(findCocktailNameById(cocktailId));
+    }
+
+
     public String findCocktailNameById(long cocktailId){
         return checkCocktatilService.findByCocktailId(cocktailId);
     }

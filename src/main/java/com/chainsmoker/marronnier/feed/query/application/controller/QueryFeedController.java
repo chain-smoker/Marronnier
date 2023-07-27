@@ -7,6 +7,8 @@ import com.chainsmoker.marronnier.feed.query.domain.entity.QueryFeed;
 import com.chainsmoker.marronnier.feed.query.domain.service.LikeService;
 import com.chainsmoker.marronnier.feed.query.domain.service.QueryFeedService;
 import com.chainsmoker.marronnier.member.query.application.dto.FindMemberDTO;
+import com.chainsmoker.marronnier.photo.command.domain.aggregate.entity.EnumType.PhotoCategory;
+import com.chainsmoker.marronnier.photo.query.application.dto.FindPhotoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -43,6 +45,7 @@ public class QueryFeedController {
         List<CheckFeedDTO> checkFeedDTO = findFeedService.findAllFeeds();
         SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         FindMemberDTO member = queryFeedService.findMemberById(sessionUser.getId());
+        queryFeedService.addDetails(checkFeedDTO);
         model.addAttribute("feeds", checkFeedDTO);
         model.addAttribute("memberIsAuthenticated", memberIsAuthenticated);
         model.addAttribute("member",member);
@@ -73,13 +76,22 @@ public class QueryFeedController {
         parameter.put("memberId", memberId);//current user Id
         parameter.put("feedId",feedId);//feed Id
 
-        QueryFeed queryFeed = findFeedService.findFeedById(feedId);
-        info.put("cocktailName", queryFeedService.findCocktailNameById(queryFeed.getCocktailId()));
-        info.put("feed", queryFeed);//feed info
+        CheckFeedDTO checkFeedDTO =  new CheckFeedDTO(findFeedService.findFeedById(feedId));
+        queryFeedService.addDetails(checkFeedDTO);
+        info.put("cocktailName", checkFeedDTO.getCocktailName());
+        info.put("feed", checkFeedDTO);//feed info
         info.put("memberId", memberId);//current user iD
         info.put("feedId",feedId);//feed Id
         info.put("whetherLike",likeService.checkLike(parameter));//whether like
         info.put("NumberOfLike",likeService.numberOfLikes(feedId));//number of like
+
+        List<FindPhotoDTO> photoDTOS = findFeedService.findPhotoByIdAndCategory(feedId, PhotoCategory.valueOf("FEED"));
+        if(photoDTOS.size()>0){
+            info.put("photo",photoDTOS.get(0).getPhotoRoot());
+        }
+        else{
+            info.put("photo","https://picsum.photos/250/250");
+        }
         //작성자확인
         long feedMemberId = findFeedService.findFeedMemberId(feedId);
         FindMemberDTO writer = queryFeedService.findMemberById(feedMemberId);

@@ -34,6 +34,23 @@
     <script src="/js/popup.js"></script>
     <script src="/js/custom.js"></script>
 
+    <style>
+        .input-file-button{
+            padding: 6px 25px;
+            background-color:#E75E8D;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+        }
+
+        input[type=file]::file-selector-button {
+            padding: 6px 25px;
+            background-color:#E75E8D;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 <div id="js-preloader" class="js-preloader">
@@ -97,7 +114,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="page-content">
-                <form action="/feed" method="post">
+                <form action="/feed" method="post" enctype="multipart/form-data">
 
                     <div class="mb-3 row">
                         <label for="writer" style="color: #d3d6d8" class="col-sm-2 col-form-label fw-semibold">작성자</label>
@@ -115,15 +132,26 @@
                         </div>
                     </div>
 
-                    <input th:value="${member.getId()}" name="memberId" hidden="hidden"><br>
-                    <input th:value="${cocktailId}" name="cocktailId" hidden="hidden"><br>
 
                     <div class="mb-3 row">
-                        <label for="inputContent" class="col-sm-2 col-form-label text-white fw-semibold">내용</label>
+                        <label for="photo" style="color: #d3d6d8" class="form-label col-sm-2 col-form-label fw-semibold">사진</label>
+                        <div class="col-sm-10">
+                            <input type="file" style="color: #d3d6d8;background-color: transparent; " class="form-control-sm" id="photo"
+                                    name="photo">
+                        </div>
+                    </div>
+
+                    <input th:value="${member.getId()}" name="memberId" hidden="hidden"><br>
+                    <input th:value="${cocktailId}" name="cocktailId" hidden="hidden"><br>
+                    <input type="hidden" value="FEED" name="category">
+
+                    <div class="mb-3 row">
+                        <label for="inputContent" style="color: #d3d6d8;" class="col-sm-2 col-form-label fw-semibold">내용</label>
                         <div class="col-sm-10">
                             <textarea style="background-color: transparent ;color: #d3d6d8" class="form-control fw-semibold" id="inputContent" name="content"></textarea>
                         </div>
                     </div>
+
                     <button style="margin-top: 30px; margin-bottom: -20px" type="submit" class="customBtn">
                     <div class="main-border-button">
                         <a type="submit" class="customLink" >작성</a>

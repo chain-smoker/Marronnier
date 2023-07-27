@@ -61,13 +61,14 @@
                     }
                     document.getElementsByClassName("feedContent")[0].textContent = data.feed.content;
                     document.getElementsByClassName("feedWriter")[0].textContent = data.feedWriter.name;
-                    document.getElementsByClassName("writerProfile")[0].src=data.feedWriter.profileImage;
+                    document.getElementsByClassName("writerProfile")[0].src = data.feedWriter.profileImage;
                     document.getElementsByClassName("cocktailName")[0].textContent = data.cocktailName;
                     document.getElementsByClassName("NumberOfLike")[0].textContent = data.NumberOfLike;
                     document.getElementsByClassName("like")[0].value = data.feedId;
                     document.getElementsByClassName("hate")[0].value = data.feedId;
                     document.getElementsByClassName("deleteFeed")[0].action = "/feed/delete/" + id;
                     document.getElementsByClassName("updateFeed")[0].action = "/feed/update/" + id;
+                    document.getElementById("photo").src = data.photo;
 
                 },
                 error: function (xhr, status, error) {
@@ -196,11 +197,12 @@
                                 <div data-bs-toggle="modal" data-bs-target="#exampleModal"
                                      th:each="feed:${feeds}" class="col-lg-4 col-sm-6" onclick="onClick(this)">
                                     <div class="item">
-                                        <img th:value="${feed.getId()}" th:src="${member.getProfileImage()}" alt="">
+                                        <img th:value="${feed.getId()}" th:src="${feed.getPhotoRoot()}" alt="">
                                         <h4 th:text="@{'# '+${feed.getWriter()}}"></h4><br>
                                         <h4><span th:text="${feed.getCocktailName()}"></span></h4>
                                         <ul>
-                                            <li ><i style="display: inline" class="fa fa-heart" ></i> <a th:text="@{' '+${feed.getLike()}}"></a> </li>
+                                            <li><i style="display: inline" class="fa fa-heart"></i> <a
+                                                    th:text="@{' '+${feed.getLike()}}"></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -230,10 +232,11 @@
         <div class="modal-content">
 
 
-<!--modal header start-->
+            <!--modal header start-->
             <div class="modal-header border-0" style="background-color: #1F2122">
                 <span><img style="border-radius: 50%; height: 30px;width: 30px" class="writerProfile" src="">
-                        <span class="feedWriter" style="margin-left: 5px; color: white;font-size: 20px;margin-top: 5px"></span></span>
+                        <span class="feedWriter"
+                              style="margin-left: 5px; color: white;font-size: 20px;margin-top: 5px"></span></span>
                 <a type="button" class="active" data-bs-dismiss="modal">확인</a>
             </div>
             <!--modal header end-->
@@ -242,30 +245,34 @@
             <!--modal body start-->
 
             <div class="modal-body border-0" style="background-color: #27292A">
-                <svg class="bd-placeholder-img rounded mx-auto d-block" width="250" height="250"
-                     xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 200x200"
-                     preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
-                    <rect width="100%" height="100%" fill="#868e96"></rect>
-                    <text x="50%" y="50%" fill="#dee2e6" dy=".3em">200x200</text>
-                </svg>
+                <div class="d-flex justify-content-center">
+                    <div style="margin-left: auto;margin-right: auto; display: inline-block;" class="text-center">
+                        <img id="photo" class="rounded" width="250" height="250" src="">
+                    </div>
+                </div>
+
                 <div class="d-flex justify-content-center">
                     <p class="cocktailName" style="color: white;">술이름</p>
                 </div>
                 <div class="d-flex justify-content-center">
-                <p class="feedContent" style="color: whitesmoke"></p>
+                    <p class="feedContent" style="color: whitesmoke"></p>
                 </div>
 
                 <div style="margin-top: 20px" class="d-flex justify-content-center">
                     <div class="no1">
-                                <button style="background-color: transparent;border: none " class="like" onclick=pushLike(this)><i class="bi bi-emoji-heart-eyes-fill" style="font-size: 1.5rem;color: #ADB5BD"></i></button>
-                            </div>
+                        <button style="background-color: transparent;border: none " class="like" onclick=pushLike(this)>
+                            <i class="bi bi-emoji-heart-eyes-fill" style="font-size: 1.5rem;color: #ADB5BD"></i>
+                        </button>
+                    </div>
                     <div class="no2">
-                                <button  style="background-color: transparent;border: none " class="hate" onclick=deleteLike(this)><i class="bi bi-emoji-heart-eyes-fill" style="font-size: 1.5rem; color: #EC6090"></i>
-                                </button>
-                            </div>
+                        <button style="background-color: transparent;border: none " class="hate"
+                                onclick=deleteLike(this)><i class="bi bi-emoji-heart-eyes-fill"
+                                                            style="font-size: 1.5rem; color: #EC6090"></i>
+                        </button>
+                    </div>
                 </div>
                 <div style="margin-top: -8px; margin-bottom: -15px" class="d-flex justify-content-center">
-                <p style="font-size: 12px; color: white" class="NumberOfLike"></p>
+                    <p style="font-size: 12px; color: white" class="NumberOfLike"></p>
                 </div>
 
 
@@ -275,14 +282,14 @@
             <!--modal footer start-->
 
             <div id="updateDelete" class="modal-footer border-0" style="background-color: #1F2122;">
-<!--                <div class="updateDelete">-->
-                            <form class="deleteFeed" method="post">
-                                <button type="submit">삭제</button>
-                            </form>
-                            <form class="updateFeed" method="get">
-                                <button>수정</button>
-                            </form>
-<!--                </div>-->
+                <!--                <div class="updateDelete">-->
+                <form class="deleteFeed" method="post">
+                    <button type="submit">삭제</button>
+                </form>
+                <form class="updateFeed" method="get">
+                    <button>수정</button>
+                </form>
+                <!--                </div>-->
             </div>
 
             <!--modal footer end-->
