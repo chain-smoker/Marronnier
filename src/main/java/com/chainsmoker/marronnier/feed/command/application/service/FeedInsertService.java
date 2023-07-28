@@ -23,11 +23,7 @@ public class FeedInsertService {
         CocktailRecipeVO cocktailRecipeVO = CocktailRecipeVO.builder()
                 .cocktailId(feedWriteDTO.getCocktailId()).build();
 
-        return feedReposiroty.save(Feed.builder()
-                .content(feedWriteDTO.getContent())
-                .memberId(memberId)
-                .cocktailId(cocktailRecipeVO)
-                .build()
-        ).getId();
+        return feedReposiroty.save(new Feed(memberId, cocktailRecipeVO,feedWriteDTO.getContent())).getId();
     }
 }
+

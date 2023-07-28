@@ -1,8 +1,10 @@
 package com.chainsmoker.marronnier.feed.query.domain.entity;
 
 import lombok.Getter;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "FEED_TB")
@@ -19,5 +21,8 @@ public class QueryFeed {
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private  String content;
+
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
     
 }

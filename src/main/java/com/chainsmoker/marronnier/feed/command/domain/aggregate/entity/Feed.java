@@ -7,8 +7,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity(name="Feed")
 @Table(name = "FEED_TB")
@@ -24,12 +26,16 @@ public class Feed {
     private CocktailRecipeVO cocktailId;
     @Column(nullable = false, columnDefinition = "TEXT")
     private  String content;
+    @CreatedDate
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
 
-    @Builder
+
     public Feed(MemberVO memberId, CocktailRecipeVO cocktailId, String content) {
         this.memberId = memberId;
         this.cocktailId = cocktailId;
         this.content = content;
+        this.createdDate =LocalDateTime.now();
     }
 
     public Feed(UpdateFeedDTO updateFeedDTO) {
