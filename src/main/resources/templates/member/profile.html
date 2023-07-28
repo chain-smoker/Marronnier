@@ -203,11 +203,12 @@
                 <div data-bs-toggle="modal" data-bs-target="#exampleModal"
                      th:each="feed:${feedList}" class="col-lg-4 col-sm-6" onclick="onClick(this)">
                     <div class="item">
-                        <img th:value="${feed.getId()}" th:src="${member.getProfileImage()}" alt="">
+                        <img th:value="${feed.getId()}" th:src="${feed.getPhotoRoot()}" alt="">
                         <h4 th:text="@{'# '+${feed.getWriter()}}"></h4><br>
                         <h4><span th:text="${feed.getCocktailName()}"></span></h4>
                         <ul>
-                            <li ><i style="display: inline" class="fa fa-heart" ></i> <a th:text="@{' '+${feed.getLike()}}"></a> </li>
+                            <li><i style="display: inline" class="fa fa-heart"></i> <a
+                                    th:text="@{' '+${feed.getLike()}}"></a></li>
                         </ul>
                     </div>
                 </div>
