@@ -15,4 +15,8 @@ public interface LikeRepository extends JpaRepository<Like, LikeVO> {
     @Modifying
     @Query(value = "delete from like_tb WHERE member_id = ?1 AND feed_id = ?2",nativeQuery = true)
     int deleteByLike(long memberId, long feedId);
+
+    @Modifying
+    @Query(value = "delete from like_tb WHERE feed_id = ?1",nativeQuery = true)
+    int deleteByfeedId(long feedId);
 }
