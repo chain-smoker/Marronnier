@@ -10,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class QueryFeedService {
@@ -66,6 +69,10 @@ public class QueryFeedService {
                 checkFeedDTOS.get(i).setPhotoRoot("https://picsum.photos/250/250");
             }
         }
+
+        Comparator<CheckFeedDTO> compareTime = (dto1,dto2)->dto2.getCreatedDate().compareTo(dto1.getCreatedDate());
+
+        Collections.sort(checkFeedDTOS,compareTime);
     }
 
     public void addDetails(CheckFeedDTO checkFeedDTO) {

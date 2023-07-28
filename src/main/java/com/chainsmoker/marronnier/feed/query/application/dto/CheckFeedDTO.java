@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+
 @Setter
 @NoArgsConstructor
 @ToString
@@ -20,12 +22,14 @@ public class CheckFeedDTO {
     private String profileImage;
     private String cocktailName;
     private String photoRoot;
+    private LocalDateTime createdDate;
 
     public CheckFeedDTO(QueryFeed feed){
         this.Id= feed.getId();
         this.memberId = feed.getMemberId();
         this.cocktailId = feed.getCocktailId() ;
         this.content = feed.getContent();
+        this.createdDate= feed.getCreatedDate();
     }
 
     public void setWriter(String writer) {

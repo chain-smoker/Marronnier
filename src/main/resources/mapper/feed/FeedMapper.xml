@@ -6,6 +6,7 @@
         <result property="memberId" column="member_id"/>
         <result property="cocktailId" column="cocktail_recipe_Id"/>
         <result property="content" column="content"/>
+        <result property="createdDate" column="created_date"/>
     </resultMap>
     <select id="findAllFeeds" resultMap="QueryFeedMap">
         SELECT *
