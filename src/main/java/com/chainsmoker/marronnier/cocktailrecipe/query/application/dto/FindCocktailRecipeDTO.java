@@ -48,6 +48,7 @@ public class FindCocktailRecipeDTO {
                 ", abv='" + abv + '\'' +
                 ", recipe='" + recipe + '\'' +
                 ", difficulty='" + difficulty + '\'' +
+                ", img='" + img + '\'' +
                 '}';
     }
 }
