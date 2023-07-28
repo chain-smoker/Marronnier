@@ -1,0 +1,68 @@
+<div th:fragment="addNavbar(memberIsAuthenticated, member)">
+
+    <!-- ***** Preloader Start ***** -->
+    <div id="js-preloader" class="js-preloader">
+        <div class="preloader-inner">
+            <span class="dot"></span>
+            <div class="dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="/" class="logo">
+                            <img src="/images/logo_white.png" alt="">
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Search End ***** -->
+                        <div class="search-input">
+                            <form id="search" action="#">
+                                <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword" onkeypress="handle" />
+                                <i class="fa fa-search"></i>
+                            </form>
+                        </div>
+                        <!-- ***** Search End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li><a href="/feed">Feed</a></li>
+                            <li><a href="/cocktail/find/cocktailrecipe">Cocktail</a></li>
+                            <li><a href="/basket">Basket</a></li>
+                            <span th:if="${memberIsAuthenticated}">
+                            <li class="nav-item dropdown">
+                                <a href="/member/profile" class="active nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <p style="display: inline" th:text="${member.getName()}">
+                                    </p>
+                                    <img th:src="${member.getProfileImage()}" alt="">
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                                    <li><p class="dropdown-item" onclick="location.href='/member/profile'">프로필</p></li>
+                                    <li><p class="dropdown-item" onclick="location.href='/apply/add'">요청글 쓰기</p></li>
+                                    <li><p class="dropdown-item" onclick="location.href='/logout'">로그아웃</p></li>
+                                </ul>
+                            </li>
+                        </span>
+                            <span th:if="!${memberIsAuthenticated}">
+                            <li><a href="/" class="active">로그인</a></li>
+                        </span>
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+</div>

@@ -1,109 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-    <title th:text="|${member.getName()}님 의 술바구니|"></title>
-
-    <!-- Bootstrap core CSS -->
-<!--    <link href="/css/bootstrap.min.css" rel="stylesheet">-->
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="/css/fontawesome.css">
-    <link rel="stylesheet" href="/css/templatemo-cyborg-gaming.css">
-    <link rel="stylesheet" href="/css/owl.css">
-    <link rel="stylesheet" href="/css/animate.css">
-    <link rel="stylesheet" href="/css/custom.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!--
-
-    TemplateMo 579 Cyborg Gaming
-
-    https://templatemo.com/tm-579-cyborg-gaming
-
-    -->
+<head th:replace="common/cssAndJs :: addCssAndJs(${member.getName()}+'님 의 술바구니')">
+    <title>메인 타이틀</title>
 </head>
 <body>
 
-<!-- ***** Preloader Start ***** -->
-<div id="js-preloader" class="js-preloader">
-    <div class="preloader-inner">
-        <span class="dot"></span>
-        <div class="dots">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
-</div>
-<!-- ***** Preloader End ***** -->
-
-<!-- ***** Header Area Start ***** -->
-<header class="header-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <nav class="main-nav">
-                    <!-- ***** Logo Start ***** -->
-                    <a href="/" class="logo">
-                        <img src="/images/logo_white.png" alt="">
-                    </a>
-                    <!-- ***** Logo End ***** -->
-                    <!-- ***** Search End ***** -->
-                    <div class="search-input">
-                        <form id="search" action="#">
-                            <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword" onkeypress="handle" />
-                            <i class="fa fa-search"></i>
-                        </form>
-                    </div>
-                    <!-- ***** Search End ***** -->
-                    <!-- ***** Menu Start ***** -->
-                    <ul class="nav">
-                        <li><a href="/feed">Feed</a></li>
-                        <li><a href="/cocktail/find/cocktailrecipe">Cocktail</a></li>
-                        <li><a href="/basket">Basket</a></li>
-                        <span th:if="${memberIsAuthenticated}">
-                            <li class="nav-item dropdown">
-                                <a href="/member/profile" class="active nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <p style="display: inline" th:text="${member.getName()}">
-                                    </p>
-                                    <img th:src="${member.getProfileImage()}" alt="">
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
-                                    <li><p class="dropdown-item" onclick="location.href='/member/profile'">프로필</p></li>
-                                    <li><p class="dropdown-item" onclick="location.href='/apply/add'">요청글 쓰기</p></li>
-                                    <li><p class="dropdown-item" onclick="location.href='/logout'">로그아웃</p></li>
-                                </ul>
-                            </li>
-                        </span>
-                        <span th:if="!${memberIsAuthenticated}">
-                            <li><a href="/" class="active">로그인</a></li>
-                        </span>
-                    </ul>
-                    <a class='menu-trigger'>
-                        <span>Menu</span>
-                    </a>
-                    <!-- ***** Menu End ***** -->
-                </nav>
-            </div>
-        </div>
-    </div>
-</header>
-<!-- ***** Header Area End ***** -->
+    <div th:replace="~{common/navbar :: addNavbar(${memberIsAuthenticated}, ${member})}"></div>
 
 
 <div class="container" style="margin-top: 30px">
@@ -139,64 +42,10 @@
                     </div>
             <!-- ***** Gaming Library End ***** -->
         </div>
-    </div>
-    <div class="row d-flex justify-content-center">
-        <!-- ****** Pagination Start ******-->
-        <div class="d-flex justify-content-center">
-            <!--표에 사용될 변수값 초기화 -->
-            <ul class="pagination"
-                th:with="start=${T(java.lang.Math).floor(basketPages.number/10)*10 + 1},
-                    last=(${start + 9 < basketPages.totalPages ? start + 9 : basketPages.totalPages})">
-                <th:block th:with="
-                firstAddr=@{/basket(page=1)},
-                prevAddr=@{/basket(page=${basketPages.number})},
-                nextAddr=@{/basket(page=${basketPages.number + 2})},
-                lastAddr=@{/basket(page=${basketPages.totalPages})}">
-                    <li>
-                        <a th:href="${firstAddr}" aria-label="First">
-                            <span aria-hidden="true">First</span>
-                        </a>
-                    </li>
-                    <!-- 이전 페이지로 가기 버튼 -->
-                    <li th:class="${basketPages.first} ? 'disabled'">
-                        <a th:href="${basketPages.first} ? '#' :${prevAddr}"
-                           aria-label="Previous">
-                            <span aria-hidden="true">&lt;</span>
-                        </a>
-                    </li>
-                    <!--1,2,3,4,.. 등 페이지-->
-                    <li th:each="page: ${#numbers.sequence(start, last)}"
-                        th:class="${page == basketPages.number + 1} ? 'active'">
-                        <a th:text="${page}" th:href="@{/basket(page=${page})}"></a>
-                    </li>
-                    <!--다음 페이지로 -->
-                    <li th:class="${basketPages.last} ? 'disabled'">
-                        <a th:href="${basketPages.last} ? '#' : ${nextAddr}"
-                           aria-label="Next">
-                            <span aria-hidden="true">&gt;</span>
-                        </a>
-                    </li>
-                    <!--맨 마지막 페이지로 이동 -->
-                    <li>
-                        <a th:href="${lastAddr}" aria-label="Last">
-                            <span aria-hidden="true">Last</span>
-                        </a>
-                    </li>
-                </th:block>
-            </ul>
-        </div>
-        <!-- ****** Pagination End ******-->
+        <div th:replace="~{common/pagination :: addPagination(${basketPages},'basket')}"></div>
     </div>
 </div>
 
 <!-- ***** Banner End ***** -->
-
-<script src="/js/jquery/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-<script src="/js/isotope.min.js"></script>
-<script src="/js/owl-carousel.js"></script>
-<script src="/js/tabs.js"></script>
-<script src="/js/popup.js"></script>
-<script src="/js/custom.js"></script>
 </body>
 </html>

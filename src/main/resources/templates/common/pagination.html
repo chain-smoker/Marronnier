@@ -1,0 +1,50 @@
+<div th:fragment="addPagination(pages,domain)">
+
+  <div class="row d-flex justify-content-center">
+    <!-- ****** Pagination Start ******-->
+    <nav aria-label="Page navigation" class="d-flex justify-content-center">
+      <!--표에 사용될 변수값 초기화 -->
+      <ul class="pagination"
+          th:with="start=${T(java.lang.Math).floor(pages.number/10)*10 + 1},
+                    last=(${start + 9 < pages.totalPages ? start + 9 : pages.totalPages})">
+        <th:block th:with="
+                firstAddr=@{/basket(page=1)},
+                prevAddr=@{/basket(page=${pages.number})},
+                nextAddr=@{/basket(page=${pages.number + 2})},
+                lastAddr=@{/basket(page=${pages.totalPages})}">
+          <li class="page-item">
+            <a class="page-link" th:href="${firstAddr}" aria-label="First">
+              <span aria-hidden="true">First</span>
+            </a>
+          </li>
+          <!-- 이전 페이지로 가기 버튼 -->
+          <li class="page-item" th:classappend="${pages.first} ? 'disabled'">
+            <a class="page-link" th:href="${pages.first} ? '#' :${prevAddr}"
+               aria-label="Previous">
+              <span aria-hidden="true">&lt;</span>
+            </a>
+          </li>
+          <!--1,2,3,4,.. 등 페이지-->
+          <li class="page-item" th:each="page: ${#numbers.sequence(start, last)}"
+              th:classappend="${page == pages.number + 1} ? 'active'">
+            <a class="page-link" th:text="${page}" th:href="@{/{domain}(domain=${domain}, page=${page})}"></a>
+          </li>
+          <!--다음 페이지로 -->
+          <li class="page-item" th:classappend="${pages.last} ? 'disabled'">
+            <a class="page-link" th:href="${pages.last} ? '#' : ${nextAddr}"
+               aria-label="Next">
+              <span aria-hidden="true">&gt;</span>
+            </a>
+          </li>
+          <!--맨 마지막 페이지로 이동 -->
+          <li class="page-item">
+            <a class="page-link" th:href="${lastAddr}" aria-label="Last">
+              <span aria-hidden="true">Last</span>
+            </a>
+          </li>
+        </th:block>
+      </ul>
+    </nav>
+    <!-- ****** Pagination End ******-->
+  </div>
+</div>
