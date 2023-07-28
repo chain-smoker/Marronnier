@@ -21,6 +21,7 @@ public class FindCocktailRecipeDTO {
     private String description;
     private String classification;
     private String abv;
+    private String recipe;
     private String difficulty;
 
     public static FindCocktailRecipeDTO entityToDTO(QueryCocktailRecipe queryCocktailRecipe){
@@ -30,6 +31,7 @@ public class FindCocktailRecipeDTO {
         recipeDTO.setDescription(queryCocktailRecipe.getDescription());
         recipeDTO.setClassification(queryCocktailRecipe.getClassification());
         recipeDTO.setAbv(queryCocktailRecipe.getAbv());
+        recipeDTO.setRecipe(queryCocktailRecipe.getRecipe());
         recipeDTO.setDifficulty(String.valueOf(queryCocktailRecipe.getDifficulty()));
         return recipeDTO;
     }
@@ -42,6 +44,7 @@ public class FindCocktailRecipeDTO {
                 ", description='" + description + '\'' +
                 ", classification='" + classification + '\'' +
                 ", abv='" + abv + '\'' +
+                ", recipe='" + recipe + '\'' +
                 ", difficulty='" + difficulty + '\'' +
                 '}';
     }

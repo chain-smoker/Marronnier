@@ -13,6 +13,7 @@ public class CocktailRecipeDTO {
     private String description;
     private String classification;
     private String abv;
+    private String recipe;
     private DifficultyEnum difficulty;
 
 }
