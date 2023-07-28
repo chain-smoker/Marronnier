@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chainsmoker.marronnier.cocktailrecipe.query.infra.repository.SearchCocktailRecipeMapper">
+    <resultMap id="QueryCocktailRecipeMap" type="com.chainsmoker.marronnier.cocktailrecipe.query.domain.entity.QueryCocktailRecipe">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="classification" column="classification"/>
+        <result property="abv" column="abv"/>
+        <result property="difficulty" column="difficulty"/>
+    </resultMap>
+    <select id="searchCocktailRecipe" resultMap="QueryCocktailRecipeMap" parameterType="string">
+        SELECT *
+        FROM COCKTAILRECIPE_TB
+        WHERE NAME LIKE concat ('%', #{searchWord}, '%')
+    </select>
+</mapper>

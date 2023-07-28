@@ -75,9 +75,9 @@
 <!-- ***** Header Area End ***** -->
 <!-- ***** Cocktail list start ***** -->
 <div class="live-stream">
-        <div class="heading-section" align="center">
-            <h4><em>Cocktail</em> 추천 결과 !!</h4>
-        </div>
+    <div class="heading-section" align="center">
+        <h4>Cocktail 추천 결과 !!</h4>
+    </div>
     <th:block th:if="${size >= 3}">
         <div class="col-lg-12">
             <div class="item" align="center" style="float: left; width: 33%;">
@@ -173,13 +173,13 @@
     <th:block th:if="${size==1}">
 
         <div class="col-lg-12">
-            <div class="item" align="center" >
+            <div class="item" align="center">
                 <div class="thumb">
                     <img th:src="${cocktails.get(0).getImg()}" style="width: 300px; height: 300px">
                 </div>
             </div>
 
-            <div class="description" align="center" >
+            <div class="description" align="center">
                 <h3 th:text="${cocktails.get(0).getName()}"/>
                 <form th:action="@{'/cocktail/find/elementbyrecipe/'+${cocktails.get(0).getId()}}" method="get">
                     <button type="submit" class="customBtn">
@@ -193,7 +193,9 @@
     </th:block>
 
     <th:block th:if="${size == 0}">
-       <h1 align="center">현재 조건으로 검색되는 칵테일은 없습니다ㅜㅜㅜㅜ</h1>
+        <div style="margin-top: 100px">
+            <h1 align="center">현재 조건으로 추천되는 칵테일은 없습니다.</h1>
+        </div>
     </th:block>
 </div>
 <!-- ***** Live Stream End ***** -->
