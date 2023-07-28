@@ -27,4 +27,9 @@ public class PushLikeService {
     public void cancelLike(LikeDTO likeDTO) {
         likeRepository.deleteByLike(likeDTO.getMemberId(),likeDTO.getFeedId());
     }
+
+    @Transactional
+    public void deleteLikes(long feedId){
+        likeRepository.deleteByfeedId(feedId);
+    }
 }

@@ -40,10 +40,9 @@ public class FeedController {
         SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         CreateFeedDTO feedWriteDTO = feedService.saveData(feedInfos,sessionUser);//웹에서 받은 데이터 dto에 저장
         System.out.println(photo);
-        feedInsertService.saveFeed(feedWriteDTO);//db에 등록
         if(photo!=null){
             feedPhotoService.savePhoto(feedInsertService.saveFeed(feedWriteDTO),photo, PhotoCategory.valueOf("FEED"));
-        }else{
+        }else {
             feedInsertService.saveFeed(feedWriteDTO);//db에 등록
             /*
             여기서 db에 저장된 사진을 갖다 넣는게 좋을지..
