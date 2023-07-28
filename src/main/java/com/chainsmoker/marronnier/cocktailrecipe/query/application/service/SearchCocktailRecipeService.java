@@ -2,7 +2,7 @@ package com.chainsmoker.marronnier.cocktailrecipe.query.application.service;
 
 import com.chainsmoker.marronnier.cocktailrecipe.query.application.dto.FindCocktailRecipeDTO;
 import com.chainsmoker.marronnier.cocktailrecipe.query.domain.entity.QueryCocktailRecipe;
-import com.chainsmoker.marronnier.cocktailrecipe.query.infra.repository.RecommandMapper;
+import com.chainsmoker.marronnier.cocktailrecipe.query.infra.repository.SearchCocktailRecipeMapper;
 import com.chainsmoker.marronnier.cocktailrecipe.query.infra.service.CocktailRecipePictureRequestService;
 import com.chainsmoker.marronnier.photo.command.domain.aggregate.entity.EnumType.PhotoCategory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,31 +10,31 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
-public class RecommandService {
+public class SearchCocktailRecipeService {
+    private final SearchCocktailRecipeMapper searchCocktailRecipeMapper;
 
-    private final RecommandMapper recommandMapper;
     private final CocktailRecipePictureRequestService pictureRequestService;
 
     @Autowired
-    public RecommandService(RecommandMapper recommandMapper, CocktailRecipePictureRequestService pictureRequestService){
-        this.recommandMapper=recommandMapper;
+    public SearchCocktailRecipeService(SearchCocktailRecipeMapper searchCocktailRecipeMapper,
+                                       CocktailRecipePictureRequestService pictureRequestService){
         this.pictureRequestService=pictureRequestService;
+        this.searchCocktailRecipeMapper=searchCocktailRecipeMapper;
     }
 
-    public List<FindCocktailRecipeDTO> recommandCocktail(Map<String, String> recommandInfo){
-        List<QueryCocktailRecipe> recipes=recommandMapper.findRecommandCocktail(recommandInfo);
+    public List<FindCocktailRecipeDTO> searchCocktailRecipe(String searchWord){
+        List<QueryCocktailRecipe> recipes=searchCocktailRecipeMapper.searchCocktailRecipe(searchWord);
         List<FindCocktailRecipeDTO> recipeDTOS=new ArrayList<>();
         for (QueryCocktailRecipe recipe:recipes){
             recipeDTOS.add(FindCocktailRecipeDTO.entityToDTO(recipe));
         }
-        // 사진 등록
-        int recipeSize= recipeDTOS.size();
+        int recipeSize=recipeDTOS.size();
         for (int i=0; i<recipeSize; i++){
             recipeDTOS.get(i).setImg(
-                    pictureRequestService.findPictureByCategory(recipeDTOS.get(i).getId(), PhotoCategory.COCKTAIL_RECIPE).get(0).getPhotoRoot());
+                    pictureRequestService.findPictureByCategory(recipeDTOS.get(i).getId(), PhotoCategory.COCKTAIL_RECIPE).get(0).getPhotoRoot()
+            );
         }
         return recipeDTOS;
     }
