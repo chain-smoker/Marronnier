@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 @SpringBootTest
-@Transactional
 public class CocktailRecipeTests {
 
     @Autowired
@@ -45,6 +44,7 @@ public class CocktailRecipeTests {
     @DisplayName("cocktail 이 정상적으로 등록되는지 테스트")
     @ParameterizedTest(name = "cocktail 이 정상적으로 등록되는지 테스트")
     @MethodSource("getCocktailRecipe")
+    @Transactional
     void testRegistCocktailRecipeTest(String name, String description, String classification, String abv, String recipe, DifficultyEnum difficulty){
         RegistCocktailRecipeDTO recipeDTO = new RegistCocktailRecipeDTO();
         recipeDTO.setName(name);
@@ -63,6 +63,7 @@ public class CocktailRecipeTests {
     @DisplayName("cocktail 조회 시 recipe 컬럼의 내용이 제대로 가져와지는지 테스트")
     @ParameterizedTest(name = "cocktail 조회 시 recipe 컬럼의 내용이 제대로 가져와지는지 테스트")
     @MethodSource("getCocktailRecipe")
+    @Transactional
     void testGetRecipeByCocktailRecipeIdTests(String name, String description, String classification, String abv, String recipe, DifficultyEnum difficulty){
         RegistCocktailRecipeDTO recipeDTO = new RegistCocktailRecipeDTO();
         recipeDTO.setName(name);
