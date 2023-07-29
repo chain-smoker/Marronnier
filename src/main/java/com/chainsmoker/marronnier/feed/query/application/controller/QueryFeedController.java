@@ -9,6 +9,8 @@ import com.chainsmoker.marronnier.feed.query.domain.service.QueryFeedService;
 import com.chainsmoker.marronnier.member.query.application.dto.FindMemberDTO;
 import com.chainsmoker.marronnier.photo.command.domain.aggregate.entity.EnumType.PhotoCategory;
 import com.chainsmoker.marronnier.photo.query.application.dto.FindPhotoDTO;
+import org.checkerframework.checker.units.qual.C;
+import org.hibernate.annotations.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -104,7 +106,9 @@ public class QueryFeedController {
     public String moveToFeedUpdate(Authentication authentication, @PathVariable Long feedId, Model model) {
         SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         QueryFeed queryFeed = findFeedService.findFeedById(feedId);
-        model.addAttribute("feed", queryFeed);
+        CheckFeedDTO checkFeedDTO= new CheckFeedDTO(queryFeed);
+        queryFeedService.addDetails(checkFeedDTO);
+        model.addAttribute("feed", checkFeedDTO);
         FindMemberDTO member = queryFeedService.findMemberById(sessionUser.getId());
         boolean memberIsAuthenticated = authentication.isAuthenticated();
         model.addAttribute("member",member);
