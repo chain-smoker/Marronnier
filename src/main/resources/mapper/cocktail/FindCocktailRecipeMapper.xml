@@ -7,29 +7,30 @@
         <result property="description" column="description"/>
         <result property="classification" column="classification"/>
         <result property="abv" column="abv"/>
+        <result property="recipe" column="recipe"/>
         <result property="difficulty" column="difficulty"/>
     </resultMap>
     <select id="findAll" resultMap="QueryCocktailRecipeMap">
         SELECT
-                ID
-              , NAME
-              , DESCRIPTION
-              , CLASSIFICATION
-              , ABV
-              , RECIPE
-              , DIFFICULTY
+            id
+             , abv
+             , classification
+             , description
+             , difficulty
+             , name
+             , recipe
         FROM
             COCKTAILRECIPE_TB
     </select>
-    <select id="findById" resultMap="QueryCocktailRecipeMap" parameterType="long">
+    <select id="findById" resultMap="QueryCocktailRecipeMap">
         SELECT
-               ID
-             , NAME
-             , DESCRIPTION
-             , CLASSIFICATION
-             , ABV
-             , RECIPE
-             , DIFFICULTY
+             id
+           , abv
+           , classification
+           , description
+           , difficulty
+           , name
+           , recipe
         FROM COCKTAILRECIPE_TB WHERE id=#{cocktailrecipeId}
 
     </select>

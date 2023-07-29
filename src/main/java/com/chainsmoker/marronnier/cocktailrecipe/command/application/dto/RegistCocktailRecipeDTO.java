@@ -30,4 +30,17 @@ public class RegistCocktailRecipeDTO {
         recipeDTO.setDifficulty(cocktailRecipe.getDifficulty());
         return recipeDTO;
     }
+
+    @Override
+    public String toString() {
+        return "RegistCocktailRecipeDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", classification='" + classification + '\'' +
+                ", abv='" + abv + '\'' +
+                ", recipe='" + recipe + '\'' +
+                ", difficulty=" + difficulty +
+                '}';
+    }
 }

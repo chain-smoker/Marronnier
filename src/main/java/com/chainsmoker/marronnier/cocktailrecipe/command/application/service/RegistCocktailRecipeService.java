@@ -6,6 +6,7 @@ import com.chainsmoker.marronnier.cocktailrecipe.command.domain.aggregate.entity
 import com.chainsmoker.marronnier.cocktailrecipe.command.domain.repository.CocktailRecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class RegistCocktailRecipeService {
@@ -15,7 +16,7 @@ public class RegistCocktailRecipeService {
         this.cocktailRecipeRepository=cocktailRecipeRepository;
     }
 
-    public void regist(RegistCocktailRecipeDTO recipeDTO){
+    public CocktailRecipe regist(RegistCocktailRecipeDTO recipeDTO){
         CocktailRecipe cocktailRecipe =
                 new CocktailRecipe(recipeDTO.getName(),
                         recipeDTO.getDescription(),
@@ -24,6 +25,6 @@ public class RegistCocktailRecipeService {
                         recipeDTO.getRecipe(),
                         recipeDTO.getDifficulty()
                 );
-        cocktailRecipeRepository.save(cocktailRecipe);
+        return cocktailRecipeRepository.save(cocktailRecipe);
     }
 }

@@ -11,8 +11,10 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Table(name = "COCKTAILRECIPE_TB")
+@ToString
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class QueryCocktailRecipe {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
