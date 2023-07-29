@@ -52,6 +52,14 @@ jobs:
         run: echo "${{ secrets.APPLICATION_OAUTH }}" > ./src/main/resources/application-oauth.yml
         shell: bash
 
+      - name: make mybatis-config.xml
+        run:
+          touch ./src/main/resources/config/mybatis-config.xml
+        shell: bash
+      - name: deliver application-oauth.yml
+        run: echo "${{ secrets.MYBATIS_CONFIG }}" > ./src/main/resources/config/mybatis-config.xml
+        shell: bash
+
 
       - name: Add permission
         run: chmod +x gradlew
