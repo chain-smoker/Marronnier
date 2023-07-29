@@ -18,7 +18,7 @@ import java.nio.file.Path;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/photo/*")
+@RequestMapping("/photo")
 public class InsertPhotoController {
 
     private final InsertPhotoService insertPhotoService;
