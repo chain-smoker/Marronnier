@@ -52,7 +52,6 @@ jobs:
         run: echo "${{ secrets.APPLICATION_OAUTH }}" > ./src/main/resources/application-oauth.yml
         shell: bash
 
-
       - name: Add permission
         run: chmod +x gradlew
 
