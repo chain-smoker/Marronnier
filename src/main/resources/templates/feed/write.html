@@ -2,17 +2,18 @@
 <html lang="en">
 <head th:replace="common/cssAndJs :: addCssAndJs('피드 작성')">
     <title>메인 타이틀</title>
-    <style>
-        input[type=file]::file-selector-button {
-            padding: 6px 25px;
-            background-color:#E75E8D;
-            border-radius: 8px;
-            color: white;
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body>
+
+<style>
+    input[type=file]::file-selector-button {
+        padding: 6px 25px;
+        background-color:#E75E8D;
+        border-radius: 8px;
+        color: white;
+        cursor: pointer;
+    }
+</style>
 
 <div th:replace="~{common/navbar :: addNavbar(${memberIsAuthenticated}, ${member})}"></div>
 
@@ -41,7 +42,7 @@
 
 
                     <div class="mb-3 row">
-                        <label for="photo" style="color: #d3d6d8" class="form-label col-sm-2 col-form-label fw-semibold">사진</label>
+                        <label  for="photo" style="color: #d3d6d8" class="form-label col-sm-2 col-form-label fw-semibold">사진</label>
                         <div class="col-sm-10">
                             <input type="file" style="color: #d3d6d8;background-color: transparent; " class="form-control-sm" id="photo"
                                     name="photo">

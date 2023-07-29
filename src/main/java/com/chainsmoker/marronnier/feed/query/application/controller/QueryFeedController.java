@@ -70,7 +70,6 @@ public class QueryFeedController {
     @GetMapping("/{feedId}")
     @ResponseBody
     public Map<String, Object> feedDetail(Authentication authentication, @PathVariable long feedId) {
-        System.out.println(feedId);
         Map<String, Object> info = new HashMap<>();
         SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         long memberId = sessionUser.getId();
