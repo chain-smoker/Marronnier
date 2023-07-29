@@ -27,6 +27,7 @@ public class FindCocktailRecipeService {
         return recipeDTOS;
     }
     public FindCocktailRecipeDTO findByCocktailRecipeId(Long cocktailrecipeId){
+        System.out.println("cocktailrecipeId = " + cocktailrecipeId);
         QueryCocktailRecipe recipe=findCocktailMapper.findById(cocktailrecipeId);
         System.out.println("QueryCocktailRecipe = " + recipe);
         FindCocktailRecipeDTO recipeDTO=FindCocktailRecipeDTO.entityToDTO(recipe);
