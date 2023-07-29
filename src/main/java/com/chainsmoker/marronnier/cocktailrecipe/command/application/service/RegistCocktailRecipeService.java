@@ -15,7 +15,7 @@ public class RegistCocktailRecipeService {
         this.cocktailRecipeRepository=cocktailRecipeRepository;
     }
 
-    public void regist(RegistCocktailRecipeDTO recipeDTO){
+    public CocktailRecipe regist(RegistCocktailRecipeDTO recipeDTO){
         CocktailRecipe cocktailRecipe =
                 new CocktailRecipe(recipeDTO.getName(),
                         recipeDTO.getDescription(),
@@ -24,6 +24,6 @@ public class RegistCocktailRecipeService {
                         recipeDTO.getRecipe(),
                         recipeDTO.getDifficulty()
                 );
-        cocktailRecipeRepository.save(cocktailRecipe);
+        return cocktailRecipeRepository.save(cocktailRecipe);
     }
 }
