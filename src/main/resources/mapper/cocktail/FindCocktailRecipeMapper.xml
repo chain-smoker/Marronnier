@@ -12,26 +12,26 @@
     </resultMap>
     <select id="findAll" resultMap="QueryCocktailRecipeMap">
         SELECT
-                ID
-              , NAME
-              , DESCRIPTION
-              , CLASSIFICATION
-              , ABV
-              , RECIPE
-              , DIFFICULTY
+            id
+             , abv
+             , classification
+             , description
+             , difficulty
+             , name
+             , recipe
         FROM
             COCKTAILRECIPE_TB
     </select>
     <select id="findById" resultMap="QueryCocktailRecipeMap" parameterType="long">
         SELECT
-               ID
-             , NAME
-             , DESCRIPTION
-             , CLASSIFICATION
-             , ABV
-             , RECIPE
-             , DIFFICULTY
-        FROM COCKTAILRECIPE_TB WHERE ID=#{cocktailrecipeId}
+             id
+           , abv
+           , classification
+           , description
+           , difficulty
+           , name
+           , recipe
+        FROM COCKTAILRECIPE_TB WHERE id=#{cocktailrecipeId}
 
     </select>
 </mapper>
