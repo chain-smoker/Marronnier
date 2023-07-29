@@ -76,7 +76,10 @@ public class CocktailRecipeTests {
         CocktailRecipe registCocktailRecipe = registCocktailRecipeService.regist(recipeDTO);
         System.out.println("registCocktailRecipe Id = " + registCocktailRecipe.getId());
         List<FindCocktailRecipeDTO> recipeDTOS = findCocktailRecipeService.findAllCocktailRecipe();
-        recipeDTOS.forEach(System.out::println);
+        for (FindCocktailRecipeDTO dto : recipeDTOS) {
+            System.out.println(dto.toString());
+        }
+
         FindCocktailRecipeDTO cocktail = findCocktailRecipeService.findByCocktailRecipeId(registCocktailRecipe.getId());
         Assertions.assertNotNull(cocktail.getRecipe());
     }
