@@ -15,9 +15,9 @@ public class FeedUpdateService {
         this.feedReposiroty = feedReposiroty;
     }
 
-    public void updateFeed(UpdateFeedDTO updateFeedDTO){
+    public long updateFeed(UpdateFeedDTO updateFeedDTO){
         Feed feed = new Feed(updateFeedDTO);
-        feedReposiroty.save(feed);
+        return feedReposiroty.save(feed).getId();
     }
 
 }
