@@ -4,7 +4,9 @@ import com.chainsmoker.marronnier.cocktailrecipe.query.application.dto.FindCockt
 import com.chainsmoker.marronnier.element.query.application.dto.FindElementDTO;
 import com.chainsmoker.marronnier.elementbyrecipe.query.infra.repository.FindElementByRecipeMapper;
 import com.chainsmoker.marronnier.elementbyrecipe.query.infra.service.ElementRequestService;
+import com.chainsmoker.marronnier.elementbyrecipe.query.infra.service.RecipePictureRequestService;
 import com.chainsmoker.marronnier.elementbyrecipe.query.infra.service.RecipeRequestService;
+import com.chainsmoker.marronnier.photo.command.domain.aggregate.entity.EnumType.PhotoCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,13 +20,16 @@ public class FindElementByRecipeService {
     private ElementRequestService elementRequestService;
 
     private RecipeRequestService cocktailRecipeRequestService;
+    private RecipePictureRequestService pictureRequestService;
     @Autowired
     public FindElementByRecipeService(FindElementByRecipeMapper findElementByRecipeMapper,
                                       ElementRequestService elementRequestService,
-                                      RecipeRequestService cocktailRecipeRequestService){
+                                      RecipeRequestService cocktailRecipeRequestService
+                                        , RecipePictureRequestService pictureRequestService ){
         this.findElementByRecipeMapper=findElementByRecipeMapper;
         this.elementRequestService=elementRequestService;
         this.cocktailRecipeRequestService=cocktailRecipeRequestService;
+        this.pictureRequestService=pictureRequestService;
     }
     public List<FindElementDTO> findElementByRecipe(Long recipeId){
         List<Long> elementIdList = findElementByRecipeMapper.findElement(recipeId);
@@ -38,6 +43,8 @@ public class FindElementByRecipeService {
 
     public FindCocktailRecipeDTO findRecipeById(Long recipeId) {
         FindCocktailRecipeDTO recipeDTO=cocktailRecipeRequestService.findByCocktailRecipeId(recipeId);
+        recipeDTO.setImg(
+                pictureRequestService.findPictureByCategory(recipeDTO.getId(), PhotoCategory.COCKTAIL_RECIPE).get(0).getPhotoRoot());
         return recipeDTO;
     }
 }

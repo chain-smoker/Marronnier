@@ -78,7 +78,7 @@ public class InsertPhotoService {
                 PhotoDTO photoInfo = new PhotoDTO(originId, originPhotoName, savedName, photoCategory, savedPath);
 
                 Photo photoEntity = new Photo(
-                        new OriginVO(photoInfo.getOriginId()),
+                        photoInfo.getOriginId(),
                         photoInfo.getPhotoCategory(),
                         photoInfo.getPhotoName(),
                         photoInfo.getPhotoRename(),
@@ -89,7 +89,7 @@ public class InsertPhotoService {
 
                 return new PhotoDTO(
                         photoEntity.getId(),
-                        photoEntity.getOriginId().getId(),
+                        photoEntity.getOriginId(),
                         photoEntity.getPhotoName(),
                         photoEntity.getPhotoRename(),
                         photoEntity.getPhotoCategory(),

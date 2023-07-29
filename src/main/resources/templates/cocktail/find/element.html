@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
 <h1>칵테일 재료 조회하기</h1>
 <div>
 </div>
 <th:block th:each="element : ${elements}">
-  <span th:text="${element.getId()}"></span>
-  <span th:text="${element.getName()}"></span>
-  <span th:text="${element.getCategory()}"></span>
-  <br>
+    <form th:action="@{'/cocktail/update/element/'+${element.getId()}}" method="get">
+        <span th:text="${element.getId()}"></span>
+        <span th:text="${element.getName()}"></span>
+        <span th:text="${element.getCategory()}"></span>
+        <button type="submit">사진 등록하기</button>
+        <br>
+    </form>
 </th:block>
 </body>
 </html>
