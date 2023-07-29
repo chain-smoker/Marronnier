@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Table(name = "COCKTAILRECIPE_TB")
+@ToString
 public class QueryCocktailRecipe {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
