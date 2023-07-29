@@ -11,12 +11,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+
 import java.util.stream.Stream;
 
 @SpringBootTest
@@ -28,6 +27,7 @@ public class CocktailRecipeTests {
 
     @Autowired
     private RegistCocktailRecipeService registCocktailRecipeService;
+
 
     private static Stream<Arguments> getCocktailRecipe(){
         return Stream.of(
@@ -77,5 +77,6 @@ public class CocktailRecipeTests {
 
         FindCocktailRecipeDTO cocktail = findCocktailRecipeService.findByCocktailRecipeId(registCocktailRecipe.getId());
         Assertions.assertNotNull(cocktail.getRecipe());
+
     }
 }
