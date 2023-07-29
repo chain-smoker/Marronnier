@@ -31,7 +31,7 @@
              , ABV
              , RECIPE
              , DIFFICULTY
-        FROM COCKTAILRECIPE_TB WHERE id=#{cocktailrecipeId}
+        FROM COCKTAILRECIPE_TB WHERE ID=#{cocktailrecipeId}
 
     </select>
 </mapper>
