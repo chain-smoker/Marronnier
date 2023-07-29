@@ -16,13 +16,13 @@ public class MemberCockTailBasketDTO {
     private final String getCockTailRecipeImage;
     private final String createdDate;
 
-    public MemberCockTailBasketDTO(long memberId, long cockTailRecipeId, String cockTailRecipeName, String cockTailRecipeDescription, String cockTailRecipeDifficulty, LocalDateTime createdDate) {
+    public MemberCockTailBasketDTO(long memberId, long cockTailRecipeId, String cockTailRecipeName,String cockTailRecipeDescription, String cockTailRecipeDifficulty, String cockTailRecipeRoot,LocalDateTime createdDate) {
         this.memberId = memberId;
         this.cockTailRecipeId = cockTailRecipeId;
         this.cockTailRecipeName = cockTailRecipeName;
         this.cockTailRecipeDescription = cockTailRecipeDescription;
         this.cockTailRecipeDifficulty = cockTailRecipeDifficulty;
-        this.getCockTailRecipeImage = null;
+        this.getCockTailRecipeImage = cockTailRecipeRoot;
         this.createdDate = createdDate.format(DateTimeFormatter.ofPattern("YYY년 MM월 dd일 HH시 mm분"));
     }
 

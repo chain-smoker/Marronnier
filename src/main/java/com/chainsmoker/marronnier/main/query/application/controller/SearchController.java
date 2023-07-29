@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -20,6 +17,7 @@ import java.util.Objects;
 
 
 @Controller
+@RequestMapping("/search")
 public class SearchController {
     private final SearchService service;
 
@@ -39,8 +37,9 @@ public class SearchController {
     }
 
     @ResponseBody
-    @PostMapping("/search")
+    @PostMapping("")
     public List<Object> searchResult(@RequestBody Map<String, String> searchInfo) {
+        System.out.println("searchInfo = " + searchInfo);
         String category = searchInfo.get("searchCategory");
         String word = searchInfo.get("searchWord");
         if(category.equals("element")){
@@ -50,8 +49,6 @@ public class SearchController {
             List<FindCocktailRecipeDTO> recipes=service.searchCocktailRecipe(word);
             return Collections.singletonList(recipes);
         }
-        System.out.println("word = " + word);
-        System.out.println("category = " + category);
         return null;
     }
 }

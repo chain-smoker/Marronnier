@@ -28,7 +28,7 @@
         function onSearch() {
             var form = document.search;
             var searchWord = form.searchWord.value;
-            var searchCategory= form.searchCategory.value;
+            var searchCategory = form.searchCategory.value;
             var action = form.action;
             console.log(searchWord);
             console.log(searchCategory);
@@ -39,80 +39,83 @@
                     searchCategory: searchCategory
                 })
                 .then((res) => {
-                    // console.log(res.data.searchWord);
                     console.log(res.data);
-                    viewData(res.data);
+                    if (searchCategory == "cocktail") {
+                        viewDataCocktailRecipe(res.data);
+                    } else if (searchCategory == "element") {
+                        viewDataElement(res.data);
+                    }
                 })
                 .catch((err) => {
                     console.log("An error occurred:", err.response);
                 })
         }
-        function viewData(data) {
-            var i=0;
-            $(".searchResult").empty();
-            while (i < data.length){
-                $(".searchResult").append("<span>"+"========="+"</span><br>");
-                $(".searchResult").append("<span>"+"Name : "+data[i].name+"</span><br>");
-                $(".searchResult").append("<span>"+"Category : "+data[i].category+"</span><br>");
+
+        function viewDataCocktailRecipe(data) {
+            var i = 0;
+            $("#result").empty();
+            while (i < data[0].length) {
+                var imgUrl = data[0][i].img;
+                $("#result").append("" +
+                    "<div data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\"" +
+                    "class=\"col-lg-4 col-sm-6\">" +
+                    "<div class=\"item\">" +
+                    "<img src=\"" + imgUrl + "\">" +
+                    "<h4>" + "#" + data[0][i].name + "</h4><br>" +
+                    "<h4><span>" + data[0][i].description + "</span></h4><br>" +
+                    "<div style=\"display: flex;\">" +
+
+                    "<form action=\"/cocktail/find/elementbyrecipe/" + data[0][i].id + "\">" +
+                    "<button class=\"customBtn\" type=\"submit\">" +
+                    "<span class=\"main-border-button\">" +
+                    "<a class=\"customLink\">상세보기</a>" +
+                    "</span>" +
+                    "</button>" +
+                    "</form >" +
+
+                    "<form action=\"/feed/write/" + data[0][i].id + "\">" +
+                    "<button class=\"customBtn\" type=\"submit\">" +
+                    "<span class=\"main-border-button\">" +
+                    "<a class=\"customLink\">피드작성</a>" +
+                    "</span>" +
+                    "</button>" +
+                    "</form>" +
+
+                    "</div>" +
+                    "</div>" +
+                    "</div>");
+                i++;
+            }
+            // "<div class=\"main-border-button\">" +
+            // "<form style=\"float: left; width: 50%; \" action=\"/feed/write/" + data[0][i].id + "\">" +
+            // "<button class=\"customBtn\" type=\"submit\">" +
+            // "<div class=\"main-border-button\">" +
+            // "<a class=\"customLink\">피드 작성</a>" +
+            // "</div>" +
+            // "</button>" +
+            // "</form>" +
+            // "</div>" +
+        }
+        function viewDataElement(data) {
+            var i = 0;
+            $("#result").empty();
+            while (i < data[0].length) {
+                var imgUrl = data[0][i].img;
+                $("#result").append("" +
+                    "<div data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\"" +
+                    "class=\"col-lg-4 col-sm-6\">" +
+                    "<div class=\"item\">" +
+                    "<img src=\"" + imgUrl + "\">" +
+                    "<h4>" + "#" + data[0][i].name + "</h4><br>" +
+                    "<h4><span>" + data[0][i].category + "</span></h4><br></div></div>");
                 i++;
             }
         }
+
     </script>
 </head>
 <body>
-<header class="header-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <nav class="main-nav">
-                    <!-- ***** Logo Start ***** -->
-                    <a href="/" class="logo">
-                        <img src="/images/logo_white.png" alt="">
-                    </a>
-                    <!-- ***** Logo End ***** -->
-                    <!-- ***** Search End ***** -->
-                    <div class="search-input">
-                        <form id="search" action="#">
-                            <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword"
-                                   onkeypress="handle"/>
-                            <i class="fa fa-search"></i>
-                        </form>
-                    </div>
-                    <!-- ***** Search End ***** -->
-                    <!-- ***** Menu Start ***** -->
-                    <ul class="nav">
-                        <li><a href="/feed">Feed</a></li>
-                        <li><a href="/cocktail/find/cocktailrecipe">Cocktail</a></li>
-                        <li><a href="/basket">Basket</a></li>
-                        <span th:if="${memberIsAuthenticated}">
-                            <li class="nav-item dropdown">
-                                <a href="/member/profile" class="active nav-link dropdown-toggle"
-                                   id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                                   aria-expanded="false">
-                                    <p style="display: inline" th:text="${member.getName()}">
-                                    </p>
-                                    <img th:src="${member.getProfileImage()}" alt="">
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
-                                    <li><p class="dropdown-item" onclick="location.href='/member/profile'">프로필</p></li>
-                                    <li><p class="dropdown-item" onclick="location.href='/apply/add'">요청글 쓰기</p></li>
-                                    <li><p class="dropdown-item" onclick="location.href='/logout'">로그아웃</p></li>
-                                </ul>
-                            </li>
-                        </span>
-                        <span th:if="!${memberIsAuthenticated}">
-                            <li><a href="/" class="active">로그인</a></li>
-                        </span>
-                    </ul>
-                    <a class='menu-trigger'>
-                        <span>Menu</span>
-                    </a>
-                    <!-- ***** Menu End ***** -->
-                </nav>
-            </div>
-        </div>
-    </div>
-</header>
+<div th:replace="~{common/navbar :: addNavbar(${memberIsAuthenticated}, ${member})}"></div>
 
 
 <div class="container">
@@ -140,13 +143,12 @@
                                                            width: 30%;
                                                            height: 50%;
                                                            border-color: #E75E8D;">
-                                                    <option value="feed">피드</option>
                                                     <option value="cocktail">칵테일</option>
                                                     <option value="element">재료</option>
                                                 </select>
                                             </div>
                                             <div style="float:left;width: 50%;">
-                                                <input type="text"  name="searchWord" style="background-color: #e75e8d;
+                                                <input type="text" name="searchWord" style="background-color: #e75e8d;
                                                           border-color: #e75e8d;
                                                           margin-top: 8px;
                                                           width: 70%;
@@ -171,12 +173,10 @@
 
                                     </div>
                                     <!--a 검색결과 출력 부분 -->
+                                    <div class="most-popular" style="margin-top: 20px; padding-top: 10px;">
+                                        <div class="row" id="result">
 
-                                    <div class="col-lg-12">
-                                        <h4>h4 텍스트</h4>
-                                    </div>
-                                    <div class="searchResult">
-
+                                        </div>
                                     </div>
                                 </div>
                             </div>

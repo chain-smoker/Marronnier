@@ -26,17 +26,16 @@
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Search End ***** -->
                         <div class="search-input">
-                            <form id="search" action="#">
-                                <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword" onkeypress="handle" />
-                                <i class="fa fa-search"></i>
+                            <form id="search" action="/cocktail/search" method="get">
+                                <input type="text" placeholder="칵테일 검색하기" id='searchText' name="searchKeyword" onkeypress="handle" />
+                                <i class="fa fa-search" onclick="location.href='/cocktail/search'"></i>
                             </form>
                         </div>
                         <!-- ***** Search End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li><a href="/feed">Feed</a></li>
-                            <li><a href="/cocktail/find/cocktailrecipe">Cocktail</a></li>
-                            <li><a href="/basket">Basket</a></li>
+                            <li><a href="/cocktail/recommand">Cocktail</a></li>
                             <span th:if="${memberIsAuthenticated}">
                             <li class="nav-item dropdown">
                                 <a href="/member/profile" class="active nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
