@@ -32,6 +32,7 @@ public class WriteReportController {
     public String writeReport(@RequestParam String reportReason,
                               @RequestParam String reportContent,
                               @RequestParam boolean isApproval,
+                              @RequestParam long originId,
                               Authentication authentication) {
 
         // 로그인된 사용자 id 가져오기
@@ -43,6 +44,7 @@ public class WriteReportController {
         writeReportDTO.setReportReason(reportReason);
         writeReportDTO.setReportContent(reportContent);
         writeReportDTO.setApproval(isApproval);
+        writeReportDTO.setOriginId(originId);
         writeReportDTO.setReporterId(reporterId);
 
         writeReportService.writeReport(writeReportDTO);

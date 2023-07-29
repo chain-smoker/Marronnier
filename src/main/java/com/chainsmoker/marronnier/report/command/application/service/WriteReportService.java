@@ -18,13 +18,12 @@ public class WriteReportService {
     }
     public void writeReport(WriteReportDTO writeReportDTO) {
 
-        // 여기서 신고 당한 피드 번호(originId)를 어떻게 가져오는가?
         Report report = new Report(
                 writeReportDTO.getReportReason(),
                 writeReportDTO.getReportContent(),
                 writeReportDTO.isApproval(),
                 writeReportDTO.getReporterId(),
-                2L
+                writeReportDTO.getOriginId()
         );
 
         reportRepository.save(report);
