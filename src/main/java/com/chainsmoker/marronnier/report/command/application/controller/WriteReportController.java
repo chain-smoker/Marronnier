@@ -29,7 +29,7 @@ public class WriteReportController {
     }
 
     @PostMapping("write")
-    public String writeReport(@RequestParam String reportReason,
+    public void writeReport(@RequestParam String reportReason,
                               @RequestParam String reportContent,
                               @RequestParam boolean isApproval,
                               @RequestParam long originId,
@@ -49,6 +49,5 @@ public class WriteReportController {
 
         writeReportService.writeReport(writeReportDTO);
 
-        return "redirect:/home";
     }
 }
