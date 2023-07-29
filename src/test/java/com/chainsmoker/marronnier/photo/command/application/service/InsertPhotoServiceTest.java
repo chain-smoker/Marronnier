@@ -1,4 +1,4 @@
-package com.chainsmoker.marronnier.photo.command.application.service;//package com.chainsmoker.marronnier.photo.command.application.service;
+//package com.chainsmoker.marronnier.photo.command.application.service;
 //
 //import com.chainsmoker.marronnier.photo.command.application.dto.PhotoDTO;
 //import com.chainsmoker.marronnier.photo.command.domain.aggregate.entity.EnumType.PhotoCategory;
