@@ -23,7 +23,7 @@
             <div class="page-content">
 
 
-                <form th:action="@{'/feed/'+${feed.getId()}}" method="post">
+                <form th:action="@{'/feed/'+${feed.getId()}}" method="post" enctype="multipart/form-data">
 
                     <div class="mb-3 row">
                         <label for="writer" style="color: #d3d6d8" class="col-sm-2 col-form-label fw-semibold">작성자</label>
@@ -37,7 +37,7 @@
                         <label style="color: #d3d6d8" for="cocktail" class="col-sm-2 col-form-label fw-semibold">칵테일</label>
                         <div class="col-sm-10">
                             <input type="text" style="color: #d3d6d8" readonly class="form-control-plaintext fw-semibold" id="cocktail"
-                                   th:value="${feed.getCocktailName()}" name="cocktailId">
+                                   th:value="${feed.getCocktailName()}" name="cocktailName">
                         </div>
                     </div>
 
@@ -50,6 +50,8 @@
                     </div>
 
                     <input th:value="${feed.getMemberId()}" name="memberId" hidden="hidden"><br>
+                    <input th:value="${feed.getId()}" name="feedId" hidden="hidden"><br>
+                    <input th:value="${feed.cocktailId}" name="cocktailId" hidden="hidden">
 
                     <div class="mb-3 row">
                         <label for="inputContent" class="col-sm-2 col-form-label text-white fw-semibold">내용</label>

@@ -6,6 +6,7 @@ import com.chainsmoker.marronnier.feed.command.application.dto.UpdateFeedDTO;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 @Service
@@ -21,10 +22,11 @@ public class FeedService {
 
     public UpdateFeedDTO saveUpdateData(Map<String, String> data,SessionUser sessionUser){
         UpdateFeedDTO updateFeedDTO = new UpdateFeedDTO();
-        updateFeedDTO.setId(Long.parseLong(data.get("Id")));
+        updateFeedDTO.setId(Long.parseLong(data.get("feedId")));
         updateFeedDTO.setMemberId(sessionUser.getId());
         updateFeedDTO.setCocktailId(Long.parseLong(data.get("cocktailId")));
         updateFeedDTO.setContent(data.get("content"));
         return updateFeedDTO;
     }
+
 }
