@@ -1,5 +1,9 @@
 package com.chainsmoker.marronnier.photo.query.application.dto;
 
+
+import lombok.Getter;
+
+@Getter
 public class FindPhotoDTO {
 
     private long id;            // 사진 아이디

@@ -2,6 +2,7 @@ package com.chainsmoker.marronnier.cocktailrecipe.query.application.dto;
 
 import com.chainsmoker.marronnier.cocktailrecipe.command.domain.aggregate.EnumType.DifficultyEnum;
 import com.chainsmoker.marronnier.cocktailrecipe.query.domain.entity.QueryCocktailRecipe;
+import com.chainsmoker.marronnier.photo.command.application.dto.PhotoDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,6 +24,7 @@ public class FindCocktailRecipeDTO {
     private String abv;
     private String recipe;
     private String difficulty;
+    private String img;
 
     public static FindCocktailRecipeDTO entityToDTO(QueryCocktailRecipe queryCocktailRecipe){
         FindCocktailRecipeDTO recipeDTO=new FindCocktailRecipeDTO();

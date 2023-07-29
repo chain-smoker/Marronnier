@@ -7,7 +7,6 @@ import com.chainsmoker.marronnier.elementbyrecipe.query.domain.service.CocktailR
 import org.springframework.beans.factory.annotation.Autowired;
 
 @InfraService
-//수정 class이름 수정 필요 
 public class RecipeRequestService implements CocktailRecipeRequest {
     private final FindCocktailRecipeService findCocktailRecipeService;
 
