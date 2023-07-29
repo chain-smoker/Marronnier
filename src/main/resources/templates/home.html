@@ -47,6 +47,7 @@
             <th:block th:if="${member == null }">
                 <h2 class="major">어서 오세요<br>분위기에 맞는<br>칵테일을 추천해 드릴게요</h2>
             </th:block>
+            <div align="center">
             <th:block th:if="${member != null }">
                 <h2 th:Text="'[ ' + ${member.getName() +' ] 님 환영합니다.'}"></h2>
             </th:block>
@@ -55,8 +56,10 @@
                 <th:block th:if="${member != null }">
                     <li><a class="button big wide smooth-scroll-middle" href="apply/add">요청하기</a></li>
                     <li><a class="button big wide smooth-scroll-middle" href="cocktail/recommand">칵테일 추천받기</a></li>
+                    <li><a class="button big wide smooth-scroll-middle" href="/feed">피드</a></li>
                     <li><a class="button big wide smooth-scroll-middle" href="/logout">로그아웃</a></li>
                 </th:block>
+            </div>
                 <!-- 카카오 로그인 버튼 -->
                 <th:block th:if="${member == null }">
                     <li><img onclick="location.href='/oauth2/authorization/kakao'"
