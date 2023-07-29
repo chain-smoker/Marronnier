@@ -73,6 +73,7 @@ public class CocktailRecipeTests {
         recipeDTO.setDifficulty(difficulty);
 
         CocktailRecipe registCocktailRecipe = registCocktailRecipeService.regist(recipeDTO);
+        System.out.println("registCocktailRecipe Id = " + registCocktailRecipe.getId());
         FindCocktailRecipeDTO cocktail = findCocktailRecipeService.findByCocktailRecipeId(registCocktailRecipe.getId());
         Assertions.assertNotNull(cocktail.getRecipe());
     }
