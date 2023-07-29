@@ -16,7 +16,7 @@ public class Photo {
     private long id;                    //사진 ID
 
     @Column(name = "ORIGIN_ID", nullable = false)
-    private OriginVO originId;          // (조주법, 재료, 피드) ID
+    private Long originId;          // (조주법, 재료, 피드) ID
 
     @Column(name = "PHOTO_CATEGORY", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -31,7 +31,7 @@ public class Photo {
 
     protected Photo() {}
 
-    public Photo(OriginVO originId, PhotoCategory photoCategory, String photoName, String photoRename, String photoRoot) {
+    public Photo(Long originId, PhotoCategory photoCategory, String photoName, String photoRename, String photoRoot) {
         this.originId = originId;
         this.photoCategory = photoCategory;
         this.photoName = photoName;

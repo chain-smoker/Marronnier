@@ -112,20 +112,20 @@
                 </div>
                 <form action="add" method="post">
 
-                    <h4 class="heading-section">제목</h4>
-                    <input type="text" class="input-group-text" id="title" name="title" placeholder="제목" required>
+                    <h4  style="margin-bottom: 5px" class="heading-section">제목</h4>
+                    <input type="text" style="background-color: #1F2122; border: none" class="input-group-text text-white" id="title" name="title" placeholder="제목" required>
                     <br>
 
-                    <h4 class="heading-section">카테고리</h4>
-                    <select name="category" id="category" class="btn btn-secondary btn-lg dropdown-toggle">
-                        <option class="dropdown-item" value="">--Please choose an option--</option>
+                    <h4 style="margin-bottom: 10px"  class="heading-section">카테고리</h4>
+                    <select name="category" id="category" class="btn btn-secondary btn-lg dropdown-toggle mb-4" required>
+                        <option class="dropdown-item" value="">--카테고리를 선택해 주세요--</option>
                         <option class="dropdown-item" value="COCKTAIL_RECIPE">칵테일 조주법</option>
                         <option class="dropdown-item" value="ELEMENT">칵테일 재료</option>
                     </select>
 
                     <br>
-                    <h4 class="heading-section">본문</h4>
-                    <textarea class="form-control col-sm-5" id="content" rows="5" name="content" placeholder="본문" required></textarea>
+                    <h4 style="margin-top: 10px; margin-bottom: 10px" class="heading-section">본문</h4>
+                    <textarea class="form-control col-sm-5 text-white" id="content" rows="5" name="content" placeholder="본문" style="background-color:#1F2122; border: none" required></textarea>
 
                     <br>
                     <input type="hidden" name="isApproval" value=false>

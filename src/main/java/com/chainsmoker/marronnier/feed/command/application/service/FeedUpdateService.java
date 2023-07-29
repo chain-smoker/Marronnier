@@ -5,6 +5,7 @@ import com.chainsmoker.marronnier.feed.command.domain.aggregate.entity.Feed;
 import com.chainsmoker.marronnier.feed.command.domain.repository.FeedReposiroty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class FeedUpdateService {
@@ -15,9 +16,10 @@ public class FeedUpdateService {
         this.feedReposiroty = feedReposiroty;
     }
 
-    public void updateFeed(UpdateFeedDTO updateFeedDTO){
+    @Transactional
+    public long updateFeed(UpdateFeedDTO updateFeedDTO){
         Feed feed = new Feed(updateFeedDTO);
-        feedReposiroty.save(feed);
+        return feedReposiroty.save(feed).getId();
     }
 
 }

@@ -39,7 +39,6 @@ public class FeedController {
     public String writeFeed(Authentication authentication, @RequestParam MultipartFile photo , @RequestParam Map<String, String> feedInfos) throws IOException {
         SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         CreateFeedDTO feedWriteDTO = feedService.saveData(feedInfos,sessionUser);//웹에서 받은 데이터 dto에 저장
-        System.out.println(photo);
         if(photo!=null){
             feedPhotoService.savePhoto(feedInsertService.saveFeed(feedWriteDTO),photo, PhotoCategory.valueOf("FEED"));
         }else {
@@ -51,11 +50,17 @@ public class FeedController {
         //피드 작성하는 코드
         return "redirect:/feed";
     }
+
     @PostMapping("/{feedId}")
-    public String modifyFeed(@PathVariable long feedId, @RequestParam Map<String, String> feedInfos, Authentication authentication){
+    public String modifyFeed(@PathVariable long feedId,@RequestParam MultipartFile photo, @RequestParam Map<String, String> feedInfos, Authentication authentication) throws IOException {
         SessionUser sessionUser = (SessionUser) authentication.getPrincipal();
         UpdateFeedDTO updateFeedDTO = feedService.saveUpdateData(feedInfos,sessionUser);
-        feedUpdateService.updateFeed(updateFeedDTO);
+        System.out.println("photo = " + photo.isEmpty());
+        if(!photo.isEmpty()){
+            feedPhotoService.updatePhoto(feedUpdateService.updateFeed(updateFeedDTO),photo, PhotoCategory.valueOf("FEED"));
+        }else{
+            feedUpdateService.updateFeed(updateFeedDTO);
+        }
         return "redirect:/feed";
     }
 

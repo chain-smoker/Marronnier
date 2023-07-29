@@ -31,6 +31,7 @@ public class Feed {
     private LocalDateTime createdDate;
 
 
+
     public Feed(MemberVO memberId, CocktailRecipeVO cocktailId, String content) {
         this.memberId = memberId;
         this.cocktailId = cocktailId;
@@ -43,5 +44,6 @@ public class Feed {
         this.memberId = new MemberVO(updateFeedDTO.getMemberId());
         this.cocktailId = new CocktailRecipeVO( updateFeedDTO.getCocktailId());
         this.content = updateFeedDTO.getContent();
+        this.createdDate =LocalDateTime.now();
     }
 }
