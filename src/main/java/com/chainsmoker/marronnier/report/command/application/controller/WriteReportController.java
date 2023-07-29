@@ -29,7 +29,7 @@ public class WriteReportController {
     }
 
     @PostMapping("write")
-    public void writeReport(@RequestParam String reportReason,
+    public String  writeReport(@RequestParam String reportReason,
                               @RequestParam String reportContent,
                               @RequestParam boolean isApproval,
                               @RequestParam long originId,
@@ -40,14 +40,12 @@ public class WriteReportController {
         long reporterId = sessionUser.getId();
 
         WriteReportDTO writeReportDTO = new WriteReportDTO();
-
         writeReportDTO.setReportReason(reportReason);
         writeReportDTO.setReportContent(reportContent);
         writeReportDTO.setApproval(isApproval);
         writeReportDTO.setOriginId(originId);
         writeReportDTO.setReporterId(reporterId);
-
         writeReportService.writeReport(writeReportDTO);
-
+        return "redirect:/feed";
     }
 }
