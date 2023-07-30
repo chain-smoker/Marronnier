@@ -56,11 +56,11 @@ public class InsertPhotoService {
         try {
             // 사진 저장 폴더가 없는 경우 생성
             File photoFolder = new File(uploadPath + savedFolder);
+            System.out.println("photoFolder = " + photoFolder);
             if (!photoFolder.exists()) {
                 photoFolder.mkdirs();
             }
 
-            System.out.println("photoFolder = " + photoFolder);
 
             String originPhotoName = photo.getOriginalFilename();
 
@@ -74,10 +74,14 @@ public class InsertPhotoService {
 
                 String savedPath = "/static/upload-images/" + savedFolder + savedName;
 
+                System.out.println("savedPath = " + savedPath);
+
                 savedFile = new File(photoFolder, savedName);
                 photo.transferTo(savedFile);
 
                 PhotoDTO photoInfo = new PhotoDTO(originId, originPhotoName, savedName, photoCategory, savedPath);
+
+                System.out.println("getPhotoRoot = " + photoInfo.getPhotoRoot());
 
                 Photo photoEntity = new Photo(
                         photoInfo.getOriginId(),

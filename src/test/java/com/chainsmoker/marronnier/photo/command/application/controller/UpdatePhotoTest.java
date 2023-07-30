@@ -53,11 +53,11 @@ public class UpdatePhotoTest {
         MockMultipartFile updateFile = new MockMultipartFile("file", updateFileName, null, updateRes.getInputStream());
 
         RequestBuilder updateRequest = MockMvcRequestBuilders.multipart("/photo/update")
-                .file(file)
+                .file(updateFile)
                 .param("category", PhotoCategory.FEED.name())
                 .param("originId", "1");
 
-        ResultActions updateActions = mvc.perform(request);
+        ResultActions updateActions = mvc.perform(updateRequest);
         updateActions.andExpect(status().is2xxSuccessful());
 
     }
