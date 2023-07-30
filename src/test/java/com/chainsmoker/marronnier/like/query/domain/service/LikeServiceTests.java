@@ -31,7 +31,6 @@ public class LikeServiceTests {
     @MethodSource("getMemberId")
     void checkLikedFeedByMemberIdTests(long memberId){
         List<CheckFeedDTO> testList = findLikedFeedService.findLikedFeedsByMemberId(memberId);
-        testList.forEach(System.out::println);
         Assertions.assertNotNull(testList);
     }
 

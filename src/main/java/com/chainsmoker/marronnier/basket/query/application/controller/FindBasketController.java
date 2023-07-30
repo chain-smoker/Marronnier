@@ -49,7 +49,6 @@ public class FindBasketController {
                     .collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
-        System.out.println("test 출력 : " +  findBasketsPaginationDTO.getBaskets());
         model.addAttribute("basketPages", findBasketsPaginationDTO.getBasketPages());
         model.addAttribute("baskets", findBasketsPaginationDTO.getBaskets());
         model.addAttribute("memberIsAuthenticated", memberIsAuthenticated);

@@ -57,7 +57,6 @@ public class SecurityConfiguration {
                 .usernameParameter("loginId")
                 .passwordParameter("password")
                 .successHandler((request, response, authentication) -> {
-                    System.out.println("authentication : " + authentication.getName());
                     try {
                         response.sendRedirect("/admin/home");
                     } catch (IOException e) {

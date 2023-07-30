@@ -18,10 +18,8 @@ public class RegistElementService {
     }
 
     public void regist(RegistElementDTO elementDTO) {
-        System.out.println("Service elementDTO = " + elementDTO);
         //dto -> entity 변환
         Element element = new Element(elementDTO.getName(),elementDTO.getCategoryName());
-        System.out.println("entity = " + element);
         elementRepository.save(element);
     }
 }

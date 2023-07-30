@@ -34,7 +34,6 @@ public class FindCocktailRecipeService {
     }
     public FindCocktailRecipeDTO findByCocktailRecipeId(Long cocktailrecipeId){
         QueryCocktailRecipe recipe=findCocktailMapper.findById(cocktailrecipeId);
-        System.out.println("QueryCocktailRecipe = " + recipe);
         FindCocktailRecipeDTO recipeDTO=FindCocktailRecipeDTO.entityToDTO(recipe);
         recipeDTO.setImg(pictureRequestService.findPictureByCategory(recipeDTO.getId(), PhotoCategory.COCKTAIL_RECIPE).get(0).getPhotoRoot());
         return recipeDTO;

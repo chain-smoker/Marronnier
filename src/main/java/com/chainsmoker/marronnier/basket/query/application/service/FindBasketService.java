@@ -64,7 +64,6 @@ public class FindBasketService {
                     cocktailRecipe.getImg(),
                     basket.getCreatedDate()
             );
-            System.out.println("memberCockTailBasketDTO = " + memberCockTailBasketDTO);
             memberCockTailBasketDTOList.add(memberCockTailBasketDTO);
         }
         return memberCockTailBasketDTOList;
