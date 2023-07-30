@@ -60,6 +60,8 @@ public class InsertPhotoService {
                 photoFolder.mkdirs();
             }
 
+            System.out.println("photoFolder = " + photoFolder);
+
             String originPhotoName = photo.getOriginalFilename();
 
             if (originPhotoName != null) {
@@ -86,8 +88,6 @@ public class InsertPhotoService {
                 );
 
                 photoRepository.save(photoEntity);
-
-                System.out.println("getPhotoRoot = " + photoEntity.getPhotoRoot());
 
                 return new PhotoDTO(
                         photoEntity.getId(),
