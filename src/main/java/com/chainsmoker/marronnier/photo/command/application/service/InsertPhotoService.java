@@ -74,10 +74,14 @@ public class InsertPhotoService {
 
                 String savedPath = "/static/upload-images/" + savedFolder + savedName;
 
+                System.out.println("savedPath = " + savedPath);
+
                 savedFile = new File(photoFolder, savedName);
                 photo.transferTo(savedFile);
 
                 PhotoDTO photoInfo = new PhotoDTO(originId, originPhotoName, savedName, photoCategory, savedPath);
+
+                System.out.println("getPhotoRoot = " + photoInfo.getPhotoRoot());
 
                 Photo photoEntity = new Photo(
                         photoInfo.getOriginId(),
