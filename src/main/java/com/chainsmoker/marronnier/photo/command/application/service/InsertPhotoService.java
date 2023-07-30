@@ -87,6 +87,8 @@ public class InsertPhotoService {
 
                 photoRepository.save(photoEntity);
 
+                System.out.println("getPhotoRoot = " + photoEntity.getPhotoRoot());
+
                 return new PhotoDTO(
                         photoEntity.getId(),
                         photoEntity.getOriginId(),
