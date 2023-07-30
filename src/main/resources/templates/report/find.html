@@ -106,7 +106,10 @@
                                             <td th:text="${report.approval}"></td>
                                                 <!-- 처리 중 버튼 적용-->
                                             <td>
-                                              <button type="button" class="btn btn-danger btn-sm px-3"></button>
+                                                <form action="/report/accept" method="post">
+                                                        <input hidden="hidden" th:value="${report.originId}" name="feedId">
+                                                    <button type="submit" class="btn btn-danger btn-sm px-3">신고 처리</button>
+                                                </form>
                                             </td>
                                         </tr>
                                         </tbody>

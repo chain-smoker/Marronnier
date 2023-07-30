@@ -39,4 +39,8 @@ public class Report {
         this.reporterId = reporterId;
         this.originId = originId;
     }
+
+    public void setApproval(boolean approval) {
+        isApproval = approval;
+    }
 }
