@@ -20,7 +20,7 @@
                             </div>
                             <div class="item" th:each="basket : ${baskets}">
                                 <ul>
-                                    <li><img th:src="${member.getProfileImage()}" alt="" class="templatemo-item" style="width: 80px; height: 80px;"></li>
+                                    <li><img th:src="${basket.getGetCockTailRecipeImage()}" alt="" class="templatemo-item" style="width: 80px; height: 80px;"></li>
                                     <li><h4>칵테일 이름</h4><span th:text="${basket.getCockTailRecipeName()}"></span></li>
                                     <!--<li><h4>칵테일 설명</h4><span th:text="${basket.getCockTailRecipeDescription()}"></span></li>-->
                                     <li><h4>칵테일 제작 난이도</h4><span th:text="${basket.getCockTailRecipeDifficulty()}"></span></li>

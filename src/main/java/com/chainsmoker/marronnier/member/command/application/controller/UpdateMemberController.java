@@ -67,7 +67,6 @@ public class UpdateMemberController {
                 updateMemberDTO.setGender(GenderEnum.valueOf(updateMap.get("gender")));
             }
 
-            System.out.println("sessionUser = " + authentication.getPrincipal());
 
             SessionUser member = (SessionUser) authentication.getPrincipal();
             long memberId = member.getId();

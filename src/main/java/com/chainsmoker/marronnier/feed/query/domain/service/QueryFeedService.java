@@ -62,7 +62,6 @@ public class QueryFeedService {
             checkFeedDTOS.get(i).setProfileImage(writer.getProfileImage());
             checkFeedDTOS.get(i).setCocktailName(findCocktailNameById(cocktailId));
             List<FindPhotoDTO> photo = checkPhotoService.findPhotoByIdAndCategory(feedId, PhotoCategory.valueOf("FEED"));
-            System.out.println(photo.size());
             if(photo.size()>0){
                 checkFeedDTOS.get(i).setPhotoRoot(photo.get(0).getPhotoRoot());
             }else{

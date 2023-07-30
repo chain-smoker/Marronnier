@@ -1,83 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <title>Cyborg - Awesome HTML5 Template</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="/css/fontawesome.css">
-    <link rel="stylesheet" href="/css/templatemo-cyborg-gaming.css">
-    <link rel="stylesheet" href="/css/owl.css">
-    <link rel="stylesheet" href="/css/animate.css">
-    <link rel="stylesheet" href="/css/custom.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<head th:replace="common/cssAndJs :: addCssAndJs(${'칵테일 추천결과'})">
+    <title>메인 타이틀</title>
 </head>
 <body>
+
 <!-- ***** Header Area Start ***** -->
-<header class="header-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <nav class="main-nav">
-                    <!-- ***** Logo Start ***** -->
-                    <a href="/" class="logo">
-                        <img src="/images/logo_white.png" alt="">
-                    </a>
-                    <!-- ***** Logo End ***** -->
-                    <!-- ***** Search End ***** -->
-                    <div class="search-input">
-                        <form id="search" action="#">
-                            <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword" onkeypress="handle" />
-                            <i class="fa fa-search"></i>
-                        </form>
-                    </div>
-                    <!-- ***** Search End ***** -->
-                    <!-- ***** Menu Start ***** -->
-                    <ul class="nav">
-                        <li><a href="/feed">Feed</a></li>
-                        <li><a href="/cocktail/find/cocktailrecipe">Cocktail</a></li>
-                        <li><a href="/basket">Basket</a></li>
-                        <span th:if="${memberIsAuthenticated}">
-                            <li class="nav-item dropdown">
-                                <a href="/member/profile" class="active nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <p style="display: inline" th:text="${member.getName()}">
-                                    </p>
-                                    <img th:src="${member.getProfileImage()}" alt="">
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
-                                    <li><p class="dropdown-item" onclick="location.href='/member/profile'">프로필</p></li>
-                                    <li><p class="dropdown-item" onclick="location.href='/apply/add'">요청글 쓰기</p></li>
-                                    <li><p class="dropdown-item" onclick="location.href='/logout'">로그아웃</p></li>
-                                </ul>
-                            </li>
-                        </span>
-                        <span th:if="!${memberIsAuthenticated}">
-                            <li><a href="/" class="active">로그인</a></li>
-                        </span>
-                    </ul>
-                    <a class='menu-trigger'>
-                        <span>Menu</span>
-                    </a>
-                    <!-- ***** Menu End ***** -->
-                </nav>
-            </div>
-        </div>
-    </div>
-</header>
+<div th:replace="~{common/navbar :: addNavbar(${memberIsAuthenticated}, ${member})}"></div>
 <!-- ***** Header Area End ***** -->
+
+
 <!-- ***** Cocktail list start ***** -->
 <div class="live-stream">
-        <div class="heading-section" align="center">
-            <h4><em>Cocktail</em> 추천 결과 !!</h4>
-        </div>
+    <div class="heading-section" align="center">
+        <h4>Cocktail 추천 결과 !!</h4>
+    </div>
     <th:block th:if="${size >= 3}">
         <div class="col-lg-12">
             <div class="item" align="center" style="float: left; width: 33%;">
@@ -173,13 +110,13 @@
     <th:block th:if="${size==1}">
 
         <div class="col-lg-12">
-            <div class="item" align="center" >
+            <div class="item" align="center">
                 <div class="thumb">
                     <img th:src="${cocktails.get(0).getImg()}" style="width: 300px; height: 300px">
                 </div>
             </div>
 
-            <div class="description" align="center" >
+            <div class="description" align="center">
                 <h3 th:text="${cocktails.get(0).getName()}"/>
                 <form th:action="@{'/cocktail/find/elementbyrecipe/'+${cocktails.get(0).getId()}}" method="get">
                     <button type="submit" class="customBtn">
@@ -193,7 +130,9 @@
     </th:block>
 
     <th:block th:if="${size == 0}">
-       <h1 align="center">현재 조건으로 검색되는 칵테일은 없습니다ㅜㅜㅜㅜ</h1>
+        <div style="margin-top: 100px">
+            <h1 align="center">현재 조건으로 추천되는 칵테일은 없습니다.</h1>
+        </div>
     </th:block>
 </div>
 <!-- ***** Live Stream End ***** -->

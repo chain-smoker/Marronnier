@@ -13,8 +13,8 @@ import lombok.Setter;
 public class FindElementDTO {
     private Long id;
     private String name;
-
     private CategoryNameEnum category;
+    private String img;
 
     public static FindElementDTO entityToDTO(QueryElement queryElement){
         FindElementDTO elementDTO=new FindElementDTO();
@@ -24,13 +24,13 @@ public class FindElementDTO {
         return elementDTO;
     }
 
-    // 삭제
     @Override
     public String toString() {
         return "FindElementDTO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", category=" + category +
+                ", img='" + img + '\'' +
                 '}';
     }
 }

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+    <title>Cyborg - Awesome HTML5 Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="/css/fontawesome.css">
+    <link rel="stylesheet" href="/css/templatemo-cyborg-gaming.css">
+    <link rel="stylesheet" href="/css/owl.css">
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <script>
+        function onSearch() {
+            var form = document.search;
+            var searchWord = form.searchWord.value;
+            var searchCategory= form.searchCategory.value;
+            var action = form.action;
+            console.log(searchWord);
+            console.log(searchCategory);
+            console.log(action);
+            axios
+                .post(action, {
+                    searchWord: searchWord,
+                    searchCategory: searchCategory
+                })
+                .then((res) => {
+                    console.log(res.data);
+                    if (searchCategory == "cocktail") {
+                        viewDataCocktailRecipe(res.data);
+                    } else if (searchCategory == "element") {
+                        viewDataElement(res.data);
+                    }
+                })
+                .catch((err) => {
+                    console.log("An error occurred:", err.response);
+                })
+        }
+        function viewDataCocktailRecipe(data) {
+            var i = 0;
+            $("#result").empty();
+            while (i < data[0].length) {
+                var imgUrl = data[0][i].img;
+                $("#result").append("" +
+                    "<div data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\"" +
+                    "class=\"col-lg-4 col-sm-6\">" +
+                    "<div class=\"item\">" +
+                    "<img src=\"" + imgUrl + "\">" +
+                    "<h4>" + "#" + data[0][i].name + "</h4><br>" +
+                    "<h4><span>" + data[0][i].description + "</span></h4><br>" +
+                    "<div style=\"display: flex;\">" +
+
+                    "<form action=\"/cocktail/find/elementbyrecipe/" + data[0][i].id + "\">" +
+                    "<button class=\"customBtn\" type=\"submit\">" +
+                    "<span class=\"main-border-button\">" +
+                    "<a class=\"customLink\">상세보기</a>" +
+                    "</span>" +
+                    "</button>" +
+                    "</form >" +
+
+                    "<form action=\"/feed/write/" + data[0][i].id + "\">" +
+                    "<button class=\"customBtn\" type=\"submit\">" +
+                    "<span class=\"main-border-button\">" +
+                    "<a class=\"customLink\">피드작성</a>" +
+                    "</span>" +
+                    "</button>" +
+                    "</form>" +
+
+                    "</div>" +
+                    "</div>" +
+                    "</div>");
+                i++;
+            }
+        }
+        function viewDataElement(data) {
+            var i = 0;
+            $("#result").empty();
+            while (i < data[0].length) {
+                var imgUrl = data[0][i].img;
+                $("#result").append("" +
+                    "<div data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\"" +
+                    "class=\"col-lg-4 col-sm-6\">" +
+                    "<div class=\"item\">" +
+                    "<img src=\"" + imgUrl + "\">" +
+                    "<h4>" + "#" + data[0][i].name + "</h4><br>" +
+                    "<h4><span>" + data[0][i].category + "</span></h4><br></div></div>");
+                i++;
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+<div th:replace="~{common/navbar :: addNavbar(${memberIsAuthenticated}, ${member})}"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-content">
+                <div class="game-details">
+                    <div class="row">
+                        <!-- 칵테일 description -->
+                        <div class="col-lg-12" style="margin-bottom: 40px;">
+                            <div class="content">
+                                <div class="row">
+
+                                    <!--a 현재 작업 코드-->
+                                    <div align="center" style="background-color: #27292a;
+                                                    padding: 20px;
+                                                    border-radius: 23px;
+                                                    margin-bottom: 30px;">
+                                        <form name="search" action="/search" method="post">
+                                            <div style="float:left;width: 30%;text-align: right">
+                                                <select type="text" name="searchCategory" style="background-color: #E75E8D;
+                                                           border-radius: 10px;
+                                                           margin-top: 10px;
+                                                           font-size: 25px;
+                                                           width: 30%;
+                                                           height: 50%;
+                                                           border-color: #E75E8D;">
+                                                    <option value="cocktail">칵테일</option>
+                                                    <option value="element">재료</option>
+                                                </select>
+                                            </div>
+                                            <div style="float:left;width: 50%;">
+                                                <input type="text"  name="searchWord" style="background-color: #e75e8d;
+                                                          border-color: #e75e8d;
+                                                          margin-top: 8px;
+                                                          width: 70%;
+                                                          height: 50%;
+                                                          font-size: 25px;
+                                                          border-radius: 10px;"/>
+                                                <input type="button" onclick='onSearch()' value="검색" style="background-color: #e75e8d;
+                                                          border-color: #e75e8d;
+                                                          margin-top: 8px;
+                                                          width: 14%;
+                                                          height: 50%;
+                                                          font-size: 25px;
+                                                          margin-left: 10px;
+                                                          border-radius: 10px;"/>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- a 현재 작업 코드-->
+
+                                    <!--a 검색결과 출력 부분 -->
+                                    <div class="most-popular" style="margin-top: 20px; padding-top: 10px;">
+                                        <div class="row" id="result">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/jquery/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+<script src="/js/isotope.min.js"></script>
+<script src="/js/owl-carousel.js"></script>
+<script src="/js/tabs.js"></script>
+<script src="/js/popup.js"></script>
+<script src="/js/custom.js"></script>
+</body>
+
+</html>
