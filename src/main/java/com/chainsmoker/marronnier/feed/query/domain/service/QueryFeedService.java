@@ -66,7 +66,7 @@ public class QueryFeedService {
             if(photo.size()>0){
                 checkFeedDTOS.get(i).setPhotoRoot(photo.get(0).getPhotoRoot());
             }else{
-                checkFeedDTOS.get(i).setPhotoRoot("https://picsum.photos/250/250");
+                checkFeedDTOS.get(i).setPhotoRoot(checkPhotoService.findPhotoByIdAndCategory(cocktailId,PhotoCategory.COCKTAIL_RECIPE).get(0).getPhotoRoot());
             }
         }
 

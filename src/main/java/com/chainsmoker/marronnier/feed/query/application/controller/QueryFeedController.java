@@ -4,13 +4,12 @@ import com.chainsmoker.marronnier.configuration.auth.SessionUser;
 import com.chainsmoker.marronnier.feed.query.application.dto.CheckFeedDTO;
 import com.chainsmoker.marronnier.feed.query.application.service.FindFeedService;
 import com.chainsmoker.marronnier.feed.query.domain.entity.QueryFeed;
+import com.chainsmoker.marronnier.feed.query.domain.service.CheckPhotoService;
 import com.chainsmoker.marronnier.feed.query.domain.service.LikeService;
 import com.chainsmoker.marronnier.feed.query.domain.service.QueryFeedService;
 import com.chainsmoker.marronnier.member.query.application.dto.FindMemberDTO;
 import com.chainsmoker.marronnier.photo.command.domain.aggregate.entity.EnumType.PhotoCategory;
 import com.chainsmoker.marronnier.photo.query.application.dto.FindPhotoDTO;
-import org.checkerframework.checker.units.qual.C;
-import org.hibernate.annotations.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -20,11 +19,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @Controller
 @RequestMapping("/feed")
@@ -32,13 +29,15 @@ public class QueryFeedController {
     private final FindFeedService findFeedService;
     private final LikeService likeService;
     private final QueryFeedService queryFeedService;
+    private final CheckPhotoService photoService;
 
 
     @Autowired
-    public QueryFeedController(FindFeedService findFeedService, LikeService likeService, QueryFeedService queryFeedService) {
+    public QueryFeedController(FindFeedService findFeedService, LikeService likeService, QueryFeedService queryFeedService, CheckPhotoService photoService) {
         this.findFeedService = findFeedService;
         this.likeService = likeService;
         this.queryFeedService = queryFeedService;
+        this.photoService = photoService;
     }
 
     @GetMapping("")
@@ -91,7 +90,7 @@ public class QueryFeedController {
             info.put("photo",photoDTOS.get(0).getPhotoRoot());
         }
         else{
-            info.put("photo","https://picsum.photos/250/250");
+            info.put("photo",photoService.findPhotoByIdAndCategory(checkFeedDTO.getCocktailId(), PhotoCategory.COCKTAIL_RECIPE).get(0).getPhotoRoot());
         }
         //작성자확인
         long feedMemberId = findFeedService.findFeedMemberId(feedId);
