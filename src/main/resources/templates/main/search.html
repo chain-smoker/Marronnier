@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>칵테일 검색하기</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -26,18 +26,6 @@
     <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 
     <script>
-        function enterKey(){
-            console.log("enterKey통과!");
-            if(window.event.keyCode==13){
-                console.log("keycode통과!");
-            }
-            if (window.event.KEYDOWN==13){
-                console.log("keydown통과!");
-            }
-            if (window.event.KEYPRESS==13){
-                console.log("keypress통과!");
-            }
-        }
         function onSearch() {
 
             var searchWord = document.getElementById('searchWord').value;
