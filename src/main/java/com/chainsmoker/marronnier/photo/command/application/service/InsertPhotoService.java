@@ -56,11 +56,11 @@ public class InsertPhotoService {
         try {
             // 사진 저장 폴더가 없는 경우 생성
             File photoFolder = new File(uploadPath + savedFolder);
+            System.out.println("photoFolder = " + photoFolder);
             if (!photoFolder.exists()) {
                 photoFolder.mkdirs();
             }
 
-            System.out.println("photoFolder = " + photoFolder);
 
             String originPhotoName = photo.getOriginalFilename();
 
