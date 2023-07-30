@@ -26,16 +26,26 @@
     <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 
     <script>
+        function enterKey(){
+            console.log("enterKey통과!");
+            if(window.event.keyCode==13){
+                console.log("keycode통과!");
+            }
+            if (window.event.KEYDOWN==13){
+                console.log("keydown통과!");
+            }
+            if (window.event.KEYPRESS==13){
+                console.log("keypress통과!");
+            }
+        }
         function onSearch() {
-            var form = document.search;
-            var searchWord = form.searchWord.value;
-            var searchCategory= form.searchCategory.value;
-            var action = form.action;
+
+            var searchWord = document.getElementById('searchWord').value;
+            var searchCategory= document.getElementById('searchCategory').value;
             console.log(searchWord);
             console.log(searchCategory);
-            console.log(action);
             axios
-                .post(action, {
+                .post("/search", {
                     searchWord: searchWord,
                     searchCategory: searchCategory
                 })
@@ -74,7 +84,7 @@
                     "</form >" +
 
                     "<form action=\"/feed/write/" + data[0][i].id + "\">" +
-                    "<button class=\"customBtn\" type=\"submit\">" +
+                    "<button style=\"margin-left: 20px;\" class=\"customBtn\" type=\"submit\">" +
                     "<span class=\"main-border-button\">" +
                     "<a class=\"customLink\">피드작성</a>" +
                     "</span>" +
@@ -121,13 +131,13 @@
                                 <div class="row">
 
                                     <!--a 현재 작업 코드-->
-                                    <div align="center" style="background-color: #27292a;
+                                    <div  align="center" style="background-color: #27292a;
                                                     padding: 20px;
                                                     border-radius: 23px;
                                                     margin-bottom: 30px;">
-                                        <form name="search" action="/search" method="post">
+<!--                                        <form name="search" action="/search" method="post">-->
                                             <div style="float:left;width: 30%;text-align: right">
-                                                <select type="text" class="text-white" name="searchCategory" style="background-color: #1F2122;
+                                                <select type="text" id="searchCategory"class="text-white"  style="background-color: #1F2122;
                                                            border-radius: 10px;
                                                            margin-top: 10px;
                                                            font-size: 16px;
@@ -139,7 +149,7 @@
                                                 </select>
                                             </div>
                                             <div style="float:left;width: 50%;">
-                                                <input type="text"  class="text-white" name="searchWord" style="background-color: #1F2122;
+                                                <input type="text"  id="searchWord" onkeypress="javascript:if(event.keyCode==13){onSearch()}" class="text-white"   style="background-color: #1F2122;
                                                           border: none;
                                                           margin-top: 8px;
                                                           width: 70%;
@@ -155,7 +165,7 @@
                                                           margin-left: 10px;
                                                           border-radius: 10px;"/>
                                             </div>
-                                        </form>
+<!--                                        </form>-->
                                     </div>
                                     <!-- a 현재 작업 코드-->
 
