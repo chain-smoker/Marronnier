@@ -120,6 +120,10 @@
 * 관리자페이지 구현
 * 관리자페이지의 신고글/요청글
 
+### 노션을 통한 기능 명세서
+<img width="1511" alt="CleanShot 2023-07-31 at 12 43 15@2x" src="https://github.com/chain-smoker/Marronnier/assets/19159759/85ed7328-6d18-4740-872c-96c6e018e240">
+
+
 <br>
 <br>
 <br>
